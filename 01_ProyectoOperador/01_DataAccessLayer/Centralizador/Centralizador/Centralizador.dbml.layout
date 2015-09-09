@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 11.875" name="Centralizador">
+  <DataContextMoniker Name="/CentralizadorDataContext" />
+  <nestedChildShapes>
+    <classShape Id="433b113e-7845-4690-b17d-0c7223380d36" absoluteBounds="0.75, 3.875, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb001_PAIS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e3efa323-37ff-44b5-8c61-40b0dd7cee70" absoluteBounds="0.765, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ea48977d-cd23-4cce-ad36-ef6272d9bbf9" absoluteBounds="9, 8.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb009_ENTIDADES" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9c486de7-2a2a-4dbb-b9a4-23ef38845dfb" absoluteBounds="9.015, 9.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="41f6f9be-3d93-4ba1-8297-a55d4c48bac8" absoluteBounds="3.5, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb002_DEPARTAMENTO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="23507bf5-7702-45bc-9368-add05600e27b" absoluteBounds="3.515, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" absoluteBounds="6.25, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a615adde-f442-4015-ac06-75a168f7009a" absoluteBounds="6.265, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="69cdee3a-3a08-4f31-be97-1a3fd2611bc8" absoluteBounds="6.25, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb004_TIPOS_IDENTIFICACION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08715907-d2b3-4b49-a289-17f1a6a5fd00" absoluteBounds="6.265, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" absoluteBounds="9, 2, 2, 5.2323225911458326">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb005_RRUS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="27211820-f74e-48b5-92bf-d5c515a1ccb0" absoluteBounds="9.015, 2.46, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2afcdc58-76a4-4e97-9e72-6bbe8e191c8a" absoluteBounds="6.25, 6.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb006_OPERADOR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4f23f23d-198f-4dad-9264-94fa3502003e" absoluteBounds="6.265, 7.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a9552ce4-f397-41b3-ada8-5dc5460e1820" absoluteBounds="0.75, 10, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb007_TIPOS_AUDITORIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fdb769e2-1616-452b-9b39-b47022d8bad7" absoluteBounds="0.765, 10.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e0ac30e3-e91d-4e95-9347-b27b7743062e" absoluteBounds="3.5, 9.875, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/CentralizadorDataContext/tb008_LOG_AUDITORIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a55bff19-2ce2-4295-91c4-96f161a1c994" absoluteBounds="3.515, 10.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.56814697265625); (3.5 : 4.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb001_PAIS/tb001_PAIS_tb002_DEPARTAMENTO" />
+      <nodes>
+        <classShapeMoniker Id="433b113e-7845-4690-b17d-0c7223380d36" />
+        <classShapeMoniker Id="41f6f9be-3d93-4ba1-8297-a55d4c48bac8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.66429768880208); (6.25 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb002_DEPARTAMENTO/tb002_DEPARTAMENTO_tb003_MUNICIPIO" />
+      <nodes>
+        <classShapeMoniker Id="41f6f9be-3d93-4ba1-8297-a55d4c48bac8" />
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.1362939453125); (8.625 : 2.5112939453125); (8.625 : 9.53929768880208); (9 : 9.53929768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb004_TIPOS_IDENTIFICACION/tb004_TIPOS_IDENTIFICACION_tb009_ENTIDADES" />
+      <nodes>
+        <classShapeMoniker Id="69cdee3a-3a08-4f31-be97-1a3fd2611bc8" />
+        <classShapeMoniker Id="ea48977d-cd23-4cce-ad36-ef6272d9bbf9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 5.2612939453125); (1.75 : 6.16429768880208); (8.54166666666667 : 6.16429768880208 : JumpStart); (8.70833333333333 : 6.16429768880208 : JumpEnd); (9 : 6.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb001_PAIS/tb001_PAIS_tb005_RRUS" />
+      <nodes>
+        <classShapeMoniker Id="433b113e-7845-4690-b17d-0c7223380d36" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.66429768880208); (8.54166666666667 : 4.66429768880208 : JumpStart); (8.70833333333333 : 4.66429768880208 : JumpEnd); (9 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO/tb003_MUNICIPIO_tb005_RRUS" />
+      <nodes>
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.20714884440104); (8.54166666666667 : 4.20714884440104 : JumpStart); (8.70833333333333 : 4.20714884440104 : JumpEnd); (9 : 4.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO/tb003_MUNICIPIO_tb005_RRUS1" />
+      <nodes>
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 5.12144653320312); (8.54166666666667 : 5.12144653320312 : JumpStart); (8.70833333333333 : 5.12144653320312 : JumpEnd); (9 : 5.12144653320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO/tb003_MUNICIPIO_tb005_RRUS2" />
+      <nodes>
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.43572326660156); (8.54166666666667 : 4.43572326660156 : JumpStart); (8.70833333333333 : 4.43572326660156 : JumpEnd); (9 : 4.43572326660156)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO/tb003_MUNICIPIO_tb005_RRUS3" />
+      <nodes>
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.8928721110026); (8.54166666666667 : 4.8928721110026 : JumpStart); (8.70833333333333 : 4.8928721110026 : JumpEnd); (9 : 4.8928721110026)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb003_MUNICIPIO/tb003_MUNICIPIO_tb005_RRUS4" />
+      <nodes>
+        <classShapeMoniker Id="6258505e-e9c7-4acc-81fd-cc44d60bfd2a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 1.3749995); (10 : 1.3749995); (10 : 2)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb004_TIPOS_IDENTIFICACION/tb004_TIPOS_IDENTIFICACION_tb005_RRUS" />
+      <nodes>
+        <classShapeMoniker Id="69cdee3a-3a08-4f31-be97-1a3fd2611bc8" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 7.842959484375); (8.54166666666667 : 7.842959484375 : JumpStart); (8.70833333333333 : 7.842959484375 : JumpEnd); (10 : 7.842959484375); (10 : 7.23232259114583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb006_OPERADOR/tb006_OPERADOR_tb005_RRUS" />
+      <nodes>
+        <classShapeMoniker Id="2afcdc58-76a4-4e97-9e72-6bbe8e191c8a" />
+        <classShapeMoniker Id="65bde578-d94f-478f-9c5c-af3dcda05ed6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.6931469726562); (3.5 : 10.6931469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CentralizadorDataContext/tb007_TIPOS_AUDITORIA/tb007_TIPOS_AUDITORIA_tb008_LOG_AUDITORIA" />
+      <nodes>
+        <classShapeMoniker Id="a9552ce4-f397-41b3-ada8-5dc5460e1820" />
+        <classShapeMoniker Id="e0ac30e3-e91d-4e95-9347-b27b7743062e" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

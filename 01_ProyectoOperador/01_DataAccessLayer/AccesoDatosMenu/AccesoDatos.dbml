@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnetdb" Class="AccesoDatosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ASUS\SQLEXPRESS;Initial Catalog=aspnetdb;Integrated Security=True" SettingsObjectName="Uniandes.Centralizador.AccesoDatos.Menu.Properties.Settings" SettingsPropertyName="aspnetdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PERFIL_OPERACION" Member="PERFIL_OPERACION">
+    <Type Name="PERFIL_OPERACION">
+      <Column Name="ID_PERFIL_OPERACION" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_PERFIL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ID_OPERACION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PERFIL_PERFIL_OPERACION" Member="PERFIL" ThisKey="ID_PERFIL" OtherKey="ID_PERFIL" Type="PERFIL" IsForeignKey="true" />
+      <Association Name="OPERACION_PERFIL_OPERACION" Member="OPERACION" ThisKey="ID_OPERACION" OtherKey="ID_OPERACION" Type="OPERACION" IsForeignKey="true" />
+      <Association Name="aspnet_Roles_PERFIL_OPERACION" Member="aspnet_Roles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PERFIL" Member="PERFIL">
+    <Type Name="PERFIL">
+      <Column Name="ID_PERFIL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE_PERFIL" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="PREFIJO" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Association Name="PERFIL_PERFIL_OPERACION" Member="PERFIL_OPERACION" ThisKey="ID_PERFIL" OtherKey="ID_PERFIL" Type="PERFIL_OPERACION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OPERACION" Member="OPERACION">
+    <Type Name="OPERACION">
+      <Column Name="ID_OPERACION" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_OPERACION_PADRE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="VISIBLE_MENU" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="OPERACION_PERFIL_OPERACION" Member="PERFIL_OPERACION" ThisKey="ID_OPERACION" OtherKey="ID_OPERACION" Type="PERFIL_OPERACION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_Users">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Users_aspnet_UsersInRoles" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRoles" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRoles">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_Users_aspnet_UsersInRoles" Member="aspnet_Users" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+      <Association Name="aspnet_Roles_aspnet_UsersInRoles" Member="aspnet_Roles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Roles">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Roles_PERFIL_OPERACION" Member="PERFIL_OPERACION" ThisKey="RoleId" OtherKey="RoleId" Type="PERFIL_OPERACION" />
+      <Association Name="aspnet_Roles_aspnet_UsersInRoles" Member="aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRoles" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PreguntasSecreta" Member="PreguntasSecreta">
+    <Type Name="PreguntasSecreta">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pregunta" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Activity" Member="Activity">
+    <Type Name="Activity">
+      <Column Name="Activity_Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Operacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityDay" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,518 @@
+﻿#ContentPlaceHolder1_nuevaContra
+{
+    color: #005795;
+    font-size: 1.3em;
+}
+
+#Contenedor, #ContentPlaceHolder1_TabContainer1
+{
+    background-color: rgba(0,160,185,0.9)!important;
+    border-radius: 5px;
+}
+
+.panelStyle
+{
+    background-color: white !important;
+}
+
+    .panelStyle h1, .panelStyle h3, .panelStyle h2, .panelStyle h4
+    {
+        border-bottom: 2px solid #00A0B0;
+    }
+
+    .panelStyle div > table
+    {
+        margin-left: 25px !important;
+    }
+
+    .panelStyle table > tbody > tr
+    {
+        padding: 0 !important;
+    }
+
+.redondo
+{
+    border: 0 !important;
+}
+
+    .redondo > h4
+    {
+        margin-left: 0px !important;
+    }
+
+    .redondo > table
+    {
+        margin-left: 15px !important;
+    }
+
+        .redondo > table > tbody > tr
+        {
+            margin-left: 15px !important;
+        }
+
+.ajax__tab_xp .ajax__tab_body
+{
+    box-shadow: 0px 0px 1px #00A0B0 !important;
+    border: none !important;
+}
+
+.presupuestoTable tbody
+{
+    background-color: rgba(0,160,185,0.8);
+}
+
+/*#ContentPlaceHolder1_CreateUserWizard1 tbody tbody > tr, #ContentPlaceHolder1_ChangePassword1 tbody tbody > tr {
+    font-size: 1.2em;
+    color: black;
+    margin: 0.4em 0em 0em 1.5em;
+    text-align: left;
+    display: block;
+}
+
+    #ContentPlaceHolder1_ChangePassword1 tbody tbody > tr label, #ContentPlaceHolder1_CreateUserWizard1 tbody tbody > tr label {
+        font-weight: 700;
+        font-size: 0.8em;
+        color: #00A0B0;
+    }
+
+    #ContentPlaceHolder1_ChangePassword1 tbody tbody > tr:first-of-type {
+        font-size: 1.4em;
+        color: #005795;
+        display: block;
+        font-weight: 900;
+        border-bottom: 2px solid #00A0B0;
+        padding-bottom: 0.5em;
+    }
+
+        #ContentPlaceHolder1_ChangePassword1 tbody tbody > tr:first-of-type td {
+            margin: 0 auto;
+            display: block;
+        }*/
+
+
+.tableIndicadores
+{
+    width: 810px;
+    vertical-align: top;
+    margin-left: 85px;
+}
+
+    .tableIndicadores tr td span
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        font-size: 1.2em;
+        vertical-align: top;
+        color: #005795;
+    }
+
+    .tableIndicadores tr td label
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        font-size: 0.9em;
+        /*vertical-align: top;*/
+        color: black;
+    }
+
+    .tableIndicadores tr td input
+    {
+        width: 99%;
+        font-size: 1.2em;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    tableIndicadores tr td input[type="text"], .tableIndicadores tr td textarea, .tableIndicadores tr td select
+    {
+        width: 100%;
+        border: solid 1px #dddddd;
+    }
+
+        .tableIndicadores tr td input[type="text"]:focus, .tableIndicadores tr td textarea:focus
+        {
+            border: thin solid #0B610B;
+        }
+
+    .tableIndicadores tr td p
+    {
+        margin: 0 3px 10px 3px;
+    }
+
+    .tableIndicadores tr td select
+    {
+        width: 99%;
+        font-size: 1.2em;
+        vertical-align: top;
+        color: #005795;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    }
+
+    .tableIndicadores tr td textarea
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1px solid #005795;
+        width: 99%;
+        height: 130px;
+        resize: none;
+    }
+
+div#userNameBox
+{
+    padding-top: 30%;
+}
+
+    div#userNameBox b, div#userNameBox span
+    {
+        display: block;
+        border-bottom: 2px solid #00A0B0;
+    }
+
+    div#userNameBox span
+    {
+        border-bottom: 1px solid gray;
+        display: inline-block;
+        float: right;
+    }
+
+#presContent div.colPresupuesto
+{
+    margin: 1em auto 1em 0.2em;
+    float: left;
+    font-size: 0.85em;
+    width: 10.9em;
+    border-radius: 0.3em;
+}
+
+    #presContent div.colPresupuesto ul
+    {
+        list-style: none;
+        padding: 0;
+        margin-left: 0.2em;
+        background-color: rgba(0,170,176,0.2);
+    }
+
+div.colPresupuesto ul li
+{
+    padding: 0.1em 0.2em;
+    height: 27px;
+}
+
+    div.colPresupuesto ul li:first-of-type
+    {
+        font-weight: 700;
+        text-align: center;
+        border-bottom: 2px solid #005795;
+        margin: 0 auto;
+    }
+
+    div.colPresupuesto ul li input
+    {
+        width: 90%;
+        margin: 0px auto 3px auto;
+    }
+
+    div.colPresupuesto ul li span
+    {
+        width: 95%;
+        display: block;
+        vertical-align: super;
+        padding: 0.09em;
+        text-align: right;
+    }
+
+div.colPresupuesto.userCol ul li span
+{
+    background-color: rgba(128,128,128,0.1);
+    border-radius: 0.3em;
+    height: 98%;
+    width: 96%;
+    margin: 0 auto;
+}
+/***************************************** ESTILOS NEG MEMO ***************************************************************/
+
+.FormWrap
+{
+    width: 990px !important;
+    box-shadow: 0px 0px 2px rgba(0,160,185,0.9)!important;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+    position: relative;
+}
+
+    .FormWrap .NegMemo, .FormWrap .Convenio
+    {
+        width: 100%;
+    }
+
+    .FormWrap div.auto-style1
+    {
+        width: 99% !important;
+        margin: 2px auto 3px auto;
+        overflow-wrap: break-word;
+    }
+
+    .FormWrap h1
+    {
+        padding: 10px 5px 0 5px;
+        font-weight: 900;
+        text-align: center;
+        font-size: 2em;
+        text-shadow: 1px 0px 1px rgb(0,160,185);
+        border-bottom: 2px dotted;
+        margin-bottom: 10px;
+    }
+
+
+    .FormWrap h2
+    {
+        border-bottom: 2px solid #00A0B0;
+        width: 96%;
+        margin: 0 auto;
+        font-size: 1.6em;
+        padding-bottom: 0px;
+        padding-top: 0.3em;
+        margin-bottom: 0.7em;
+    }
+
+    .FormWrap textarea
+    {
+        resize: none;
+    }
+
+    .FormWrap h3
+    {
+        font-weight: 700;
+        border-bottom: 2px dotted rgb(0,160,185);
+        margin-left: 2.5em;
+        width: 93%;
+    }
+
+div.label-info > span
+{
+    width: 31%;
+    display: inline-block;
+    margin: 0 0 0 2%;
+}
+
+    div.label-info > span > span:first-child, div.label-info > span > label:first-child
+    {
+        font-size: 1em;
+        font-weight: 500;
+        color: rgb(0,160,185);
+        display: block;
+    }
+
+    div.label-info > span > label:nth-child(2)
+    {
+        font-size: 0.8em;
+        font-weight: 500;
+        color: rgb(0,160,185);
+        display: block;
+    }
+
+    div.label-info > span select
+    {
+        min-width: 80px;
+    }
+
+    div.label-info > span > select
+    {
+        font-size: 0.8em;
+        font-weight: 500;
+        display: block;
+    }
+
+
+div.big-text-box > span
+{
+    width: 97%;
+    display: block;
+}
+
+    div.big-text-box > span > label:first-child, .auto-style1 div.auto-style1-2 > label:first-child
+    {
+        font-size: 1em;
+        font-weight: 600;
+        color: rgb(0,160,185);
+        display: block;
+        margin: 1em 0 0.3em 1em;
+    }
+
+    div.big-text-box > span > textarea
+    {
+        width: 90% !important;
+        margin-left: 5%;
+        height: 60px;
+    }
+
+
+
+.auto-style1 div.auto-style1-2
+{
+    display: inline-block;
+    width: 45%;
+    margin-left: 3%;
+}
+
+    .auto-style1 div.auto-style1-2 > *
+    {
+        display: block;
+    }
+
+.no-display
+{
+    display: none;
+}
+
+
+.tabletable
+{
+    /*width: 100%;*/
+    vertical-align: top;
+    /*margin-left: 85px;*/
+}
+
+    .tabletable tr td
+    {
+        border: 1px solid #dddddd;
+        border-bottom: hidden;
+        border-top: hidden;
+    }
+
+        .tabletable tr td span
+        {
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+            font-style: normal;
+            text-align: left;
+            text-decoration: none;
+            /*border: 1px solid #FF0000;*/
+            font-size: 1.2em;
+            /*vertical-align: top;*/
+            color: #005795;
+        }
+
+        .tabletable tr td label
+        {
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+            font-style: normal;
+            text-align: left;
+            text-decoration: none;
+            /*border: 1px solid #FF0000;*/
+            font-size: 0.9em;
+            /*vertical-align: top;*/
+            color: #B51E3B;
+        }
+
+        .tabletable tr td input
+        {
+            /*width: 50%;*/
+            /*font-size: 1.2em;*/
+            vertical-align: top;
+            text-align: center;
+            vertical-align: middle;
+            text-align: center;
+            /*margin-left: 85px;*/
+        }
+
+        .tabletable tr td select
+        {
+            /*width: 99%;*/
+            font-size: 1.2em;
+            vertical-align: top;
+            color: #005795;
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        }
+
+        .tabletable tr td textarea
+        {
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+            font-style: normal;
+            text-align: left;
+            text-decoration: none;
+            border: 1px solid #005795;
+            /*width: 99%;*/
+            height: 130px;
+            resize: none;
+        }
+
+
+.tableEncuesta
+{
+    width: 100%;
+    vertical-align: top;
+    /*margin-left: 85px;*/
+}
+
+    .tableEncuesta tr td span
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        /*border: 1px solid #FF0000;*/
+        font-size: 1.2em;
+        /*vertical-align: top;*/
+        color: #005795;
+    }
+
+    .tableEncuesta tr td label
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        /*border: 1px solid #FF0000;*/
+        font-size: 0.9em;
+        /*vertical-align: top;*/
+        color: #B51E3B;
+    }
+
+    .tableEncuesta tr td input
+    {
+        /*width: 50%;*/
+        /*font-size: 1.2em;*/
+        vertical-align: top;
+        text-align: left;
+        vertical-align: middle;
+        text-align: center;
+        margin-left: 85px;
+    }
+
+    .tableEncuesta tr td select
+    {
+        width: 99%;
+        font-size: 1.2em;
+        vertical-align: top;
+        color: #005795;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    }
+
+    .tableEncuesta tr td textarea
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1px solid #005795;
+        width: 99%;
+        height: 130px;
+        resize: none;
+    }
+
+#menu
+{
+    margin: 0px 0px 0px 0px !important;
+    width: 100% !important;
+}
+
+
+

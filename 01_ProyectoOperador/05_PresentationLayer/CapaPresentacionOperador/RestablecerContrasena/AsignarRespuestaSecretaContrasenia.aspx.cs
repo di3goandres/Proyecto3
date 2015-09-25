@@ -8,7 +8,7 @@ using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Uniandes.AccesoDatos.Menu;
+using Uniandes.Centralizador.AccesoDatos.Menu;
 
 public partial class RestablecerContrasena_AsignarRespuestaSecretaContrasenia : System.Web.UI.Page
 {

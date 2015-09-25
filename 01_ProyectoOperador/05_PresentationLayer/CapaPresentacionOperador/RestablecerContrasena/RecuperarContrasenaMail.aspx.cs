@@ -11,7 +11,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Uniandes.Utilidades;
-using Uniandes.AccesoDatos.Menu;
+using Uniandes.Centralizador.AccesoDatos.Menu;
 
 
 public partial class RecuperarContrasenaMail : System.Web.UI.Page

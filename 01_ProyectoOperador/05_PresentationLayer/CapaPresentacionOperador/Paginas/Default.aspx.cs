@@ -23,13 +23,31 @@ public partial class Paginas_Default : System.Web.UI.Page
         return hex.ToString();
     }
 
+    protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
+    {
+
+        Response.Write(TreeView1.SelectedNode.Value);
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         try
         {
             if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
-            // documentos doc = new documentos();
+
+                //if (!Page.IsPostBack)
+                //{
+                    TreeView1.Nodes.Add(new TreeNode("Node1","0"));
+                    TreeView1.Nodes[0].ChildNodes.Add(new TreeNode("ChildNode","2"));
+                    TreeView1.Nodes.Add(new TreeNode("Node2"));
+                    TreeView1.Nodes[1].ChildNodes.Add(new TreeNode("ChildNode2"));
+                    TreeView1.Nodes.Add(new TreeNode("Node3"));
+                    TreeView1.Nodes[2].ChildNodes.Add(new TreeNode("ChildNode2"));
+
+                //}
+                
+                // documentos doc = new documentos();
                 string datosMime = getMimeFromFile(@"D:\vcredist.tmp.jpeg.bmp");
 
                 Byte[] bytes = File.ReadAllBytes(@"D:\datos.png");

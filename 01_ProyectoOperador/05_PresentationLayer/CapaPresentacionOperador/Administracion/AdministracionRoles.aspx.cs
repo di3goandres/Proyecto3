@@ -9,7 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading;
 using AccesControl.Utilidades;
-using Uniandes.AccesoDatos.Menu;
+using Uniandes.Centralizador.AccesoDatos.Menu;
 using Uniandes.GestionUsuarios;
 
 public partial class Administracion_AdministracionRoles : System.Web.UI.Page

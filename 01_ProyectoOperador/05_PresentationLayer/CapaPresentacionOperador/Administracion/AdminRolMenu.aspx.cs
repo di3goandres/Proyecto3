@@ -8,10 +8,10 @@ using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Uniandes.AccesoDatos.Menu;
+using Uniandes.Centralizador.AccesoDatos.Menu;
 using Uniandes.GestionUsuarios;
 using Uniandes.Utilidades;
-using Uniandes.AccesoDatos;
+
 
 public partial class Administracion_AdminRolMenu : System.Web.UI.Page
 {

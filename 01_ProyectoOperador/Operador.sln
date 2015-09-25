@@ -40,7 +40,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CapaPresentacionOperador", 
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "21046"
+		VWDPort = "64859"
 	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{5D709956-E404-4E14-A97A-577F847C1CFB} = {5D709956-E404-4E14-A97A-577F847C1CFB}
@@ -51,6 +51,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centralizador", "01_DataAccessLayer\Centralizador\Centralizador\Centralizador.csproj", "{38F9EAF9-E66C-4743-A674-E5493C8FD81C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCentralizador", "00_Entidades\EntidadesCentralizador\EntidadesCentralizador\EntidadesCentralizador.csproj", "{952DFAF9-ADA3-40EB-966F-7C2703DDAF50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionUsuarios", "01_DataAccessLayer\GestionUsuarios\GestionUsuarios.csproj", "{EB463085-D442-44A4-965C-C842B1A26A3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +122,12 @@ Global
 		{952DFAF9-ADA3-40EB-966F-7C2703DDAF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952DFAF9-ADA3-40EB-966F-7C2703DDAF50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{952DFAF9-ADA3-40EB-966F-7C2703DDAF50}.Release|x64.ActiveCfg = Release|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +138,7 @@ Global
 		{AC7841B0-0287-483D-84FF-9441404066A1} = {22CA5E0E-163B-4F5F-A24D-9D3C9D5C4269}
 		{45D29E2B-52FE-4C77-B218-9A4C3F3C7B16} = {22CA5E0E-163B-4F5F-A24D-9D3C9D5C4269}
 		{38F9EAF9-E66C-4743-A674-E5493C8FD81C} = {22CA5E0E-163B-4F5F-A24D-9D3C9D5C4269}
+		{EB463085-D442-44A4-965C-C842B1A26A3F} = {22CA5E0E-163B-4F5F-A24D-9D3C9D5C4269}
 		{5D709956-E404-4E14-A97A-577F847C1CFB} = {A374AA63-0C55-4960-A85C-4A4EC6827A71}
 		{86ED1E88-0D33-47D0-A866-83B877178D76} = {7203F7C2-A713-457A-87F1-34B22F59D67E}
 		{ACDE1BB6-27DE-4231-A540-1F009FA1E8B7} = {9D252732-6DCA-420F-8233-095EDA0EC512}

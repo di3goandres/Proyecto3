@@ -40,7 +40,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CapaPresentacionOperador", 
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "64859"
+		VWDPort = "25606"
 	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{5D709956-E404-4E14-A97A-577F847C1CFB} = {5D709956-E404-4E14-A97A-577F847C1CFB}

@@ -19,7 +19,7 @@ var gridCasosdE = "#DatosC";
 var gridCasosPagerIdE = "#PagerC";
 
 $(function () {
-    DoJsonRequestBusy(pagina, 'TraerinformacionInicial', datosIniciales, {});
+    //DoJsonRequestBusy(pagina, 'TraerinformacionInicial', datosIniciales, {});
     LoadUploadFiles('#fileUploadSolicitud', '#ArchivosAdjuntosDiv');
 
   

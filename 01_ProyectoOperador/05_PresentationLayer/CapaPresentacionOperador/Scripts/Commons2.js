@@ -647,6 +647,8 @@ var fileUploadIconFolder = "../../imagenes/";
 function LoadUploadFiles(inputFileUpload, divFileUploadId) {
     $(divFileUploadId).empty();
     $(divFileUploadId).append('<div><ul class = "file-fileupload-list"></ul></div>');
+   
+
 
     $(inputFileUpload).fileupload({
         replaceFileInput: true,
@@ -681,7 +683,9 @@ function DefaultFileUploadAdd(e, data, fileDivUploadId) {
         //        }
         //  var filename = file.name.replace(/^\s+|\s+$/g, '').replace('.', '-').replace('#', '-').replace(' ', '');
         var filename = file.name.ReplaceAll(".", "-").ReplaceAll("|", "-").ReplaceAll("&", "-").ReplaceAll(" ", "-").ReplaceAll("$", "-").ReplaceAll("^", "-").ReplaceAll("{", "-").ReplaceAll("}", "-").ReplaceAll("[", "-").ReplaceAll("]", "").ReplaceAll("(", "-").ReplaceAll(")", "-").ReplaceAll('"', "-").ReplaceAll("'", "-").ReplaceAll("+", "-").ReplaceAll("#", "").ReplaceAll("@", "");
+       
         if ($("." + filename).length != 0) {
+           
             $(fileDivUploadId + ' .' + filename).remove('.upload-done');
             $(fileDivUploadId + ' .' + filename + ' .upload-done-img').remove();
             $(fileDivUploadId + ' .' + filename + ' .error-file-img').remove();
@@ -689,7 +693,10 @@ function DefaultFileUploadAdd(e, data, fileDivUploadId) {
             $(fileDivUploadId + ' .' + filename).prepend('<img class="loading-file-img" src="' + fileUploadIconFolder + 'ajax-loader_2.gif" alt="Verificando virus" />');
         }
         else {
-            $(fileDivUploadId + " .file-fileupload-list").append('<li class = "file-item"><div class="' + filename + '"><span><img class="loading-file-img" src="' + fileUploadIconFolder + 'ajax-loader2.gif" alt="Verificando virus" /></span>&nbsp;<a href="#" class ="remove-file-item">Eliminar</a> &nbsp;<span class="file-item">' + file.name + '</span> <label class="actual-process">Inició la carga del archivo</label></div></li>');
+           
+            //$(fileDivUploadId + " .file-fileupload-list").append('<li class = "file-item"><div class="' + filename + '"><span><img class="loading-file-img" src="' + fileUploadIconFolder + 'ajax-loader2.gif" alt="Verificando virus" /></span>&nbsp;<a href="#" class ="remove-file-item">Eliminar</a> &nbsp;<span class="file-item">' + file.name + '</span> <label class="actual-process">Inició la carga del archivo</label></div></li>');
+            $(fileDivUploadId + " .file-fileupload-list").append('<li class = "file-item"><div class="' + filename + '"><span><img class="loading-file-img" src="' + fileUploadIconFolder + 'ajax-loader2.gif" alt="Verificando virus" /></span>&nbsp; &nbsp;<span class="file-item">' + file.name + '</span> <label class="actual-process">Inició la carga del archivo</label></div></li>');
+
         }
         AddRemoveHandler();
     });
@@ -711,14 +718,18 @@ function DefaultFileUploadFail(e, data, fileDivUploadId) {
         //  var filename = file.name.replace(/^\s+|\s+$/g, '').replace('.', '-').replace('#', '-').replace(' ', '');
         // var filename = nombresinEspacios.replace(' ', '').replace('.', '-').replace('#', '-').replace('(', '-').replace(')', '-'); //file.name.replace(/^\s+|\s+$/g, '').replace('.', '-').replace('#', '-').replace(' ', '');
         var filename = file.name.ReplaceAll(".", "-").ReplaceAll("|", "-").ReplaceAll("&", "-").ReplaceAll(" ", "-").ReplaceAll("$", "-").ReplaceAll("^", "-").ReplaceAll("{", "-").ReplaceAll("}", "-").ReplaceAll("[", "-").ReplaceAll("]", "").ReplaceAll("(", "-").ReplaceAll(")", "-").ReplaceAll('"', "-").ReplaceAll("'", "-").ReplaceAll("+", "-").ReplaceAll("#", "").ReplaceAll("@", "");
-
+       
         $(fileDivUploadId + ' .' + filename + ' .upload-done').remove();
         $(fileDivUploadId + ' .' + filename + ' .upload-done-img').remove();
         $(fileDivUploadId + ' .' + filename + ' .loading-file-img').remove();
         $(fileDivUploadId + ' .' + filename + ' .error-file-img').remove();
+
         $('.' + filename + ' .actual-process').text('Error en la carga del archivo, es posible que el tamaño del archivo sea muy grande.');
         $(fileDivUploadId + ' .' + filename).prepend('<img class="error-file-img" src="' + fileUploadIconFolder + 'close.png" alt="Error en la carga de archivos" />');
+        $(fileDivUploadId + ' .' + filename).append('<button class="remove-file-item btn btn-error"><i class="fa fa-ban"></i><span>Eliminar</span></button>');
     });
+
+    AddRemoveHandler();
 }
 
 function DefaultFileUploadSend(e, data, fileDivUploadId) {
@@ -727,7 +738,7 @@ function DefaultFileUploadSend(e, data, fileDivUploadId) {
         var x = 0;
       
         var filename = file.name.ReplaceAll(".", "-").ReplaceAll("|", "-").ReplaceAll("&", "-").ReplaceAll(" ", "-").ReplaceAll("$", "-").ReplaceAll("^", "-").ReplaceAll("{", "-").ReplaceAll("}", "-").ReplaceAll("[", "-").ReplaceAll("]", "").ReplaceAll("(", "-").ReplaceAll(")", "-").ReplaceAll('"', "-").ReplaceAll("'", "-").ReplaceAll("+", "-").ReplaceAll("#", "").ReplaceAll("@", "");
-
+       
         $(fileDivUploadId + ' .' + filename + ' .actual-process').text('Se está realizando la verificación de virus.');
     });
 
@@ -747,6 +758,8 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
             var x = 0;
           
             var filename = file.Original.ReplaceAll(".", "-").ReplaceAll("|", "-").ReplaceAll("&", "-").ReplaceAll(" ", "-").ReplaceAll("$", "-").ReplaceAll("^", "-").ReplaceAll("{", "-").ReplaceAll("}", "-").ReplaceAll("[", "-").ReplaceAll("]", "").ReplaceAll("(", "-").ReplaceAll(")", "-").ReplaceAll('"', "-").ReplaceAll("'", "-").ReplaceAll("+", "-").ReplaceAll("#", "").ReplaceAll("@", "");
+            removeRepetidos(fileDivUploadId, filename);
+
 
             $(fileDivUploadId + ' .' + filename + ' .upload-done-img').remove();
             $(fileDivUploadId + ' .' + filename + ' .upload-done').remove();
@@ -767,15 +780,42 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
                 error = true;
             }
             if (error == false) {
-                $(fileDivUploadId + ' .' + filename + ' .actual-process').text('El archivo está listo para ser cargado.');
+
+                //$("#archivosAdjuntosTable").append(' <table role="presentation" class="table table-striped clearfix"><tbody class="files">');
+
+
+                //$("#archivosAdjuntosTable").append('<tr class="template-upload fade in"> <td>' +
+                //                          '<i class="icon-axa_31 iconGray"></i>' +
+                //                      '</td><td><p class="name">Cedula.doc</p>' +
+                //                          '<strong class="error text-danger label label-danger hidden">File type not allowed</strong>' +
+                //                     ' </td> <td><p class="size">1.78 KB</p>' +
+                //                          '<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">' +
+                //                              '<div class="progress-bar progress-bar-success" style="width: 0%;"></div></div></td><td>' +
+                //                              '<button class="btn btn-error">' +
+                //                              '<i class="fa fa-ban"></i>' +
+                //                              '<span>Eliminar</span>' +
+                //                          '</button>' +
+                //                          '</td></tr>');
+
+
+
+                //$("#archivosAdjuntosTable").append(' </tbody></table>');
+                removeRepetidos(fileDivUploadId, filename);
+                $(fileDivUploadId + ' .' + filename).append('<i class="icon-axa_31 iconGray"></i>');
+                $(fileDivUploadId + ' .' + filename + ' .actual-process').text( file.tamanioArchivo/1024  +"KB");
                 $(fileDivUploadId + ' .' + filename).append('<input type="hidden" class="upload-done" name="doneFile" value="' + file.Generated + '">');
-                $(fileDivUploadId + ' .' + filename).prepend('<img class="upload-done-img" src="' + fileUploadIconFolder + 'ok.png" alt="A la espera de carga de los archivos" />');
+               
+             
+                $(fileDivUploadId + ' .' + filename).append('<button class="remove-file-item btn btn-error"><i class="fa fa-ban"></i><span>Eliminar</span></button>');
+
+                $(fileDivUploadId + ' .' + filename).prepend('<img class="upload-done-AddRemoveHandler()img" src="' + fileUploadIconFolder + 'ok.png" alt="A la espera de carga de los archivos" />');
             } else {
                 $(fileDivUploadId + ' .' + filename).prepend('<img class="error-file-img" src="' + fileUploadIconFolder + 'close.png" alt="error en la carga de archivos" />');
                 AlertUI("ERROR", result.Mensaje);
             }
         });
     }
+    AddRemoveHandler();
 }
 
 function GetLoadFilenames(fileDivUploadId) {
@@ -790,6 +830,49 @@ function GetLoadFilenames(fileDivUploadId) {
     return names
 }
 
+
+//funcion para remover un item de la lista.
+function AddRemoveHandler() {
+    $('.remove-file-item').unbind("click");
+    $('.remove-file-item').click(function () {
+        $(this).parents('.file-item:first').remove();
+    });
+}
+
+function removeItem() {
+
+    $(this).parents('.file-item:first').remove();
+}
+
+function removeRepetidos(fileDivUploadId, filename) {
+    var names = "";
+    
+    if ($(fileDivUploadId + ' .upload-done').length.toString() != "0") {
+
+    }
+
+    var r = GetLoadFilenames(fileDivUploadId);
+    $(fileDivUploadId + ' .file-item').each(function (a) {
+        names +=  $(this).parent().attr('class')+ ",";
+    });
+   
+
+    var todos = names.split(',');
+
+
+    for (var i = 0; i < todos.length; i++) {
+        if (todos[i] == filename) {
+            $("#" + todos[i]).parents('.file-item:first').remove();
+        }
+    }
+
+    
+
+
+
+
+}
+
 function GetLoadFilenamesConvenio(fileDivUploadId) {
     var names = "";
     if ($(fileDivUploadId + ' .loading-file-img').length.toString() != "0") {
@@ -802,12 +885,7 @@ function GetLoadFilenamesConvenio(fileDivUploadId) {
     return names
 }
 
-function AddRemoveHandler() {
-    $('.remove-file-item').unbind("click");
-    $('.remove-file-item').click(function () {
-        $(this).parents('.file-item:first').remove();
-    });
-}
+
 
 function validarEmail(sEmail) {
     // filtros

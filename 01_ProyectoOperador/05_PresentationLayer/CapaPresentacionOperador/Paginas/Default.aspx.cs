@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AccesControl.Utilidades;
 using Uniandes.Centralizador.AccesoDatos.Menu;
+using Uniandes.FileControl;
 public partial class Paginas_Default : System.Web.UI.Page
 {
 
@@ -35,6 +36,15 @@ public partial class Paginas_Default : System.Web.UI.Page
         {
             if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
+
+
+                var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+
+                fileControl._CreateFolderInFTP("CC1077845378/Carpeta1", "OPERADOR_REPOSITORY_USER");
+                fileControl._CreateFolderInFTP("CC1077845378/Carpeta2", "OPERADOR_REPOSITORY_USER");
+                fileControl._CreateFolderInFTP("CC1077845378/Carpeta2/subcarpeta1", "OPERADOR_REPOSITORY_USER");
+
+
 
                 //if (!Page.IsPostBack)
                 //{

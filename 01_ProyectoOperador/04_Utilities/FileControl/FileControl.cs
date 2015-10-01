@@ -19,6 +19,7 @@ namespace Uniandes.FileControl
         public string Original { get; set; }
         public string Generated { get; set; }
         public string FullFilename { get; set; }
+        public string tamanioArchivo { get; set; }
     }
     public class FileControl
     {
@@ -173,6 +174,7 @@ namespace Uniandes.FileControl
                         var filePath = Path.Combine(path, generatedName);
                         AntivirusFileNames.Add(new FileNameControl() { Original = filename, Generated = generatedName, FullFilename = filePath });
                         maxSize += postedFile.ContentLength;
+
                         nombreArchivo = generatedName;
                         _SendFileStreamToFtp(postedFile.InputStream, antivirusDir.Path, antivirusDir.FtpUser, antivirusDir.FtpPassword, generatedName);
                         //if (postedFile.ContentLength > maxSize)
@@ -195,7 +197,7 @@ namespace Uniandes.FileControl
                         var generatedName = GetFileName(postedFile.FileName, i.ToString());
                         var filePath = Path.Combine(path, generatedName);
                         nombreArchivo = generatedName;
-                        AntivirusFileNames.Add(new FileNameControl() { Original = filename, Generated = generatedName, FullFilename = filePath });
+                        AntivirusFileNames.Add(new FileNameControl() { Original = filename, Generated = generatedName, FullFilename = filePath, tamanioArchivo = postedFile.ContentLength.ToString() });
                         postedFile.SaveAs(filePath);
                         //if (postedFile.ContentLength > maxSize)
                         maxSize += postedFile.ContentLength;
@@ -270,6 +272,62 @@ namespace Uniandes.FileControl
                 }
             }
             return true;
+        }
+
+
+        /// <summary>
+        /// Metodo para crear directorios en el FTP
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <param name="ftpUser"></param>
+        /// <param name="ftpPassword"></param>
+        /// <returns></returns>
+        public bool _CreateFolderInFTP(string nameFolder, string destinationKey)
+        {
+            try
+            {
+
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+                if (repository.Path.Equals(FileConfigSettings.GetAntivirusDirectory().Path))
+                    return false;
+                if (repository == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+
+                string user = repository.FtpUser;
+                string password = repository.FtpPassword;
+                //create the directory
+                string directory = repository.Path + nameFolder;
+                FtpWebRequest requestDir = (FtpWebRequest)FtpWebRequest.Create(new Uri(directory));
+                requestDir.Method = WebRequestMethods.Ftp.MakeDirectory;
+                requestDir.Credentials = new NetworkCredential(user, password);
+                requestDir.UsePassive = true;
+                requestDir.UseBinary = true;
+                requestDir.KeepAlive = false;
+                FtpWebResponse response = (FtpWebResponse)requestDir.GetResponse();
+                Stream ftpStream = response.GetResponseStream();
+
+                ftpStream.Close();
+                response.Close();
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
+            }
         }
 
         /// <summary>

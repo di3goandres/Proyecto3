@@ -10,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Uniandes.Utilidades;
 using Uniandes.Centralizador.AccesoDatos.Menu;
-using Uniandes.Entity;
+using Operador.Entity;
 
 
 public partial class shared_UtilidadesSession : System.Web.UI.Page

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using Uniandes.Entity;
+using Operador.Entity;
 
 namespace Uniandes.Centralizador.AccesoDatos.Menu
 {

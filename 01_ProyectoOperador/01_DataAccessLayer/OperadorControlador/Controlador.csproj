@@ -35,25 +35,55 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Uniandes.Entity">
-      <HintPath>S:\Uniandes.Entity.dll</HintPath>
-    </Reference>
     <Reference Include="Uniandes.Utilidades">
       <HintPath>S:\Uniandes.Utilidades.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarpetaPersonalDao.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="DaoUsuario.cs" />
     <Compile Include="DepartamentosDao.cs" />
-    <Compile Include="PacienteDao.cs" />
+    <Compile Include="MapeadorCarpetaPersonal.cs" />
+    <Compile Include="Operador.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Operador.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="OperadorDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="TipoidentificacionDao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Operador.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Operador.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Operador.dbml.layout">
+      <DependentUpon>Operador.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

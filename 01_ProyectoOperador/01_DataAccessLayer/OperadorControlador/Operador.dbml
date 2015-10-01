@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OperadorCarpeta" Class="OperadorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tb001_PAIS" Member="tb001_PAIS">
+    <Type Name="tb001_PAIS">
+      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombrePais" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDane" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO" ThisKey="idPais" OtherKey="idPais" Type="tb002_DEPARTAMENTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCarpetaPersonal" Member="tblCarpetaPersonal">
+    <Type Name="tblCarpetaPersonal">
+      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="idCarpetaPadre" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NombreCarpeta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO">
+    <Type Name="tb002_DEPARTAMENTO">
+      <Column Name="idDepartamento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreDepartamento" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDANE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb002_DEPARTAMENTO_tb003_MUNICIPIO" Member="tb003_MUNICIPIO" ThisKey="idDepartamento" OtherKey="idDepartamento" Type="tb003_MUNICIPIO" />
+      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb001_PAIS" ThisKey="idPais" OtherKey="idPais" Type="tb001_PAIS" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb003_MUNICIPIO" Member="tb003_MUNICIPIO">
+    <Type Name="tb003_MUNICIPIO">
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreMunicipio" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idDepartamento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDANE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb002_DEPARTAMENTO_tb003_MUNICIPIO" Member="tb002_DEPARTAMENTO" ThisKey="idDepartamento" OtherKey="idDepartamento" Type="tb002_DEPARTAMENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tipoId" Member="tbl_tipoId">
+    <Type Name="tbl_tipoId">
+      <Column Name="id_tipoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre_tipoId" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="abreviado_tipoId" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_usuarios" Member="tbl_usuarios">
+    <Type Name="tbl_usuarios">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="userIdCentralizador" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="repositorioKey" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="carpetaUsuarioInicial" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

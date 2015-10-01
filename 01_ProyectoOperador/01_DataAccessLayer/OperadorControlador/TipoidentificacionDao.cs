@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using Uniandes.Entity;
+using Operador.Entity;
 
 namespace Uniandes.Controlador
 {

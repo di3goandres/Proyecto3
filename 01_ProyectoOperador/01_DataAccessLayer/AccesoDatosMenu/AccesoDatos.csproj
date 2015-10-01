@@ -40,6 +40,9 @@
     <Reference Include="Incoder.AccesoDatos">
       <HintPath>S:\Incoder.AccesoDatos.dll</HintPath>
     </Reference>
+    <Reference Include="Operador.Entity">
+      <HintPath>\\asus\dll\Operador.Entity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -49,9 +52,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Uniandes.Entity">
-      <HintPath>S:\Uniandes.Entity.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos.designer.cs">

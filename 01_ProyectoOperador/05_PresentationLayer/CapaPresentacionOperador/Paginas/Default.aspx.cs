@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AccesControl.Utilidades;
 using Uniandes.Centralizador.AccesoDatos.Menu;
+using Uniandes.Controlador;
 using Uniandes.FileControl;
 public partial class Paginas_Default : System.Web.UI.Page
 {
@@ -40,23 +41,57 @@ public partial class Paginas_Default : System.Web.UI.Page
 
                 var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
-                fileControl._CreateFolderInFTP("CC1077845378/Carpeta1", "OPERADOR_REPOSITORY_USER");
-                fileControl._CreateFolderInFTP("CC1077845378/Carpeta2", "OPERADOR_REPOSITORY_USER");
-                fileControl._CreateFolderInFTP("CC1077845378/Carpeta2/subcarpeta1", "OPERADOR_REPOSITORY_USER");
+
+                CarpetaPersonalDao cPdao = new CarpetaPersonalDao();
+
+                List<string> carpetasTodasUsuario = new List<string>();
+                var resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuario("c6d7156d-bec0-4bdb-af6b-20802dff6c00");
+
+                int Node = 0;
+                string carpetaUsuario = "CC1077845378/";
+                TreeView1.Nodes.Clear();
+                foreach (var cp in resultadoCarpetas)
+                {
+                    string Actual = carpetaUsuario + cp.NombreCarpeta;
+                    TreeView1.Nodes.Add(new TreeNode(cp.NombreCarpeta, cp.IdCarpetaPersonal.ToString()));
+                    
+                    carpetasTodasUsuario.Add(Actual);
+                    if (cp.Hijos!=null && cp.Hijos.Count > 0)
+                    {
+                        foreach (var hijos in cp.Hijos)
+                        {
+                            carpetasTodasUsuario.Add(Actual + "/" + hijos.NombreCarpeta);
+                            TreeView1.Nodes[Node].ChildNodes.Add(new TreeNode(hijos.NombreCarpeta, hijos.IdCarpetaPersonal.ToString()));
+                        }
+                        
+                    }
+                    Node++;
+                }
+
+
+                foreach (var carpetasCrear in carpetasTodasUsuario) {
+                    fileControl._CreateFolderInFTP(carpetasCrear, "OPERADOR_REPOSITORY_USER");
+                
+                }
+
+
+                
+                //fileControl._CreateFolderInFTP("CC1077845378/Carpeta2", "OPERADOR_REPOSITORY_USER");
+                //fileControl._CreateFolderInFTP("CC1077845378/Carpeta2/subcarpeta1", "OPERADOR_REPOSITORY_USER");
 
 
 
                 //if (!Page.IsPostBack)
                 //{
-                    TreeView1.Nodes.Add(new TreeNode("Node1","0"));
-                    TreeView1.Nodes[0].ChildNodes.Add(new TreeNode("ChildNode","2"));
-                    TreeView1.Nodes.Add(new TreeNode("Node2"));
-                    TreeView1.Nodes[1].ChildNodes.Add(new TreeNode("ChildNode2"));
-                    TreeView1.Nodes.Add(new TreeNode("Node3"));
-                    TreeView1.Nodes[2].ChildNodes.Add(new TreeNode("ChildNode2"));
+                //TreeView1.Nodes.Add(new TreeNode("Node1", "0"));
+                //TreeView1.Nodes[0].ChildNodes.Add(new TreeNode("ChildNode", "2"));
+                //TreeView1.Nodes.Add(new TreeNode("Node2"));
+                //TreeView1.Nodes[1].ChildNodes.Add(new TreeNode("ChildNode2"));
+                //TreeView1.Nodes.Add(new TreeNode("Node3"));
+                //TreeView1.Nodes[2].ChildNodes.Add(new TreeNode("ChildNode2"));
 
                 //}
-                
+
                 // documentos doc = new documentos();
                 string datosMime = getMimeFromFile(@"D:\vcredist.tmp.jpeg.bmp");
 
@@ -64,14 +99,14 @@ public partial class Paginas_Default : System.Web.UI.Page
                 String file = Convert.ToBase64String(bytes);
 
                 // Example #2: Write one string to a text file.
-               
+
                 // WriteAllText creates a file, writes the specified string to the file,
                 // and then closes the file.    You do NOT need to call Flush() or Close().
                 System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\64.txt", file);
                 string fileHexa = ByteArrayToString(bytes);
 
 
-                
+
                 // WriteAllText creates a file, writes the specified string to the file,
                 // and then closes the file.    You do NOT need to call Flush() or Close().
                 System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\hexa.txt", fileHexa);
@@ -83,18 +118,18 @@ public partial class Paginas_Default : System.Web.UI.Page
                 System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\bitConverter.txt", hex);
 
 
-               //// doc.insertar(file, "png", "datos.png");
+                //// doc.insertar(file, "png", "datos.png");
 
-               // string path = @"D:\100_Cargues\";
+                // string path = @"D:\100_Cargues\";
 
-               // var documento = doc.consultar("");
+                // var documento = doc.consultar("");
 
-               // Byte[] bytess = Convert.FromBase64String(documento.contenido);
-
-
+                // Byte[] bytess = Convert.FromBase64String(documento.contenido);
 
 
-               // File.WriteAllBytes(path + documento.nombre, bytes);
+
+
+                // File.WriteAllBytes(path + documento.nombre, bytes);
 
 
                 string usuarioActual = Thread.CurrentPrincipal.Identity.Name;
@@ -145,7 +180,7 @@ public partial class Paginas_Default : System.Web.UI.Page
 
             };
         }
-        
+
     }
 
     public static string getMimeFromFile(string filename)

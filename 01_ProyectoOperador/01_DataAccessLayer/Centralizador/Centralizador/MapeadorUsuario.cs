@@ -15,7 +15,7 @@ namespace Centralizador.DAO
             return new Usuario
 
             {
-                //UUID = entidad.UID.ToString(),
+                UUID = entidad.UID.ToString(),
                 idTipoIdentificacion = entidad.idTipoIdentificacion == default(int) ? default(int) : entidad.idTipoIdentificacion,
                 numeroIdentificacion = entidad.numeroIdentificacion,
                 idMunicipioExpedicionDocumento =  entidad.idMunicipioExpedicionDocumento==  default(int) ? default(int)  :Convert.ToInt32( entidad.idMunicipioExpedicionDocumento),

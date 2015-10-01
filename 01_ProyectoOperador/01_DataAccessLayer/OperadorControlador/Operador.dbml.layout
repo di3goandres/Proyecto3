@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.75" name="Operador">
+  <DataContextMoniker Name="/OperadorDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fe40a738-73b9-4a42-8609-2caf98b9067c" absoluteBounds="0.75, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OperadorDataContext/tb001_PAIS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f87a6285-8e43-4704-97fa-aefd42bf161c" absoluteBounds="0.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1741301e-515b-4da9-a166-2cf1330f1362" absoluteBounds="0.75, 3.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/OperadorDataContext/tblCarpetaPersonal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f6bf19b-13d0-4319-9b1c-75c06b8d7a3e" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cfe88b44-2a06-415b-8bbb-630f86ddca07" absoluteBounds="3.5, 0.875, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/OperadorDataContext/tb002_DEPARTAMENTO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="12d732c5-7087-4c64-bd00-62cd367127e9" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a3010d76-44bd-46a0-a558-9a92d522ebea" absoluteBounds="6.25, 0.875, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/OperadorDataContext/tb003_MUNICIPIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e36fd071-c826-4617-9e50-eac18185b64f" absoluteBounds="6.265, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d61ceedf-c5f3-4adf-90d4-81a01899a3f7" absoluteBounds="3.75, 3.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/OperadorDataContext/tbl_tipoId" />
+      <nestedChildShapes>
+        <elementListCompartment Id="222ff6e7-42ed-4205-9c35-108a60765d5e" absoluteBounds="3.765, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bf338d6d-f20a-4e58-bbc2-95ec5fbfbe8e" absoluteBounds="0.75, 6.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/OperadorDataContext/tbl_usuarios" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e567e233-4f7b-4ee1-ac43-de6c97a33047" absoluteBounds="0.765, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.69314697265625); (3.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OperadorDataContext/tb001_PAIS/tb001_PAIS_tb002_DEPARTAMENTO" />
+      <nodes>
+        <classShapeMoniker Id="fe40a738-73b9-4a42-8609-2caf98b9067c" />
+        <classShapeMoniker Id="cfe88b44-2a06-415b-8bbb-630f86ddca07" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 1.66429768880208); (6.25 : 1.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OperadorDataContext/tb002_DEPARTAMENTO/tb002_DEPARTAMENTO_tb003_MUNICIPIO" />
+      <nodes>
+        <classShapeMoniker Id="cfe88b44-2a06-415b-8bbb-630f86ddca07" />
+        <classShapeMoniker Id="a3010d76-44bd-46a0-a558-9a92d522ebea" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

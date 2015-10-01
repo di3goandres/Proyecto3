@@ -10,8 +10,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Uniandes.Centralizador.AccesoDatos.Menu;
 using Uniandes.Controlador;
-using Uniandes.Entity;
+using Operador.Entity;
 using Uniandes.Utilidades;
+using Uniandes.FileControl;
 
 public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 {
@@ -92,27 +93,28 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                     case MembershipCreateStatus.Success:
                         Roles.AddUserToRole(NUMERO_IDENTIFICACION, PERFILP);
 
-                        Paciente nuevoPaciente = new Paciente();
-                        nuevoPaciente.nombres_paciente = NombresI;
-                        nuevoPaciente.apellidos_paciente = ApellidosI;
-                        nuevoPaciente.ident_paciente = NUMERO_IDENTIFICACION;
-                        nuevoPaciente.tipo_id = TIPO_IDENTIFICACION;
-                        nuevoPaciente.genero_paciente = 2;
-
-                        nuevoPaciente.direccion_paciente = DireccionResidencia;
-                        nuevoPaciente.telefono_paciente = telefono;
-                        nuevoPaciente.movil_paciente = telefono;
-                        nuevoPaciente.mail_paciente = Email;
-                        nuevoPaciente.userId = newUser.ProviderUserKey.ToString();
-                        nuevoPaciente.fecha_nacimiento = DateTime.Now;
-
-                       // PacienteDao pd = new PacienteDao();
-                        //var nuevo = pd.registrarPacienteNuevo(nuevoPaciente);
+                      
                         var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario);
                         DaoUsuario registroAPP = new DaoUsuario();
-                        var usuaripoRegistrarApp =  registroAPP.RegistrarUsuario(nuevoPaciente.userId, Usuarioregistrado.UUID.ToString());
 
+                        string CarpetaInicial = "CC"+ NUMERO_IDENTIFICACION;
+
+                        var usuaripoRegistrarApp =  registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
+                            "OPERADOR_REPOSITORY_USER",CarpetaInicial );
+
+                        #region crear carpeta en el servidor 
+                        var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+
+                        fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
+                        #endregion
+
+
+                        #region Enviar Correo de confirmacion de creacion de cuenta.
                         var enviar = new Correos().EnviarEmailCreacionDeUsuario(Email);
+                        #endregion
+
+
+
 
                         status = "OK";
                         Retorno = "La cuenta del usuario, ha sido creada con exito";

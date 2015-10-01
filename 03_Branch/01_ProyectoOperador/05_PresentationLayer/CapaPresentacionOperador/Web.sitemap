@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode title="Administracion">
+    <siteMapNode url="Administracion/CrearUsuarios.aspx" title="Crear Usuarios"  />
+    <siteMapNode url="Administracion/DesbloquearUsuario.aspx" title="Desbloquear Usuarios" />
+    <siteMapNode url="Administracion/HabilitarUsuario.aspx" title="Habilitar / Deshabilitar Usuarios" />
+    <siteMapNode url="RestablecerContrasena/CambiarContrasena.aspx" title="Cambiar Contraseña" />
+
+  </siteMapNode>
+  
+</siteMap>

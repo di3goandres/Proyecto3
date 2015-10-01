@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="centralizador" Class="CentralizadorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tb001_PAIS" Member="tb001_PAIS">
+    <Type Name="tb001_PAIS">
+      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombrePais" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDane" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO" ThisKey="idPais" OtherKey="idPais" Type="tb002_DEPARTAMENTO" />
+      <Association Name="tb001_PAIS_tb005_RRUS" Member="tb005_RRUS" ThisKey="idPais" OtherKey="idPaisNacionalidad" Type="tb005_RRUS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb009_ENTIDADES" Member="tb009_ENTIDADES">
+    <Type Name="tb009_ENTIDADES">
+      <Column Name="idEntidades" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreEntidad" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoIdentificacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="numeroIdentificacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tb004_TIPOS_IDENTIFICACION_tb009_ENTIDADES" Member="tb004_TIPOS_IDENTIFICACION" ThisKey="idTipoIdentificacion" OtherKey="idTipoIdentificacion" Type="tb004_TIPOS_IDENTIFICACION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO">
+    <Type Name="tb002_DEPARTAMENTO">
+      <Column Name="idDepartamento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreDepartamento" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDANE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb002_DEPARTAMENTO_tb003_MUNICIPIO" Member="tb003_MUNICIPIO" ThisKey="idDepartamento" OtherKey="idDepartamento" Type="tb003_MUNICIPIO" />
+      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb001_PAIS" ThisKey="idPais" OtherKey="idPais" Type="tb001_PAIS" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb003_MUNICIPIO" Member="tb003_MUNICIPIO">
+    <Type Name="tb003_MUNICIPIO">
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreMunicipio" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idDepartamento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDANE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS" Member="tb005_RRUS" ThisKey="IdMunicipio" OtherKey="idMunicipioExpedicionDocumento" Type="tb005_RRUS" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS1" Member="tb005_RRUS1" ThisKey="IdMunicipio" OtherKey="idMunicipioNotificacionCorrespondencia" Type="tb005_RRUS" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS2" Member="tb005_RRUS2" ThisKey="IdMunicipio" OtherKey="idMunicipioLaboral" Type="tb005_RRUS" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS3" Member="tb005_RRUS3" ThisKey="IdMunicipio" OtherKey="idMunicipioNacimiento" Type="tb005_RRUS" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS4" Member="tb005_RRUS4" ThisKey="IdMunicipio" OtherKey="idMunicipioResidencia" Type="tb005_RRUS" />
+      <Association Name="tb002_DEPARTAMENTO_tb003_MUNICIPIO" Member="tb002_DEPARTAMENTO" ThisKey="idDepartamento" OtherKey="idDepartamento" Type="tb002_DEPARTAMENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb004_TIPOS_IDENTIFICACION" Member="tb004_TIPOS_IDENTIFICACION">
+    <Type Name="tb004_TIPOS_IDENTIFICACION">
+      <Column Name="idTipoIdentificacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="convencion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="tb004_TIPOS_IDENTIFICACION_tb009_ENTIDADES" Member="tb009_ENTIDADES" ThisKey="idTipoIdentificacion" OtherKey="idTipoIdentificacion" Type="tb009_ENTIDADES" />
+      <Association Name="tb004_TIPOS_IDENTIFICACION_tb005_RRUS" Member="tb005_RRUS" ThisKey="idTipoIdentificacion" OtherKey="idTipoIdentificacion" Type="tb005_RRUS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb005_RRUS" Member="tb005_RRUS">
+    <Type Name="tb005_RRUS">
+      <Column Name="idRRUS" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UID" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoIdentificacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numeroIdentificacion" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="idMunicipioExpedicionDocumento" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fechaExpedicion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="primerApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="segundoApellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="primerNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="segundoNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="genero" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="idMunicipioNacimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPaisNacionalidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idMunicipioResidencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="direccionResidencia" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="idMunicipioNotificacionCorrespondencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="direccionNotificacionCorrespondencia" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="correoElectronico" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="idMunicipioLaboral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="estadoCivil" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tb001_PAIS_tb005_RRUS" Member="tb001_PAIS" ThisKey="idPaisNacionalidad" OtherKey="idPais" Type="tb001_PAIS" IsForeignKey="true" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS" Member="tb003_MUNICIPIO" ThisKey="idMunicipioExpedicionDocumento" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS1" Member="tb003_MUNICIPIO1" ThisKey="idMunicipioNotificacionCorrespondencia" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS2" Member="tb003_MUNICIPIO2" ThisKey="idMunicipioLaboral" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS3" Member="tb003_MUNICIPIO3" ThisKey="idMunicipioNacimiento" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
+      <Association Name="tb003_MUNICIPIO_tb005_RRUS4" Member="tb003_MUNICIPIO4" ThisKey="idMunicipioResidencia" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
+      <Association Name="tb004_TIPOS_IDENTIFICACION_tb005_RRUS" Member="tb004_TIPOS_IDENTIFICACION" ThisKey="idTipoIdentificacion" OtherKey="idTipoIdentificacion" Type="tb004_TIPOS_IDENTIFICACION" IsForeignKey="true" />
+      <Association Name="tb006_OPERADOR_tb005_RRUS" Member="tb006_OPERADOR" ThisKey="idOperador" OtherKey="idOperador" Type="tb006_OPERADOR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb006_OPERADOR" Member="tb006_OPERADOR">
+    <Type Name="tb006_OPERADOR">
+      <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreOperador" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="tipoIdentificacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numeroIdentificacion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="tb006_OPERADOR_tb005_RRUS" Member="tb005_RRUS" ThisKey="idOperador" OtherKey="idOperador" Type="tb005_RRUS" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb007_TIPOS_AUDITORIA" Member="tb007_TIPOS_AUDITORIA">
+    <Type Name="tb007_TIPOS_AUDITORIA">
+      <Column Name="idAuditoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombreAuditoria" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcionAuditoria" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Association Name="tb007_TIPOS_AUDITORIA_tb008_LOG_AUDITORIA" Member="tb008_LOG_AUDITORIA" ThisKey="idAuditoria" OtherKey="idAuditoria" Type="tb008_LOG_AUDITORIA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb008_LOG_AUDITORIA" Member="tb008_LOG_AUDITORIA">
+    <Type Name="tb008_LOG_AUDITORIA">
+      <Column Name="idLogAuditoria" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idAuditoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fechaLog" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="comentarios" Type="System.String" DbType="VarChar(1500) NOT NULL" CanBeNull="false" />
+      <Association Name="tb007_TIPOS_AUDITORIA_tb008_LOG_AUDITORIA" Member="tb007_TIPOS_AUDITORIA" ThisKey="idAuditoria" OtherKey="idAuditoria" Type="tb007_TIPOS_AUDITORIA" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

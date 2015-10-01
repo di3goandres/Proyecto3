@@ -1,0 +1,26 @@
+.fireQuote,.riskQuote{
+display: none;
+}
+
+.fireQuote.active,.riskQuote.active{
+display: block;
+}
+
+
+.select-items {
+    max-width: 180px;
+    height: 141px;
+}
+
+.select-items span {
+    display: block;
+    padding: 0 15px;
+    font-family: ITCFranklinGothicCondensedBook;
+    white-space: normal;
+}
+.contrast {
+    background: #fff;
+    height: 58px;
+    font-family: ITCFranklinGothicDemi;
+    font-size: 1.5em;
+}

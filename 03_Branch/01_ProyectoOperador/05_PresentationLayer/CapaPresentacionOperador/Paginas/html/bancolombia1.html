@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Meta, title, CSS, favicons, etc. -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.">
+      <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+      <meta name="author" content="Axa Colpatria">
+      <title>
+         Cotizador Bancolombia
+      </title>
+      <!-- Bootstrap core CSS -->
+      <link href="css/normalize.css" rel="stylesheet">
+      <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+      <link href="css/fonts.css" rel="stylesheet">
+      <link href="css/axa_icons.css" rel="stylesheet">
+      <link href="css/toolkit.css" rel="stylesheet">
+      <link href="css/site/bancolombia.css" rel="stylesheet">
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 8]>
+      <link href="css/bootstrap-ie7.css" rel="stylesheet">
+      <link href="css/ie7.css" rel="stylesheet">
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/ie7.js"></script>
+      <link href="http://externalcdn.com/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+      <link href="js/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+      <script src="js/respond.proxy.js"></script>
+      <script src="js/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="animated fadeIn">
+      <div class="container">
+         <section class="text-left">
+            <h2 class="title">Cotización Bancolombia</h2>
+            <p>Llena estos datos y accede a los mejores servicios AXA COLPATRIA</p>
+            <div class="divider"></div>
+         </section>
+         <div class="row">
+            <br>
+            <h4 class="text-center main-title uppercase colorBlue">Selecciona el tipo de póliza cotizar</h4>
+            <div class="row text-center">
+               <div class="btn-group  no-pad text-center" data-toggle="buttons">
+                  <label class="btn fireButton">
+                     <div class="select-items">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>   <i class="iconGroup icon-axa_57"></i> <span>Incendio/Terremoto</span>
+                     </div>
+                  </label>
+                  <label class="btn riskButton">
+                     <div class="select-items">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> <i class="iconGroup icon-axa_56"></i> <span>Todo riesgo construcción</span>
+                     </div>
+                  </label>
+               </div>
+            </div>
+            <div class="row fireQuote">
+               <br>
+               <h4 class="uppercase subtitle"><i class="iconSubtitulos icon-axa_14"></i> &nbsp;Datos personales</h4>
+               <hr>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                  <form data-toggle="validator" role="form" novalidate="true">
+                     <br>
+                     <div class="row">
+                           <div class="form-group has-feedback ">
+                            <label for="exampleInputEmail1" class="labelhalf">Documento</label>
+                           <div class="ui-widget half25 arrow-caret">
+                             <select id="" class="form-control combobox">
+                               <option value="">Tipo</option>
+                               <option value="c.c">C.C</option>
+                               <option value="NIT">NIT</option>
+                             </select>
+                           </div>
+                           
+                              <input pattern="^[_A-z0-9]{1,}$" type="text" class="half75 form-control animated" id="exampleInputEmail1" placeholder="Número de identificación" required="">
+                              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                              <span class="help-block with-errors"></span>
+                            
+                           </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Nombre(s)</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Apellido(s)</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group has-feedback ">
+                           <label for="exampleInputEmail1" class="labelhalf">Ciudad/Depto</label>
+                           <div class="ui-widget arrow-caret">
+                              <select id="" class="form-control combobox">
+                                 <option value="1">Selecciona o escribe una ciudad</option>
+                                 <option value="c.c">Bogotá</option>
+                                 <option value="NIT">Cali</option>
+                              </select>
+                           </div>
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Dirección</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Teléfono fijo</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Celular</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                  <section class="totalizer">
+                     <h2 class="subTit uppercase colorBlue">Valor asegurado</h2>
+                     <br>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Ingrese el valor a asegurar</label>
+                           <div class="input-group">
+                              <span class="input-group-addon">$ </span>
+                              <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control contrast input-lg animated" id="exampleInputEmail1" placeholder="" required="">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="exampleInputEmail1" class="col-xs-12 no-pad">Vigencia del seguro</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="half25 form-control contrast animated" id="exampleInputEmail1" placeholder="DD" required=""> 
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="half25 form-control contrast animated" id="exampleInputEmail1" placeholder="MM" required=""> 
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="half25 form-control contrast animated" id="exampleInputEmail1" placeholder="AAAA" required="">
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+                     <div class="row">
+                        <a href="bancolombia2.html" class="btn btn-primary btn-block btn-lg">Cotizar</a>
+                        <br>
+                        <a href="" class="btn btn-white btn-block btn-lg">Cancelar</a>
+                     </div>
+                  </section>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="riskQuote">
+               <br>
+               <h4 class="uppercase subtitle"><i class="iconSubtitulos icon-axa_14"></i> &nbsp;Datos personales</h4>
+               <hr>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                  <form data-toggle="validator" role="form" novalidate="true">
+                     <br>
+                     <div class="row">
+                        <div class="form-group has-feedback ">
+                           <label for="exampleInputEmail1" class="labelhalf">Documento</label>
+                           <div class="ui-widget half25 arrow-caret">
+                             <select id="" class="form-control combobox">
+                               <option value="">Tipo</option>
+                               <option value="c.c">C.C</option>
+                               <option value="NIT">NIT</option>
+                             </select>
+                           </div>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated half75" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Nombre(s)</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Apellido(s)</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group has-feedback ">
+                           <label for="exampleInputEmail1" class="labelhalf">Ciudad/Depto</label>
+                           <div class="ui-widget arrow-caret">
+                              <select id="" class="form-control combobox">
+                                 <option value="1">Selecciona o escribe una ciudad</option>
+                                 <option value="c.c">Bogotá</option>
+                                 <option value="NIT">Cali</option>
+                              </select>
+                           </div>
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Dirección</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Teléfono fijo</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group  has-feedback">
+                           <label for="exampleInputEmail1">Celular</label>
+                           <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="" required="">
+                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                           <span class="help-block with-errors"></span>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                  <section class="totalizer">
+                     <h2 class="subTit uppercase colorBlue">Valor asegurado</h2>
+                     <br>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Ingrese el valor a asegurar</label>
+                           <div class="input-group">
+                              <span class="input-group-addon">$ </span>
+                              <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control contrast input-lg animated" id="exampleInputEmail1" placeholder="" required="">
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="clear"></div>
+                     <div class="row">
+                        <a href="bancolombia2.html" class="btn btn-primary btn-block btn-lg">Cotizar</a>
+                        <br>
+                        <a href="" class="btn btn-white btn-block btn-lg">Cancelar</a>
+                     </div>
+                  </section>
+               </div>
+            </div>
+         </div>
+         </div>
+      </div>
+   </body>
+   <script src="js/jquery/jquery-1.11.3.js"></script>
+   <script src="js/jquery/jquery-ui.js"></script>
+   <script src="js/bootstrap/bootstrap.js"></script>
+   <script src="js/modernizr.js"></script>
+   <script src="js/bootstrap/validator.min.js"></script>
+   <script src="js/slick/slick.min.js"></script>
+   <script src="js/toolkit.js"></script>
+   <script src="js/site/bancolombia.js"></script>
+   <script>
+      $(function () {
+       $('[data-toggle="tooltip"]').tooltip();
+       })
+       
+   </script>
+</html>

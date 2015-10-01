@@ -1,0 +1,654 @@
+﻿var pagina = "CreacionMenu.aspx/";
+
+var gridId = "#Datos";
+var gridPagerId = "#pagerL";
+var gridSubMenusId = "#DatosMenus";
+var gridSubmenusPagerId = "#pagerMenus";
+var idActual = 0;
+var permiteInsertarURL = true;
+var esHijo = false;
+$(function () {
+    $("#EditarAgregar").hide();
+    $("#EditarCrearMenuHijo").hide();
+    $("#ActualizarMenus").hide();
+
+
+    $("#EditarCrear").button().click(function () {
+        ValidarEditarAgregar();
+
+    });
+    $("#Cancel").button().click(function () {
+        LimpiarDatos();
+        $("#EditarAgregar").dialog('close');
+    });
+    $("#CancelActMenu").button().click(function () {
+        LimpiarDatos();
+        $("#ActualizarMenus").dialog('close');
+    })
+
+    $("#EditarCrearMenu").button().click(function () {
+        ValidarEditarAgregarHijo();
+
+    });
+    $("#ActuMenu").button().click(function () {
+        ValidarActualizarMenuOHijo();
+
+    });
+
+    $("#CancelMenu").button().click(function () {
+        LimpiarDatos();
+        $("#EditarCrearMenuHijo").dialog('close');
+    })
+    TraerDatos();
+
+    $('#esPadre').change(function () {
+        if ($(this).is(":checked")) {
+            $("url").disabled = false;
+        } else {
+            $("url").disabled = true;
+
+        }
+    });
+
+
+    //TraerInformacionInicial();
+
+});
+
+
+function TraerInformacionInicial() {
+    DoJsonRequestBusy(pagina, "TraerInformacionInicial", cargarDatosInicales, '{}');
+}
+
+function cargarDatosInicales(jsonrequest) {
+    var data = jsonrequest.d;
+
+    if (data.Ok == "Error Consultando información inicial.") {
+        AlertUI(".:Error", data.mensaje);
+        return false;
+    }
+
+    if (data.Ok == "OK") {
+        fillSelect($("#City"), data.Cities);
+        $("#SignedIN").datepicker({
+            dateFormat: 'dd/mm/yy', dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dic'],
+            showOtherMonths: true,
+            maxDate: new Date(data.aniofechaIngresoMaxima, data.mesfechaIngresoMaxima, data.diafechaIngresoMaxima),
+            selectOtherMonths: true, changeMonth: true, changeYear: true
+        });
+        $("#SignedOUT").datepicker({
+            dateFormat: 'dd/mm/yy', dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dic'],
+            showOtherMonths: true,
+            maxDate: new Date(data.aniofechaIngresoMaxima, data.mesfechaIngresoMaxima, data.diafechaIngresoMaxima),
+            selectOtherMonths: true, changeMonth: true, changeYear: true
+        });
+
+    }
+}
+
+
+
+function TraerDatos() {
+    OnBusy();
+    jQuery(gridId).jqGrid('GridUnload');
+    jQuery(gridId).jqGrid({
+        height: '100%',
+        loadtext: "Cargando datos...",
+        multiselect: false,
+        pager: gridPagerId,
+        emptyrecords: "Sin registros",
+        rownumbers: true,
+        shrinkToFit: true,
+        width: 540,
+        datatype: "json",
+        url: pagina + 'GetGridDataWithPaging',
+        rowNum: 15,
+        rowList: [15, 30, 45],
+        viewsortcols: [true, 'horizontal', true],
+        loadonce: false,
+        viewrecords: true,
+        mtype: 'POST',
+        ajaxGridOptions: { contentType: "application/json" },
+        serializeGridData: function (postData) {
+            if (postData.searchField === undefined) postData.searchField = null;
+            if (postData.searchString === undefined) postData.searchString = null;
+            if (postData.searchOper === undefined) postData.searchOper = null;
+            return $.toJSON(postData);
+        },
+
+        colNames: ['ID', 'Nombre del Menu', 'URL', 'Activo'],
+        colModel: [
+                    {
+                        name: 'ID', Index: "ID", sortable: false, width: 0, editable: true, edittype: 'text', hidden: true, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    },
+                    {
+                        name: 'Name', Index: "Name", sortable: false, width: 100, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    }, {
+                        name: 'Url', Index: "url", sortable: false, width: 50, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    }
+                    ,
+                    {
+                        name: 'Activo', Index: "Activo", sortable: false, width: 50, editoptions: { value: "True:False" }, formatter: "checkbox", formatoptions: { disabled: true }, height: '100%', editable: true, hidden: false, align: 'center',
+                        editrules: { edithidden: true, required: true },
+
+                    }
+
+        ],
+        onSelectRow: function (id) {
+            traerMenuSecundario();
+        },
+        jsonReader: {
+            root: "d.rows",
+            page: "d.page",
+            total: "d.total",
+            records: "d.records"
+        },
+        sortname: 'NOMBRE',
+        sortorder: 'ASC',
+        sortable: false,
+        caption: "Menú",
+        loadComplete: function (data) {
+            if (data.d.status == 2) { /*AlertUI(".:INFO", data.d.userMessage);*/ } else if (data.d.status == 3) {
+                document.location.target = "self";
+                document.location.href = 'Default.aspx';
+            } else {
+
+                $("#dialog-Busy").dialog('close');
+            }
+        },
+        loadError: function (xhr, status, error) { AlertUI(".:ERROR", status.toUpperCase() + ": " + error); },
+        prmNames: { page: 'numPage', rows: 'numRows', sort: 'colName', order: 'sortOrder', search: 'isSearch', nd: 'nd', id: 'id', oper: 'oper', editoper: 'edit', addoper: 'add', deloper: 'del', totalrows: 'totalrows' }
+
+    }).navGrid(gridPagerId, {
+        edit: false, add: false, del: false, search: false, view: false, refresh: false
+    })
+
+    .navButtonAdd(gridPagerId, {
+        caption: "", buttonicon: "ui-icon-refresh",
+        onClickButton: function (data) { TraerDatos() },
+        position: "last", title: "Refrescar", cursor: "pointer"
+    })
+    .navButtonAdd(gridPagerId, {
+        caption: "Ins", buttonicon: "ui-icon-plusthick",
+        onClickButton: function (data) { EditarCrearPOPUP(false) },
+        position: "last", title: "Insert", cursor: "pointer"
+    }).navButtonAdd(gridPagerId, {
+        caption: "Des", buttonicon: "ui-icon-cancel",
+        onClickButton: function (data) {
+            DesactivarActivarMenu();
+
+        },
+        position: "last", title: "Desactivar", cursor: "pointer"
+    }).navButtonAdd(gridPagerId, {
+        caption: "Act", buttonicon: "ui-icon-pencil",
+        onClickButton: function (data) { ActualizarMenus(true) },
+        position: "last", title: "Actualizar", cursor: "pointer"
+    });
+
+    //$('#Datos').contextMenu(menu, { triggerOn: 'contextmenu' });
+
+}
+
+
+function ActualizarMenus(EsPadre) {
+
+    if (EsPadre) {
+
+        var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+
+        if ((rowid == null) || (rowid == undefined)) {
+            AlertUI(".:Info", "Please select a record.");
+            return false;
+        }
+        var ret = $(gridId).getRowData(rowid);
+        idActual = ret.ID;
+
+        $("#ActualizarMenu").val(ret.Name);
+
+        $("#ActualizarURL").val(ret.Url);
+
+        permiteInsertarURL = false;
+        esHijo = false;
+
+        $('#ActualizarMenus').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Edit', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+
+    } else {
+        esHijo = true;
+
+        permiteInsertarURL = true;
+
+        var rowid = $(gridSubMenusId).jqGrid('getGridParam', 'selrow');
+
+        if ((rowid == null) || (rowid == undefined)) {
+            AlertUI(".:Info", "Please select a record.");
+            return false;
+        }
+
+        var ret = $(gridSubMenusId).getRowData(rowid);
+        idActual = ret.ID;
+
+        idActual = ret.ID;
+
+        $("#ActualizarMenu").val(ret.Name);
+        $("#ActualizarURL").val(ret.Url);
+
+
+        $('#ActualizarMenus').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Edit', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+    }
+
+}
+
+
+
+function DesactivarActivarMenu() {
+
+
+    var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+
+    if ((rowid == null) || (rowid == undefined)) {
+        AlertUI(".:Info", "Please select a record.");
+        return false;
+    }
+
+    var ret = $(gridId).getRowData(rowid);
+
+    var ac = ret.Activo;
+    if (ac == "True") {
+
+        return ConfirmUI("Continue?", "Desea desactivar /Activar este menú?",
+        function () {
+            var ret = $(gridId).getRowData(rowid);
+            var parametros = {};
+            parametros.ID = ret.ID;
+            parametros.Activar = false;
+
+            var Pasar = $.toJSON(parametros);
+            DoJsonRequestBusy(pagina, 'DesactivarActivar', resultadoGuardarEditar, Pasar);
+        });
+        return;
+
+    } else {
+
+        return ConfirmUI("Continue?", "Desea Activar este menú?",
+      function () {
+          var ret = $(gridId).getRowData(rowid);
+          var parametros = {};
+          parametros.ID = ret.ID;
+          parametros.Activar = true;
+
+          var Pasar = $.toJSON(parametros);
+          DoJsonRequestBusy(pagina, 'DesactivarActivar', resultadoGuardarEditar, Pasar);
+      });
+        return;
+    }
+    return;
+
+}
+
+
+function Delete() {
+    var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+
+    if ((rowid == null) || (rowid == undefined)) {
+        AlertUI(".:Info", "Please select a record.");
+        return false;
+    }
+    return ConfirmUI("Continue?", "Delete this record?",
+        function () {
+            var ret = $(gridId).getRowData(rowid);
+            var parametros = {};
+            parametros.ID = ret.ID;
+            var Pasar = $.toJSON(parametros);
+            DoJsonRequestBusy(pagina, 'Delete', resultadoGuardarEditar, Pasar);
+        });
+
+}
+
+
+
+
+function ValidarEditarAgregar() {
+    var parametros = {};
+    var parametrosNOpasan = {}
+    var n = false;
+    var esPadre = ($("#esPadre").is(':checked'));
+
+    n = validarYAgregarDatos("#MenuName", "input", "Ingrese el nombre del menú ", "MenuName", parametros);
+    if (!n) return;
+
+    if (esPadre) {
+        n = validarYAgregarDatos("#url", "input", "Ingrese por favor la URl asociada", "URL", parametros);
+        if (!n) return;
+    }
+
+
+    parametros.EsEditar = EsEditar;
+    parametros.ID = idActual;
+    parametros.EsPadre = true;
+
+    var Pasar = $.toJSON(parametros);
+    DoJsonRequestBusy(pagina, 'EditarAgregar', resultadoGuardarEditar, Pasar);
+}
+
+
+function ValidarActualizarMenuOHijo() {
+    var parametros = {};
+    var parametrosNOpasan = {}
+    var n = false;
+    //  var esPadre = ($("#esPadre").is(':checked'));
+
+    n = validarYAgregarDatos("#ActualizarMenu", "input", "Ingrese el nombre del menú ", "MenuName", parametros);
+    if (!n) return;
+    //parametros.URL = "";
+    if (permiteInsertarURL) {
+        n = validarYAgregarDatos("#ActualizarURL", "input", "Ingrese por favor la URl asociada", "URL", parametros);
+        if (!n) return;
+    } else {
+
+        parametros.URL = $("#ActualizarURL").val();
+
+    }
+
+
+
+
+    parametros.ID = idActual;
+
+
+    var Pasar = $.toJSON(parametros);
+    if (esHijo) {
+        DoJsonRequestBusy(pagina, 'Actualizar', resultadoGuardarEditarHijos, Pasar);
+    } else {
+        DoJsonRequestBusy(pagina, 'Actualizar', resultadoGuardarEditar, Pasar);
+
+    }
+}
+
+
+
+function ValidarEditarAgregarHijo() {
+    var parametros = {};
+    var parametrosNOpasan = {}
+    var n = false;
+
+
+    n = validarYAgregarDatos("#MenuHijo", "input", "Ingrese el nombre del menú ", "MenuName", parametros);
+    if (!n) return;
+
+    n = validarYAgregarDatos("#UrlHijo", "input", "Ingrese por favor la URl asociada", "URL", parametros);
+    if (!n) return;
+
+
+
+    parametros.EsEditar = EsEditar;
+    parametros.ID = idActual;
+    parametros.EsPadre = false;
+
+    var Pasar = $.toJSON(parametros);
+    DoJsonRequestBusy(pagina, 'EditarAgregar', resultadoGuardarEditarHijos, Pasar);
+}
+
+function resultadoGuardarEditar(jsonrequest) {
+    var data = jsonrequest.d;
+    if (data.Ok == "OK") {
+        $("#EditarAgregar").dialog('close');
+        $('#ActualizarMenus').dialog('close');
+        AlertUI(".:Información", data.mensaje.toString(), function () {
+            TraerDatos();
+        });
+    }
+    else {
+        AlertUI(".:Información", data.mensaje.toString());
+        return;
+    }
+}
+
+
+function resultadoGuardarEditarHijos(jsonrequest) {
+    var data = jsonrequest.d;
+    if (data.Ok == "OK") {
+        $("#EditarCrearMenuHijo").dialog('close');
+        $('#ActualizarMenus').dialog('close');
+        AlertUI(".:Información", data.mensaje.toString(), function () {
+            traerMenuSecundario();
+        });
+    }
+    else {
+        AlertUI(".:Información", data.mensaje.toString());
+        return;
+    }
+}
+
+
+function EditarCrearPOPUP(Editar) {
+
+    var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+
+    if (Editar) {
+        if ((rowid == null) || (rowid == undefined)) {
+            AlertUI(".:Info", "Debe seleccionar al menos un registro por favor.");
+            return false;
+        }
+        $("#EditarCrear").val("Update");
+        EsEditar = true;
+        var ret = $(gridId).getRowData(rowid);
+        idActual = ret.ID;
+        $("#CompanyName").val(ret.Name);
+
+        $("#SignedIN").val(ret.SignedIn);
+        $("#SignedOUT").val(ret.SignedOut);
+        $("#CompanyDesc").val(ret.Description);
+
+
+
+        $('#EditarAgregar').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Edit', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+    } else {
+        $("#EditarCrear").val("Insert");
+        idActual = 0;
+        EsEditar = false;
+        LimpiarDatos();
+        $('#EditarAgregar').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Insert', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+    }
+}
+
+function LimpiarDatos() {
+    $("#ActualizarMenu").val("");
+    $("#ActualizarURL").val("");
+}
+
+
+
+
+function traerMenuSecundario(id) {
+    var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+    var ret = $(gridId).getRowData(rowid);
+    idPadreActual = ret.ID;
+    jQuery(gridSubMenusId).jqGrid('GridUnload');
+    jQuery(gridSubMenusId).jqGrid({
+        height: '100%',
+        loadtext: "Cargando datos...",
+        multiselect: false,
+        pager: gridSubmenusPagerId,
+        emptyrecords: "Sin registros",
+        rownumbers: true,
+        shrinkToFit: true,
+        width: 550,
+        datatype: "json",
+        url: pagina + 'GetGridDataWithPagingHijos',
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        viewsortcols: [true, 'horizontal', true],
+        loadonce: false,
+        viewrecords: true,
+        mtype: 'POST',
+        ajaxGridOptions: { contentType: "application/json" },
+        serializeGridData: function (postData) {
+            if (postData.searchField === undefined) postData.searchField = null;
+            if (postData.searchString === undefined) postData.searchString = null;
+            if (postData.searchOper === undefined) postData.searchOper = null;
+            postData.IDPADRE = idPadreActual;
+            return $.toJSON(postData);
+        },
+
+        colNames: ['ID', 'Nombre del Menu', 'URL', 'Activo'],
+        colModel: [
+                    {
+                        name: 'ID', Index: "ID", sortable: false, width: 0, editable: true, edittype: 'text', hidden: true, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    },
+                    {
+                        name: 'Name', Index: "Name", sortable: false, width: 100, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    }
+                    ,
+                    {
+                        name: 'Url', Index: "Url", sortable: false, width: 100, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true },
+                        editrules: { edithidden: true, required: true }
+                    }
+                    ,
+                    {
+                        name: 'Activo', Index: "Activo", sortable: false, width: 50, editoptions: { value: "True:False" }, formatter: "checkbox", formatoptions: { disabled: true }, height: '100%', editable: true, hidden: false, align: 'center',
+                        editrules: { edithidden: true, required: true },
+
+                    }
+
+        ],
+        jsonReader: {
+            root: "d.rows",
+            page: "d.page",
+            total: "d.total",
+            records: "d.records"
+        },
+        sortname: 'NOMBRE',
+        sortorder: 'ASC',
+        sortable: false,
+        caption: "Items Del Menu",
+        loadComplete: function (data) { if (data.d.status == 2) { /*AlertUI(".:INFO", data.d.userMessage); */} else if (data.d.status == 3) { AlertUI(".:ERROR", data.d.userMessage); } },
+        loadError: function (xhr, status, error) { AlertUI(".:ERROR", status.toUpperCase() + ": " + error); },
+        prmNames: { page: 'numPage', rows: 'numRows', sort: 'colName', order: 'sortOrder', search: 'isSearch', nd: 'nd', id: 'id', oper: 'oper', editoper: 'edit', addoper: 'add', deloper: 'del', totalrows: 'totalrows' }
+
+    }).navGrid(gridSubmenusPagerId, {
+        edit: false, add: false, del: false, search: false, view: false, refresh: false
+    }).navButtonAdd(gridSubmenusPagerId, {
+        caption: "", buttonicon: "ui-icon-refresh",
+        onClickButton: function (data) { traerMenuSecundario() },
+        position: "last", title: "Refrescar", cursor: "pointer"
+    })
+        .navButtonAdd(gridSubmenusPagerId, {
+            caption: "Ins", buttonicon: "ui-icon-pencil",
+            onClickButton: function (data) { EditarCrearPOPUPMenu(false) },
+            position: "last", title: "Editar", cursor: "pointer"
+        }).navButtonAdd(gridSubmenusPagerId, {
+            caption: "desc", buttonicon: "ui-icon-cancel",
+            onClickButton: function (data) { DesactivarActivarMenuHijos() },
+            position: "last", title: "Agregar", cursor: "pointer"
+        }).navButtonAdd(gridSubmenusPagerId, {
+            caption: "Act", buttonicon: "ui-icon-pencil",
+            onClickButton: function (data) { ActualizarMenus(false) },
+            position: "last", title: "Actualizar", cursor: "pointer"
+        });
+}
+
+
+function DesactivarActivarMenuHijos() {
+
+
+    var rowid = $(gridSubMenusId).jqGrid('getGridParam', 'selrow');
+
+    if ((rowid == null) || (rowid == undefined)) {
+        AlertUI(".:Info", "Please select a record.");
+        return false;
+    }
+
+    var ret = $(gridSubMenusId).getRowData(rowid);
+
+    var ac = ret.Activo;
+    if (ac == "True") {
+
+        return ConfirmUI("Continue?", "Desea desactivar /Activar este menú?",
+        function () {
+            var ret = $(gridSubMenusId).getRowData(rowid);
+            var parametros = {};
+            parametros.ID = ret.ID;
+            parametros.Activar = false;
+
+            var Pasar = $.toJSON(parametros);
+            DoJsonRequestBusy(pagina, 'DesactivarActivar', resultadoGuardarEditarHijos, Pasar);
+        });
+        return;
+
+    } else {
+
+        return ConfirmUI("Continue?", "Desea Activar este menú?",
+      function () {
+          var ret = $(gridSubMenusId).getRowData(rowid);
+          var parametros = {};
+          parametros.ID = ret.ID;
+          parametros.Activar = true;
+
+          var Pasar = $.toJSON(parametros);
+          DoJsonRequestBusy(pagina, 'DesactivarActivar', resultadoGuardarEditarHijos, Pasar);
+      });
+        return;
+    }
+    return;
+
+}
+
+
+function EditarCrearPOPUPMenu(Editar) {
+
+    var rowid = $(gridId).jqGrid('getGridParam', 'selrow');
+
+
+
+    if (Editar) {
+        if ((rowid == null) || (rowid == undefined)) {
+            AlertUI(".:Info", "Debe seleccionar al menos un registro por favor.");
+            return false;
+        }
+        //    $("#EditarCrear").val("Update");
+        EsEditar = true;
+        var ret = $(gridSubMenusId).getRowData(rowid);
+        idActual = ret.ID;
+        //$("#CompanyName").val(ret.Name);
+
+        //$("#SignedIN").val(ret.SignedIn);
+        //$("#SignedOUT").val(ret.SignedOut);
+        //$("#CompanyDesc").val(ret.Description);
+
+
+
+        $('#EditarAgregar').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Edit', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+    } else {
+        $("#EditarCrear").val("Insert");
+        var ret = $(gridId).getRowData(rowid);
+        idActual = ret.ID;
+        EsEditar = false;
+        LimpiarDatos();
+        $('#EditarCrearMenuHijo').dialog({
+            width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Insert', closeOnEscape: false,
+            open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
+        });
+    }
+}

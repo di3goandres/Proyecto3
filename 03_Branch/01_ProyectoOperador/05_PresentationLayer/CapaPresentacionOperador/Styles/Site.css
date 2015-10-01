@@ -1,0 +1,1780 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+body
+{
+    background-color: Black;
+    background: white;
+    font-size: .80em;
+    font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #005795;
+    height: 88px;
+}
+
+.division{
+width:33%;
+height:100px;
+float:left;
+}
+
+a:link, a:visited
+{
+    color: green;
+}
+
+a:hover
+{
+    color: #7D2C83;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #465c71;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+    /*height: 25px;*/
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #8DC83D;
+    /*font-variant: small-caps;*/
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: left;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+    width: 960px;
+    background-color: #fff;
+    margin: 0px auto 0px auto;
+    border: 1px solid #496077;
+    border-radius: 5px;
+}
+
+
+.pageAdministracion
+{
+    width: 1280px;
+    background-color: #fff;
+    margin: 0px auto 0px auto;
+    border: 1px solid #496077;
+    border-radius: 5px;
+    height: auto;
+}
+
+.header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: #FFFFFF;
+    width: 964px;
+    color: #000;
+    top: 5px;
+    left: -17px;
+    height: 120px;
+}
+
+    .header h1
+    {
+        border-style: none;
+        border-color: inherit;
+        border-width: medium;
+        font-weight: 700;
+        margin: 0px;
+        padding: 0px 0px 0px 20px;
+        color: #f9f9f9;
+        line-height: 2em;
+        font-size: 2em;
+        background-color: #7D2C83;
+    }
+
+.main
+{
+    padding: 0px 12px;
+    margin: 12px 8px 8px 4px;
+    /*min-height: 680px;*/
+    /*border: 1px solid #7D2C83;*/
+    border-radius: 5px;
+}
+
+.menu_des
+{
+    padding: 0px 12px;
+    margin: 12px 8px 8px 8px;
+    min-height: 600px;
+}
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+div.spacewhite
+{
+    background-color: White;
+    width: 100%;
+    height: 30px;
+}
+
+div.hideSkiplink
+{
+    background-color: white;
+    width: 100%;
+    height: 30px;
+}
+
+div.menu
+{
+    padding: 4px 0px 4px 8px;
+}
+
+    div.menu ul
+    {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+    }
+
+        div.menu ul li a, div.menu ul li a:visited
+        {
+            background-color: black;
+            border: 1px #4e667d solid;
+            color: #dde4ec;
+            display: block;
+            line-height: 1.35em;
+            padding: 4px 20px;
+            text-decoration: none;
+            white-space: nowrap;
+            width: auto;
+        }
+
+            div.menu ul li a:hover
+            {
+                background-color: #bfcbd6;
+                color: #465c71;
+                text-decoration: none;
+            }
+
+            div.menu ul li a:active
+            {
+                background-color: #465c71;
+                color: #cfdbe6;
+                text-decoration: none;
+            }
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 0 solid #ccc;
+}
+
+    fieldset p
+    {
+        margin: 2px 12px 10px 10px;
+    }
+
+    fieldset.login label, fieldset.register label, fieldset.changePassword label
+    {
+        display: block;
+    }
+
+    fieldset label.inline
+    {
+        display: inline;
+    }
+
+legend
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    display: block;
+    float: none;
+    text-align: center;
+    width: 956px;
+    height: 16px;
+    background-color: #7D2C83;
+}
+
+.loginDisplay
+{
+    background-color: white;
+    background: white;
+    font-size: 1.1em;
+    display: block;
+    text-align: center;
+    padding: 0px 12px;
+    margin: 12px 8px 8px 4px;
+    border: 1px solid #7D2C83;
+    border-radius: 7px;
+}
+
+    .loginDisplay a:link
+    {
+        color: white;
+    }
+
+    .loginDisplay a:visited
+    {
+        color: white;
+    }
+
+    .loginDisplay a:hover
+    {
+        color: white;
+    }
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: center;
+    padding-right: 10px;
+    background-color: gainsboro;
+    color: #005795;
+    font-family: verdana,tahoma,helvetica;
+    font-size: smaller;
+    font-weight: normal;
+}
+
+.widelabel
+{
+    display: -moz-inline-block;
+    border-width: thick;
+    display: inline-block;
+    width: 173px;
+    margin-left: auto;
+    height: 24px;
+}
+
+/*#encabezado {
+    background-image: url('../imagenes/logo_header.png');
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    height: 89px;
+    background-color: #FFFFFF;
+    width: 100%;
+    image-orientation: inherit;
+}*/
+
+
+
+#encabezado2
+{
+    /*background-image: url('../imagenes/acdi_logo.png');
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    height: 94px;
+    background-color: #FFFFFF;
+    width: 251px;
+    margin-left: 1031px;
+     text-align:right;*/
+}
+
+#page
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+
+#piedepag, #up, #piedepagModal, #piedepagModalAvance
+{
+    background-color: #cb842e;
+    height: 15px;
+    color: #190707;
+    font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    font-size: 15px;
+    padding: 3px;
+    text-align: center;
+}
+
+.table
+{
+    border: #FF0000;
+    width: 99%;
+    vertical-align: middle;
+    margin-left: 23px;
+}
+
+    .table tr td
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: solid;
+        border: 1 #FF0000;
+        width: 60%;
+    }
+
+    .table th
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 40%;
+        color: #FFFF00;
+    }
+
+    .table tr td label
+    {
+        text-align: left;
+        left: 1px;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-emphasis: circle;
+        /*text-align: left;*/
+        text-decoration: solid;
+        border: 1 #FF0000;
+        width: 53%;
+        font-size: 0.9em;
+        /*background-color: #F2F2F2;*/
+    }
+
+    .table tr td input[type="text"], .table tr td input[type="password"]
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        /*text-align: left;*/
+        text-decoration: solid;
+        border: 1 #FF0000;
+        width: 90%;
+        background-color: #F2F2F2;
+    }
+
+    .table tr td input[type="checkbox"], .table tr td input[type="radio"]
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        /*text-align: left;*/
+        text-decoration: solid;
+        border: 1 #FF0000;
+        width: 90%;
+        background-color: rgba(0, 0, 0, 0.00);
+    }
+
+
+    .table tr td select
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 92%;
+        background-color: #F2F2F2;
+        color: #005795;
+    }
+
+    .table tr td textarea
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: right;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 90%;
+        resize: none;
+        background-color: #F2F2F2;
+    }
+
+.check
+{
+    border: 1 #FF0000;
+    text-align: left;
+    width: 90%;
+}
+
+
+/*
+estilos de la tabal de filtros de busqueda
+*/
+.table-filtro-busqueda
+{
+    border: 1 #FF0000;
+    width: auto;
+    vertical-align: middle;
+}
+
+    .table-filtro-busqueda tr td
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: right;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 20%;
+    }
+
+        .table-filtro-busqueda tr td input
+        {
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+            font-style: normal;
+            text-align: left;
+            text-decoration: none;
+            border: 1 #FF0000;
+            width: 90%;
+        }
+
+        .table-filtro-busqueda tr td select
+        {
+            font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+            font-style: normal;
+            text-align: right;
+            text-decoration: none;
+            border: 1 #FF0000;
+            width: 91%;
+        }
+
+        .table-filtro-busqueda tr td input[type="button"]
+        {
+            text-align: center;
+            width: 70%;
+        }
+
+.titulo div
+{
+    position: relative;
+    top: 12px;
+    text-align: center;
+}
+
+
+
+
+/*
+estilos Ajustados
+*/
+
+
+DIV.content-container
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.main-title
+{
+    font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    font-size: large;
+    color: #A1C472;
+    text-align: center;
+    width: 100%;
+}
+
+.Acdivocabutton-bar
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 20px;
+    padding: 5px 5px 5px 5px;
+    text-align: left;
+    background-color: #B51E3B;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+
+
+#encabezadoTabla
+{
+    position: absolute;
+    left: 37%;
+    width: 100%;
+    margin-left: -350px;
+    top: 25px;
+}
+
+
+#accordion
+{ /* el rectángulo contenedor */
+    width: 450px;
+}
+
+    #accordion h3
+    { /* los enlaces que despliegan y contraen el contenido */
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        -moz-box-shadow: 0 0 10px #444 inset;
+        -webkit-box-shadow: 0 0 10px #444 inset;
+        box-shadow: 0 0 10px #444 inset;
+        background-color: #005796;
+        color: #6D76AF;
+        cursor: pointer;
+        font-family: Tahoma;
+        font-size: 17px;
+        font-weight: normal;
+        height: 1.7em;
+        line-height: 1.7em;
+        margin: 0 0 2px;
+        padding: 0 20px;
+        position: relative;
+    }
+
+        #accordion h3:hover
+        { /* efecto hover sobre esos enlaces */
+            -moz-box-shadow: 0 0 10px #000 inset;
+            -webkit-box-shadow: 0 0 10px #000 inset;
+            box-shadow: 0 0 10px #000 inset;
+            background-color: #BBBFF4;
+            color: #FFF;
+        }
+
+        #accordion h3 span
+        { /* una imagen que permuta segñun el estado del contenido */
+            background: transparent url(http://img810.imageshack.us/img810/6159/demoacordeonjs.gif) no-repeat right top;
+            display: flexbox;
+            height: 16px;
+            position: absolute;
+            right: 20px;
+            top: 7px;
+            width: auto;
+            height: auto;
+        }
+
+        #accordion h3.active span
+        { /* desplegado */
+            background-position: right bottom;
+        }
+
+    #accordion div
+    { /* el contenido */
+        background-color: #000;
+        border: 1px dotted #666;
+        color: #AAA;
+        font-family: Georgia;
+        font-size: 13px;
+        line-height: 1.5;
+        margin: 10px;
+        padding: 10px;
+        width: auto;
+        height: auto;
+    }
+
+
+
+/*Inicio estilos TABS*/
+
+a, .title
+{
+    color: #B24926;
+    /*margin-left: 21px;*/
+}
+
+#content a:hover
+{
+    color: #333333;
+}
+
+#banner-secondary p.intro
+{
+    float: left;
+    padding: 0;
+    width: 50%;
+}
+
+#banner-secondary .download-box
+{
+    background: linear-gradient(to right, #333333 0%, #444444 100%) repeat scroll 0 0 transparent;
+    border: 1px solid #AAAAAA;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    float: right;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 40%;
+}
+
+    #banner-secondary .download-box h2
+    {
+        color: #71D1FF;
+        font-size: 26px;
+    }
+
+    #banner-secondary .download-box .button
+    {
+        display: block;
+        float: none;
+        margin-top: 15px;
+    }
+
+    #banner-secondary .download-box p
+    {
+        margin: 15px 0 5px;
+    }
+
+#banner-secondary .download-option
+{
+    float: left;
+    font-size: 16px;
+    width: 45%;
+}
+
+#banner-secondary .download-legacy
+{
+    float: right;
+}
+
+#banner-secondary .download-option span
+{
+    color: #71D1FF;
+    display: block;
+    font-size: 14px;
+}
+
+#content
+{
+    margin-top: 1em;
+    margin-left: 2em;
+    /*margin-right: 2em;*/
+}
+
+
+    #content .dev-links
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #666666;
+        border-image: none;
+        border-radius: 0 0 0 5px;
+        border-style: solid;
+        border-width: 0 0 1px 1px;
+        box-shadow: -2px 2px 10px -2px #666666;
+        float: right;
+        margin: -15px -25px 0.5em 1em;
+        padding: 1em;
+        width: 30%;
+    }
+
+        #content .dev-links ul
+        {
+            margin: 0;
+        }
+
+        #content .dev-links li
+        {
+            background-image: none;
+            margin: 0.25em 0 0.25em 1em;
+            padding: 0;
+        }
+
+.demo-list
+{
+    float: right;
+    width: 25%;
+}
+
+    .demo-list h2
+    {
+        font-weight: normal;
+        margin-bottom: 0;
+    }
+
+#content .demo-list ul
+{
+    border-top: 1px solid #CCCCCC;
+    margin: 0;
+    width: 100%;
+}
+
+#content .demo-list li
+{
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    margin: 0;
+    padding: 0;
+}
+
+#content .demo-list .active
+{
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#content .demo-list a
+{
+    color: #3F3F3F;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2% 4%;
+    text-decoration: none;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+.demo-frame
+{
+    height: 350px;
+    width: 70%;
+}
+
+.view-source a
+{
+    cursor: pointer;
+}
+
+.view-source > div
+{
+    display: none;
+    overflow: hidden;
+}
+
+#banner-secondary p.intro, #banner-secondary .download-box
+{
+    float: none;
+    width: auto;
+}
+
+#banner-secondary .download-box
+{
+    overflow: auto;
+}
+
+#content .dev-links
+{
+    margin: -15px -29px 0.5em 1em;
+    overflow: hidden;
+    width: 55%;
+}
+
+/*fin estilos tabs*/
+
+.redondo
+{
+    width: 95%;
+    border: 1px solid #003366;
+    border-radius: 5px;
+    -moz-border-radius: 5px; /*Establecemos el radio del borde*/
+    /*margin-left: 10px;
+    float: left;
+    margin-bottom: 0px;
+    margin-top: 20px;*/
+}
+
+.sangria
+{
+    padding-right: 10px;
+}
+
+
+
+/*inicio wizar*/
+#demoWrapper
+{
+    padding: 1em;
+    width: 500px;
+    border-style: solid;
+}
+
+#fieldWrapper
+{
+}
+
+#demoNavigation
+{
+    margin-top: 0.5em;
+    margin-right: 1em;
+    text-align: right;
+}
+
+#data
+{
+    font-size: 0.7em;
+}
+
+input
+{
+    margin-right: 0.1em;
+    margin-bottom: 0.5em;
+}
+
+.input_field_25em
+{
+    width: 2.5em;
+}
+
+.input_field_3em
+{
+    width: 3em;
+}
+
+.input_field_35em
+{
+    width: 3.5em;
+}
+
+.input_field_12em
+{
+    width: 12em;
+}
+
+label
+{
+    margin-bottom: 0.2em;
+    font-weight: normal;
+    font-size: 0.8em;
+    font-family: verdana,tahoma,helvetica;
+}
+
+    label.error
+    {
+        color: red;
+        font-size: 0.8em;
+        margin-left: 0.5em;
+    }
+
+.step h1
+{
+    float: right;
+    font-weight: bold;
+    font-size: 1em;
+    padding-right: 0.8em;
+}
+
+.navigation_button
+{
+    width: 70px;
+}
+
+#data
+{
+    overflow: auto;
+}
+/*fin wizard*/
+
+
+.largoDiv
+{
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 470px;
+    width: 99%;
+}
+
+
+
+
+
+.ajax__myTab .ajax__tab_header
+{
+    font-family: Calibri;
+    font-size: 90px;
+    font-weight: bold;
+    background-color: #ffffff;
+    margin-left: 0px;
+}
+
+.ajax__myTab .ajax__tab_tap
+{
+    font-family: Calibri;
+    font-size: 90px;
+    font-weight: bold;
+    background-color: Red;
+    margin-left: 0px;
+}
+
+.Tab .ajax__tab_tap
+{
+    color: #4682b4;
+    font-family: Calibri;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #ffffff;
+    margin-left: 0px;
+}
+
+
+.ButtonAc
+{
+    background-color: gainsboro;
+    color: #005795;
+    font-family: verdana,tahoma,helvetica;
+    font-size: smaller;
+    font-weight: normal;
+}
+
+
+/*A PARTIR DE AQUI; SON LOS ESTILOS DEL MENU PRINCIPAL*/
+
+/*** ESSENTIAL STYLES ***/
+#menu
+{
+    margin: 0px 0px 0px 10px;
+    float: left;
+}
+
+
+.menu-ppl, .menu-ppl *
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 1000;
+}
+
+.menu-ppl
+{
+    line-height: -1.0;
+}
+
+    .menu-ppl ul
+    {
+        position: absolute;
+        top: -999em;
+        width: 10em; /* left offset of submenus need to match (see below) */
+    }
+
+        .menu-ppl ul li
+        {
+            width: 100%;
+        }
+
+    .menu-ppl li:hover
+    {
+        visibility: inherit; /* fixes IE7 'sticky bug' */
+    }
+
+    .menu-ppl li
+    {
+        float: left;
+        position: relative;
+    }
+
+    .menu-ppl a
+    {
+        display: block;
+        position: relative;
+        background: url(../imagenes/middle.png) right top no-repeat;
+        font-weight: normal;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-size: 14px;
+    }
+
+    .menu-ppl li:hover ul, .menu-ppl li.sfHover ul
+    {
+        left: 0;
+        top: 26px; /* match top ul list item height */
+        z-index: 99;
+    }
+
+ul.menu-ppl li:hover li ul, ul.menu-ppl li.sfHover li ul
+{
+    top: -999em;
+}
+
+ul.menu-ppl li li:hover ul, ul.menu-ppl li li.sfHover ul
+{
+    left: 10em; /* match ul width */
+    top: 0;
+}
+
+ul.menu-ppl li li:hover li ul, ul.menu-ppl li li.sfHover li ul
+{
+    top: -999em;
+}
+
+ul.menu-ppl li li li:hover ul, ul.menu-ppl li li li.sfHover ul
+{
+    left: 10em; /* match ul width */
+    top: 0;
+}
+
+/*** DEMO SKIN ***/
+.menu-ppl
+{
+    float: right;
+    margin-bottom: 1em;
+}
+
+    .menu-ppl .left
+    {
+        background: url(../imagenes/middle.png) right top no-repeat;
+        width: 11px;
+    }
+
+    .menu-ppl .right
+    {
+        background: url(../imagenes/middle.png) right top no-repeat;
+        width: 14px;
+    }
+
+    .menu-ppl a
+    {
+        /*border-left:	1px solid #fff;  /*los bordes del menu 	border-top:		1px solid #CFDEFF;*/ /*padding: 		15px;*/
+        padding-top: 6px;
+        padding-left: 20px;
+        padding-right: 25px;
+        text-decoration: none;
+    }
+
+        .menu-ppl a, .menu-ppl a:visited
+        {
+            /* visited pseudo selecto005795 so IE6 applies text colour*/
+            color: #005795;
+        }
+
+    .menu-ppl li
+    {
+        background: url(../imagenes/back.png) center center; /*background: #CC191F;*/
+        height: 30px;
+    }
+
+        .menu-ppl li li, .menu-ppl li li
+        {
+            /*background: url(../imagenes/back_sub.png) center center;*/ /*background: #CC191F;*/
+            background: #E6DED6;
+            height: 21px;
+            text-align: left;
+            border-left: 1px solid #fff;
+            border-top: 1px solid #FFF;
+        }
+
+            .menu-ppl li li a, .menu-ppl li li a
+            {
+                background-image: none;
+                padding-top: 5px;
+                padding-left: 10px;
+                padding-right: 15px;
+                width: 100%;
+            }
+
+            .menu-ppl li li:hover, .menu-ppl li li:hover
+            {
+                /*background: CC191F;]*/ /*background: #CC6569;*/ /*background: url(../imagenes/back_sub.png) center center;*/
+                background: #F5A11D;
+            }
+
+        .menu-ppl li:hover, .menu-ppl li.sfHover, .menu-ppl a:focus, .menu-ppl a:hover, .menu-ppl a:active
+        {
+            outline: 0;
+        }
+    /*** arrows **/
+    .menu-ppl a.sf-with-ul
+    {
+        padding-right: 2.25em;
+        min-width: 1px; /* trigger IE7 hasLayout so spans position accurately */
+    }
+
+.sf-sub-indicator
+{
+    position: absolute;
+    display: block;
+    right: .75em;
+    top: 1.05em; /* IE6 only */
+    width: 10px;
+    height: 10px;
+    text-indent: -999em;
+    overflow: hidden;
+    background: url('../imagenes/arrows-ffffff.png') no-repeat -10px -100px; /* 8-bit indexed alpha png. IE6 gets solid image only */
+}
+
+a > .sf-sub-indicator
+{
+    /* give all except IE6 the correct values */
+    top: .8em;
+    background-position: 0 -100px; /* use translucent arrow for modern browsers*/
+}
+/* apply hovers to modern browsers */
+a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-indicator, li:hover > a > .sf-sub-indicator, li.sfHover > a > .sf-sub-indicator
+{
+    background-position: -10px -100px; /* arrow hovers for modern browsers*/
+}
+
+/* point right for anchors in subs */
+.menu-ppl ul .sf-sub-indicator
+{
+    background-position: -10px 0;
+}
+
+.menu-ppl ul a > .sf-sub-indicator
+{
+    top: .5em;
+    background-position: 0 0;
+}
+/* apply hovers to modern browsers */
+.menu-ppl ul a:focus > .sf-sub-indicator, .menu-ppl ul a:hover > .sf-sub-indicator, .menu-ppl ul a:active > .sf-sub-indicator, .menu-ppl ul li:hover > a > .sf-sub-indicator, .menu-ppl ul li.sfHover > a > .sf-sub-indicator
+{
+    background-position: -10px 0; /* arrow hovers for modern browsers*/
+}
+
+/*** shadows for all but IE6 ***/
+.sf-shadow ul
+{
+    background: url('../imagenes/shadow.png') no-repeat bottom right;
+    padding: 0 8px 9px 0; /*-moz-border-radius-bottomleft: 17px; 	-moz-border-radius-topright: 17px; 	-webkit-border-top-right-radius: 17px; 	-webkit-border-bottom-left-radius: 17px;*/
+}
+
+    .sf-shadow ul.sf-shadow-off
+    {
+        background: transparent;
+    }
+
+
+/*Inicio estilos accordion*/
+.accordion
+{
+    width: 100%;
+    Height: 391%;
+}
+
+.accordionHeader
+{
+    border: 0px solid #005796;
+    color: white;
+    font-family: Gill Sans MT, Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: #005796;
+}
+
+.accordionHeaderSelected
+{
+    border: 0px solid #B51E3B;
+    color: white;
+    background-color: #00a0b0;
+    font-family: Arial, Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.accordionContent
+{
+    background: white !important;
+    border: 0px dashed #B51E3B;
+    border-top: none;
+    padding: 5px;
+    padding-top: 10px;
+}
+/*Fin estilos accordion*/
+
+/*estilos textBox*/
+-textBoxMultiline
+{
+    width: 100%;
+}
+
+
+.mGrid
+{
+    width: 100%;
+    margin: 5px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+    .mGrid td
+    {
+        padding: 2px;
+        border: solid 1px #c1c1c1;
+        color: #005795;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    }
+
+    .mGrid th
+    {
+        padding: 4px 2px;
+        color: #E6DED6;
+        background: #B51E3B repeat-x top;
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+    }
+
+    .mGrid .alt
+    {
+        background: #ccc repeat-x top;
+    }
+
+    .mGrid .pgr
+    {
+        background: #52C1C1 repeat-x top;
+    }
+
+        .mGrid .pgr table
+        {
+            margin: 5px 0;
+        }
+
+        .mGrid .pgr td
+        {
+            border-width: 0;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: #fff;
+            line-height: 12px;
+        }
+
+        .mGrid .pgr a
+        {
+            color: #666;
+            text-decoration: none;
+        }
+
+            .mGrid .pgr a:hover
+            {
+                color: #000;
+                text-decoration: none;
+            }
+
+
+.ajax__tab_body
+{
+    border-right: 1px solid white;
+    background-color: #E6DED6;
+}
+
+.Acdivocabutton-bar2
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 5px;
+    padding: 0px 5px 5px 5px;
+    text-align: left;
+    background-color: #00A0B0;
+    border-radius: 5px;
+}
+
+.Line
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 5px;
+    text-align: center;
+    color: #00A0B0;
+}
+
+
+
+/**
+    login button
+    */
+
+.loginButton
+{
+    -moz-box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+    box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b8e356), color-stop(1, #6f804b) );
+    background: -moz-linear-gradient( center top, #b8e356 5%, #6f804b 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cb842e', endColorstr='#6f804b');
+    background-color: #D0FA58;
+    -webkit-border-top-left-radius: 22px;
+    -moz-border-radius-topleft: 22px;
+    border-top-left-radius: 22px;
+    -webkit-border-top-right-radius: 22px;
+    -moz-border-radius-topright: 22px;
+    border-top-right-radius: 22px;
+    -webkit-border-bottom-right-radius: 22px;
+    -moz-border-radius-bottomright: 22px;
+    border-bottom-right-radius: 22px;
+    -webkit-border-bottom-left-radius: 22px;
+    -moz-border-radius-bottomleft: 22px;
+    border-bottom-left-radius: 22px;
+    text-indent: 0;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    height: 41px;
+    line-height: 41px;
+    width: 129px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #86ae47;
+}
+
+    .loginButton:hover
+    {
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6f804b), color-stop(1, #b8e356) );
+        background: -moz-linear-gradient( center top, #6f804b 5%, #b8e356 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6f804b', endColorstr='#b8e356');
+        background-color: #6f804b;
+    }
+
+    .loginButton:active
+    {
+        position: relative;
+        top: 1px;
+    }
+
+
+/* Navigation */
+
+#navigation
+{
+    /*width: 200px;
+    top: 17.8em;
+    left: -2.6em;
+    width: 13em;
+    position: absolute;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 90%;*/
+}
+
+    #navigation ul
+    {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #navigation li
+    {
+        border-bottom: 1px solid #ED9F9F;
+    }
+
+        #navigation li a
+        {
+            display: block;
+            padding: 5px 5px 5px 0.5em;
+            border-left: 12px solid #711515;
+            border-right: 1px solid #711515;
+            background-color: #B51032;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+            #navigation li a:hover
+            {
+                background-color: #711515;
+                color: #FFFFFF;
+            }
+
+    #navigation ul ul
+    {
+        margin-left: 12px;
+    }
+
+        #navigation ul ul li
+        {
+            border-bottom: 1px solid #711515;
+            margin: 0;
+            background-color: #ED9F9F;
+            color: #711515;
+        }
+
+        #navigation ul ul a:link, #navigation ul ul a:visited
+        {
+            background-color: #ED9F9F;
+            color: #711515;
+        }
+
+        #navigation ul ul a:hover
+        {
+            background-color: #711515;
+            color: #FFFFFF;
+        }
+
+
+
+
+.tableinside
+{
+    border: #FF0000;
+    width: 99%;
+    vertical-align: middle;
+    margin-left: 1px;
+}
+
+    .tableinside tr td
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 1%;
+    }
+
+    .tableinside th
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 40%;
+        color: #FFFF00;
+    }
+
+    .tableinside tr td label
+    {
+        text-align: left;
+        left: 1px;
+    }
+
+    .tableinside tr td input
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        /*text-align: left;*/
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 90%;
+        background-color: #F2F2F2;
+    }
+
+    .tableinside tr td select
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 91%;
+        background-color: #F2F2F2;
+    }
+
+    .tableinside tr td textarea
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: right;
+        text-decoration: none;
+        border: 1 #FF0000;
+        width: 90%;
+        resize: none;
+        background-color: #F2F2F2;
+    }
+
+
+.form table
+{
+    width: 100%;
+}
+
+.form select
+{
+    font-family: Verdana, Arial, Helvetica, Tahoma, Sans-Serif;
+}
+
+.form td
+{
+    width: 75%;
+    /*padding: 5px;*/
+    margin: 0px;
+    vertical-align: top;
+}
+
+    .form td input
+    {
+        background-color: #A4A4A4;
+        border: solid 0px transparent;
+    }
+
+.form th
+{
+    text-align: right;
+    width: 30%;
+    padding-right: 20px;
+}
+
+.form .button-bar
+{
+    background-color: #fafafa;
+    padding: 5px 5px 5px 25%;
+    margin: 0;
+    text-align: left;
+}
+
+.form input[type="text"], .form textarea, .form select, .form input[type="password"]
+{
+    /*width: 100%;*/
+    border: solid 1px #ACFA58;
+}
+
+    .form input[type="text"]:focus, .form textarea:focus, form input[type="password"]:focus
+    {
+        border: thin solid #01DF01;
+    }
+
+.form p
+{
+    margin: 0 3px 10px 3px;
+}
+
+.chrome
+{
+    overflow: visible;
+    position: relative;
+}
+
+
+
+.contextMenu
+{
+    position: absolute;
+    z-index: 9999999;
+    border: solid 1px #CCC;
+    background: #EEE;
+    padding: 0px;
+    margin: 0px;
+    display: none;
+    background-repeat: no-repeat;
+}
+
+    .contextMenu LI
+    {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .contextMenu a
+    {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        line-height: 20px;
+        height: 20px;
+        background-position: 6px center;
+        background-repeat: no-repeat;
+        outline: none;
+        padding: 1px 5px;
+        padding-left: 28px;
+    }
+
+    .contextMenu LI.hover, .contextMenu LI.hover A
+    {
+        color: #FFF;
+        background-color: #3399FF;
+    }
+
+        .contextMenu LI.hover.disabled, .contextMenu LI.disabled A
+        {
+            color: #AAA;
+            cursor: default;
+        }
+
+            .contextMenu LI.hover.disabled, .contextMenu LI.hover.disabled A
+            {
+                background-color: transparent;
+            }
+
+    .contextMenu LI.separator
+    {
+        border-top: solid 1px #CCC;
+    }
+
+
+/*
+ *contextMenu.js v 1.1.2
+ *Author: Sudhanshu Yadav
+ *s-yadav.github.com
+ *Copyright (c) 2013 Sudhanshu Yadav.
+ *Dual licensed under the MIT and GPL licenses
+ */
+/*Context menu css */
+.iw-contextMenu
+{
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    border: 1px solid #E6E6E6;
+    display: none;
+    z-index: 1000;
+    overflow: auto;
+    height:auto;
+}
+
+.iw-cm-menu
+{
+    background: #F4F4F4;
+    color: #333;
+    margin: 0px;
+    padding: 0px;
+    height:auto;
+}
+
+    .iw-cm-menu li
+    {
+        list-style: none;
+        padding: 7px;
+        padding-left: 30px;
+        padding-right: 20px;
+        border-bottom: 1px solid #CCC;
+        cursor: pointer;
+        position: relative;
+    }
+
+.iw-mOverlay
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: #4B8A08;
+    opacity: .5;
+}
+
+.iw-contextMenu li.iw-mDisable
+{
+    opacity: .3;
+}
+
+.iw-mSelected
+{
+    background-color: #4B8A08;
+    color: #F2F2F2;
+}
+
+.iw-cm-arrow-right
+{
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #333333;
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    margin-top: -3px;
+}
+
+.iw-mIcon
+{
+    width: 25px;
+    height: 25px;
+    left: 0px;
+    top: 3px;
+    position: absolute;
+}
+
+
+
+
+.fijo {position:fixed;} 
+
+

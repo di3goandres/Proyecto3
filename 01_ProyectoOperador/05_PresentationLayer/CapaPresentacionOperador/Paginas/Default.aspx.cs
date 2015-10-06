@@ -39,40 +39,40 @@ public partial class Paginas_Default : System.Web.UI.Page
             {
 
 
-                var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+                //var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
 
-                CarpetaPersonalDao cPdao = new CarpetaPersonalDao();
+                //    CarpetaPersonalDao cPdao = new CarpetaPersonalDao();
 
-                List<string> carpetasTodasUsuario = new List<string>();
-                var resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuario("c6d7156d-bec0-4bdb-af6b-20802dff6c00");
+                //    List<string> carpetasTodasUsuario = new List<string>();
+                //    var resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuario("c6d7156d-bec0-4bdb-af6b-20802dff6c00");
 
-                int Node = 0;
-                string carpetaUsuario = "CC1077845378/";
-                TreeView1.Nodes.Clear();
-                foreach (var cp in resultadoCarpetas)
-                {
-                    string Actual = carpetaUsuario + cp.NombreCarpeta;
-                    TreeView1.Nodes.Add(new TreeNode(cp.NombreCarpeta, cp.IdCarpetaPersonal.ToString()));
+                //int Node = 0;
+                //string carpetaUsuario = "CC1077845378/";
+                //TreeView1.Nodes.Clear();
+                //foreach (var cp in resultadoCarpetas)
+                //{
+                //    string Actual = carpetaUsuario + cp.NombreCarpeta;
+                //    TreeView1.Nodes.Add(new TreeNode(cp.NombreCarpeta, cp.IdCarpetaPersonal.ToString()));
                     
-                    carpetasTodasUsuario.Add(Actual);
-                    if (cp.Hijos!=null && cp.Hijos.Count > 0)
-                    {
-                        foreach (var hijos in cp.Hijos)
-                        {
-                            carpetasTodasUsuario.Add(Actual + "/" + hijos.NombreCarpeta);
-                            TreeView1.Nodes[Node].ChildNodes.Add(new TreeNode(hijos.NombreCarpeta, hijos.IdCarpetaPersonal.ToString()));
-                        }
+                //    carpetasTodasUsuario.Add(Actual);
+                //    if (cp.Hijos!=null && cp.Hijos.Count > 0)
+                //    {
+                //        foreach (var hijos in cp.Hijos)
+                //        {
+                //            carpetasTodasUsuario.Add(Actual + "/" + hijos.NombreCarpeta);
+                //            TreeView1.Nodes[Node].ChildNodes.Add(new TreeNode(hijos.NombreCarpeta, hijos.IdCarpetaPersonal.ToString()));
+                //        }
                         
-                    }
-                    Node++;
-                }
+                //    }
+                //    Node++;
+                //}
 
 
-                foreach (var carpetasCrear in carpetasTodasUsuario) {
-                    fileControl._CreateFolderInFTP(carpetasCrear, "OPERADOR_REPOSITORY_USER");
+                //foreach (var carpetasCrear in carpetasTodasUsuario) {
+                //    fileControl._CreateFolderInFTP(carpetasCrear, "OPERADOR_REPOSITORY_USER");
                 
-                }
+                //}
 
 
                 

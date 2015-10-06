@@ -18,8 +18,12 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
     public void ProcessRequest (HttpContext context) {
         JavaScriptSerializer ser = new JavaScriptSerializer();
         HttpFileCollection fileCollection;
+        Operador.Entity.MetadataArchivos nuevaMetadata = new Operador.Entity.MetadataArchivos();
+        
         try
         {
+
+
             context.Response.ContentType = "text/plain";
 
             ///Se obtienen los archivos.
@@ -53,6 +57,15 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
                 if (postedFile.ContentLength > 0)
                 {
                     var filename = Path.GetFileName(postedFile.FileName);
+                    string ext = System.IO.Path.GetExtension(filename).ToLower();
+                    nuevaMetadata.extension = ext;
+                    nuevaMetadata.fecha_cargue = DateTime.Now;
+                    nuevaMetadata.idCarpetaPersonal = 3;
+
+                    nuevaMetadata.idTipoDocumento = 1;
+                    nuevaMetadata.nombre = filename;
+                    
+                    
                     listaNombresArchivos.Add(new FileNameControl() { Original = filename, });
                 }
             }
@@ -64,6 +77,14 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
             listaNombresArchivos = fileControl.AntivirusFileNames;
             //var fileLoaded = SessionHelper.GetSessionData("MIME_TYPES");
 
+
+            fileControl.CopyAntivirusToUserRepositorio("OPERADOR_REPOSITORY_USER", listaNombresArchivos.First().Generated, @"\CC1077845378\Carpeta001\Sub02CarpetaDe001");
+            Uniandes.Controlador.MetadataArchivoDao mDataArchibo = new Uniandes.Controlador.MetadataArchivoDao();
+
+            nuevaMetadata.tamanio = listaNombresArchivos.First().tamanioArchivo.ToString();
+            nuevaMetadata.autor = "usuario";
+            nuevaMetadata.idDMtadataArchivo = Guid.NewGuid();
+             mDataArchibo.RegistrarMetadataArchivo(nuevaMetadata);
 
             var respuesta = new { Estado = "OK", Mensaje = ".", Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuesta));

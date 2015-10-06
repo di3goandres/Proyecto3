@@ -33,12 +33,21 @@ namespace Uniandes.Controlador
     partial void Inserttb001_PAIS(tb001_PAIS instance);
     partial void Updatetb001_PAIS(tb001_PAIS instance);
     partial void Deletetb001_PAIS(tb001_PAIS instance);
+    partial void InserttblCarpetaPersonal(tblCarpetaPersonal instance);
+    partial void UpdatetblCarpetaPersonal(tblCarpetaPersonal instance);
+    partial void DeletetblCarpetaPersonal(tblCarpetaPersonal instance);
     partial void Inserttb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
     partial void Updatetb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
     partial void Deletetb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
     partial void Inserttb003_MUNICIPIO(tb003_MUNICIPIO instance);
     partial void Updatetb003_MUNICIPIO(tb003_MUNICIPIO instance);
     partial void Deletetb003_MUNICIPIO(tb003_MUNICIPIO instance);
+    partial void Inserttbl_metadataArchivos(tbl_metadataArchivos instance);
+    partial void Updatetbl_metadataArchivos(tbl_metadataArchivos instance);
+    partial void Deletetbl_metadataArchivos(tbl_metadataArchivos instance);
+    partial void Inserttbl_tipoDocumento(tbl_tipoDocumento instance);
+    partial void Updatetbl_tipoDocumento(tbl_tipoDocumento instance);
+    partial void Deletetbl_tipoDocumento(tbl_tipoDocumento instance);
     partial void Inserttbl_tipoId(tbl_tipoId instance);
     partial void Updatetbl_tipoId(tbl_tipoId instance);
     partial void Deletetbl_tipoId(tbl_tipoId instance);
@@ -100,6 +109,22 @@ namespace Uniandes.Controlador
 			get
 			{
 				return this.GetTable<tb003_MUNICIPIO>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_metadataArchivos> tbl_metadataArchivos
+		{
+			get
+			{
+				return this.GetTable<tbl_metadataArchivos>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_tipoDocumento> tbl_tipoDocumento
+		{
+			get
+			{
+				return this.GetTable<tbl_tipoDocumento>();
 			}
 		}
 		
@@ -259,8 +284,10 @@ namespace Uniandes.Controlador
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblCarpetaPersonal")]
-	public partial class tblCarpetaPersonal
+	public partial class tblCarpetaPersonal : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private decimal _idCarpetaPersonal;
 		
@@ -270,11 +297,35 @@ namespace Uniandes.Controlador
 		
 		private string _NombreCarpeta;
 		
+		private EntitySet<tblCarpetaPersonal> _tblCarpetaPersonal2;
+		
+		private EntitySet<tbl_metadataArchivos> _tbl_metadataArchivos;
+		
+		private EntityRef<tblCarpetaPersonal> _tblCarpetaPersonal1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidCarpetaPersonalChanging(decimal value);
+    partial void OnidCarpetaPersonalChanged();
+    partial void OnuserIdApplicacionChanging(string value);
+    partial void OnuserIdApplicacionChanged();
+    partial void OnidCarpetaPadreChanging(System.Nullable<decimal> value);
+    partial void OnidCarpetaPadreChanged();
+    partial void OnNombreCarpetaChanging(string value);
+    partial void OnNombreCarpetaChanged();
+    #endregion
+		
 		public tblCarpetaPersonal()
 		{
+			this._tblCarpetaPersonal2 = new EntitySet<tblCarpetaPersonal>(new Action<tblCarpetaPersonal>(this.attach_tblCarpetaPersonal2), new Action<tblCarpetaPersonal>(this.detach_tblCarpetaPersonal2));
+			this._tbl_metadataArchivos = new EntitySet<tbl_metadataArchivos>(new Action<tbl_metadataArchivos>(this.attach_tbl_metadataArchivos), new Action<tbl_metadataArchivos>(this.detach_tbl_metadataArchivos));
+			this._tblCarpetaPersonal1 = default(EntityRef<tblCarpetaPersonal>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCarpetaPersonal", DbType="Decimal(18,0) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCarpetaPersonal", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal idCarpetaPersonal
 		{
 			get
@@ -285,7 +336,11 @@ namespace Uniandes.Controlador
 			{
 				if ((this._idCarpetaPersonal != value))
 				{
+					this.OnidCarpetaPersonalChanging(value);
+					this.SendPropertyChanging();
 					this._idCarpetaPersonal = value;
+					this.SendPropertyChanged("idCarpetaPersonal");
+					this.OnidCarpetaPersonalChanged();
 				}
 			}
 		}
@@ -301,7 +356,11 @@ namespace Uniandes.Controlador
 			{
 				if ((this._userIdApplicacion != value))
 				{
+					this.OnuserIdApplicacionChanging(value);
+					this.SendPropertyChanging();
 					this._userIdApplicacion = value;
+					this.SendPropertyChanged("userIdApplicacion");
+					this.OnuserIdApplicacionChanged();
 				}
 			}
 		}
@@ -317,7 +376,15 @@ namespace Uniandes.Controlador
 			{
 				if ((this._idCarpetaPadre != value))
 				{
+					if (this._tblCarpetaPersonal1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidCarpetaPadreChanging(value);
+					this.SendPropertyChanging();
 					this._idCarpetaPadre = value;
+					this.SendPropertyChanged("idCarpetaPadre");
+					this.OnidCarpetaPadreChanged();
 				}
 			}
 		}
@@ -333,9 +400,117 @@ namespace Uniandes.Controlador
 			{
 				if ((this._NombreCarpeta != value))
 				{
+					this.OnNombreCarpetaChanging(value);
+					this.SendPropertyChanging();
 					this._NombreCarpeta = value;
+					this.SendPropertyChanged("NombreCarpeta");
+					this.OnNombreCarpetaChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblCarpetaPersonal_tblCarpetaPersonal", Storage="_tblCarpetaPersonal2", ThisKey="idCarpetaPersonal", OtherKey="idCarpetaPadre")]
+		public EntitySet<tblCarpetaPersonal> tblCarpetaPersonal2
+		{
+			get
+			{
+				return this._tblCarpetaPersonal2;
+			}
+			set
+			{
+				this._tblCarpetaPersonal2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblCarpetaPersonal_tbl_metadataArchivos", Storage="_tbl_metadataArchivos", ThisKey="idCarpetaPersonal", OtherKey="idCarpetaPersonal")]
+		public EntitySet<tbl_metadataArchivos> tbl_metadataArchivos
+		{
+			get
+			{
+				return this._tbl_metadataArchivos;
+			}
+			set
+			{
+				this._tbl_metadataArchivos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblCarpetaPersonal_tblCarpetaPersonal", Storage="_tblCarpetaPersonal1", ThisKey="idCarpetaPadre", OtherKey="idCarpetaPersonal", IsForeignKey=true)]
+		public tblCarpetaPersonal tblCarpetaPersonal1
+		{
+			get
+			{
+				return this._tblCarpetaPersonal1.Entity;
+			}
+			set
+			{
+				tblCarpetaPersonal previousValue = this._tblCarpetaPersonal1.Entity;
+				if (((previousValue != value) 
+							|| (this._tblCarpetaPersonal1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblCarpetaPersonal1.Entity = null;
+						previousValue.tblCarpetaPersonal2.Remove(this);
+					}
+					this._tblCarpetaPersonal1.Entity = value;
+					if ((value != null))
+					{
+						value.tblCarpetaPersonal2.Add(this);
+						this._idCarpetaPadre = value.idCarpetaPersonal;
+					}
+					else
+					{
+						this._idCarpetaPadre = default(Nullable<decimal>);
+					}
+					this.SendPropertyChanged("tblCarpetaPersonal1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tblCarpetaPersonal2(tblCarpetaPersonal entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblCarpetaPersonal1 = this;
+		}
+		
+		private void detach_tblCarpetaPersonal2(tblCarpetaPersonal entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblCarpetaPersonal1 = null;
+		}
+		
+		private void attach_tbl_metadataArchivos(tbl_metadataArchivos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblCarpetaPersonal = this;
+		}
+		
+		private void detach_tbl_metadataArchivos(tbl_metadataArchivos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblCarpetaPersonal = null;
 		}
 	}
 	
@@ -714,6 +889,456 @@ namespace Uniandes.Controlador
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_metadataArchivos")]
+	public partial class tbl_metadataArchivos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _idDMtadataArchivo;
+		
+		private System.Nullable<decimal> _idCarpetaPersonal;
+		
+		private string _nombre;
+		
+		private string _extension;
+		
+		private string _autor;
+		
+		private System.DateTime _fecha_cargue;
+		
+		private decimal _idTipoDocumento;
+		
+		private string _tamanio;
+		
+		private EntityRef<tblCarpetaPersonal> _tblCarpetaPersonal;
+		
+		private EntityRef<tbl_tipoDocumento> _tbl_tipoDocumento;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidDMtadataArchivoChanging(System.Guid value);
+    partial void OnidDMtadataArchivoChanged();
+    partial void OnidCarpetaPersonalChanging(System.Nullable<decimal> value);
+    partial void OnidCarpetaPersonalChanged();
+    partial void OnnombreChanging(string value);
+    partial void OnnombreChanged();
+    partial void OnextensionChanging(string value);
+    partial void OnextensionChanged();
+    partial void OnautorChanging(string value);
+    partial void OnautorChanged();
+    partial void Onfecha_cargueChanging(System.DateTime value);
+    partial void Onfecha_cargueChanged();
+    partial void OnidTipoDocumentoChanging(decimal value);
+    partial void OnidTipoDocumentoChanged();
+    partial void OntamanioChanging(string value);
+    partial void OntamanioChanged();
+    #endregion
+		
+		public tbl_metadataArchivos()
+		{
+			this._tblCarpetaPersonal = default(EntityRef<tblCarpetaPersonal>);
+			this._tbl_tipoDocumento = default(EntityRef<tbl_tipoDocumento>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDMtadataArchivo", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid idDMtadataArchivo
+		{
+			get
+			{
+				return this._idDMtadataArchivo;
+			}
+			set
+			{
+				if ((this._idDMtadataArchivo != value))
+				{
+					this.OnidDMtadataArchivoChanging(value);
+					this.SendPropertyChanging();
+					this._idDMtadataArchivo = value;
+					this.SendPropertyChanged("idDMtadataArchivo");
+					this.OnidDMtadataArchivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCarpetaPersonal", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> idCarpetaPersonal
+		{
+			get
+			{
+				return this._idCarpetaPersonal;
+			}
+			set
+			{
+				if ((this._idCarpetaPersonal != value))
+				{
+					if (this._tblCarpetaPersonal.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidCarpetaPersonalChanging(value);
+					this.SendPropertyChanging();
+					this._idCarpetaPersonal = value;
+					this.SendPropertyChanged("idCarpetaPersonal");
+					this.OnidCarpetaPersonalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string nombre
+		{
+			get
+			{
+				return this._nombre;
+			}
+			set
+			{
+				if ((this._nombre != value))
+				{
+					this.OnnombreChanging(value);
+					this.SendPropertyChanging();
+					this._nombre = value;
+					this.SendPropertyChanged("nombre");
+					this.OnnombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_extension", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
+		public string extension
+		{
+			get
+			{
+				return this._extension;
+			}
+			set
+			{
+				if ((this._extension != value))
+				{
+					this.OnextensionChanging(value);
+					this.SendPropertyChanging();
+					this._extension = value;
+					this.SendPropertyChanged("extension");
+					this.OnextensionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_autor", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string autor
+		{
+			get
+			{
+				return this._autor;
+			}
+			set
+			{
+				if ((this._autor != value))
+				{
+					this.OnautorChanging(value);
+					this.SendPropertyChanging();
+					this._autor = value;
+					this.SendPropertyChanged("autor");
+					this.OnautorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_cargue", DbType="DateTime NOT NULL")]
+		public System.DateTime fecha_cargue
+		{
+			get
+			{
+				return this._fecha_cargue;
+			}
+			set
+			{
+				if ((this._fecha_cargue != value))
+				{
+					this.Onfecha_cargueChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_cargue = value;
+					this.SendPropertyChanged("fecha_cargue");
+					this.Onfecha_cargueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipoDocumento", DbType="Decimal(18,0) NOT NULL")]
+		public decimal idTipoDocumento
+		{
+			get
+			{
+				return this._idTipoDocumento;
+			}
+			set
+			{
+				if ((this._idTipoDocumento != value))
+				{
+					if (this._tbl_tipoDocumento.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidTipoDocumentoChanging(value);
+					this.SendPropertyChanging();
+					this._idTipoDocumento = value;
+					this.SendPropertyChanged("idTipoDocumento");
+					this.OnidTipoDocumentoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tamanio", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string tamanio
+		{
+			get
+			{
+				return this._tamanio;
+			}
+			set
+			{
+				if ((this._tamanio != value))
+				{
+					this.OntamanioChanging(value);
+					this.SendPropertyChanging();
+					this._tamanio = value;
+					this.SendPropertyChanged("tamanio");
+					this.OntamanioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblCarpetaPersonal_tbl_metadataArchivos", Storage="_tblCarpetaPersonal", ThisKey="idCarpetaPersonal", OtherKey="idCarpetaPersonal", IsForeignKey=true)]
+		public tblCarpetaPersonal tblCarpetaPersonal
+		{
+			get
+			{
+				return this._tblCarpetaPersonal.Entity;
+			}
+			set
+			{
+				tblCarpetaPersonal previousValue = this._tblCarpetaPersonal.Entity;
+				if (((previousValue != value) 
+							|| (this._tblCarpetaPersonal.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblCarpetaPersonal.Entity = null;
+						previousValue.tbl_metadataArchivos.Remove(this);
+					}
+					this._tblCarpetaPersonal.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_metadataArchivos.Add(this);
+						this._idCarpetaPersonal = value.idCarpetaPersonal;
+					}
+					else
+					{
+						this._idCarpetaPersonal = default(Nullable<decimal>);
+					}
+					this.SendPropertyChanged("tblCarpetaPersonal");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_tipoDocumento_tbl_metadataArchivos", Storage="_tbl_tipoDocumento", ThisKey="idTipoDocumento", OtherKey="idTipoDocumento", IsForeignKey=true)]
+		public tbl_tipoDocumento tbl_tipoDocumento
+		{
+			get
+			{
+				return this._tbl_tipoDocumento.Entity;
+			}
+			set
+			{
+				tbl_tipoDocumento previousValue = this._tbl_tipoDocumento.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_tipoDocumento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_tipoDocumento.Entity = null;
+						previousValue.tbl_metadataArchivos.Remove(this);
+					}
+					this._tbl_tipoDocumento.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_metadataArchivos.Add(this);
+						this._idTipoDocumento = value.idTipoDocumento;
+					}
+					else
+					{
+						this._idTipoDocumento = default(decimal);
+					}
+					this.SendPropertyChanged("tbl_tipoDocumento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_tipoDocumento")]
+	public partial class tbl_tipoDocumento : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private decimal _idTipoDocumento;
+		
+		private string _tipoDocumento;
+		
+		private string _descripcion;
+		
+		private EntitySet<tbl_metadataArchivos> _tbl_metadataArchivos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidTipoDocumentoChanging(decimal value);
+    partial void OnidTipoDocumentoChanged();
+    partial void OntipoDocumentoChanging(string value);
+    partial void OntipoDocumentoChanged();
+    partial void OndescripcionChanging(string value);
+    partial void OndescripcionChanged();
+    #endregion
+		
+		public tbl_tipoDocumento()
+		{
+			this._tbl_metadataArchivos = new EntitySet<tbl_metadataArchivos>(new Action<tbl_metadataArchivos>(this.attach_tbl_metadataArchivos), new Action<tbl_metadataArchivos>(this.detach_tbl_metadataArchivos));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipoDocumento", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public decimal idTipoDocumento
+		{
+			get
+			{
+				return this._idTipoDocumento;
+			}
+			set
+			{
+				if ((this._idTipoDocumento != value))
+				{
+					this.OnidTipoDocumentoChanging(value);
+					this.SendPropertyChanging();
+					this._idTipoDocumento = value;
+					this.SendPropertyChanged("idTipoDocumento");
+					this.OnidTipoDocumentoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipoDocumento", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string tipoDocumento
+		{
+			get
+			{
+				return this._tipoDocumento;
+			}
+			set
+			{
+				if ((this._tipoDocumento != value))
+				{
+					this.OntipoDocumentoChanging(value);
+					this.SendPropertyChanging();
+					this._tipoDocumento = value;
+					this.SendPropertyChanged("tipoDocumento");
+					this.OntipoDocumentoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this.OndescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._descripcion = value;
+					this.SendPropertyChanged("descripcion");
+					this.OndescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_tipoDocumento_tbl_metadataArchivos", Storage="_tbl_metadataArchivos", ThisKey="idTipoDocumento", OtherKey="idTipoDocumento")]
+		public EntitySet<tbl_metadataArchivos> tbl_metadataArchivos
+		{
+			get
+			{
+				return this._tbl_metadataArchivos;
+			}
+			set
+			{
+				this._tbl_metadataArchivos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_metadataArchivos(tbl_metadataArchivos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_tipoDocumento = this;
+		}
+		
+		private void detach_tbl_metadataArchivos(tbl_metadataArchivos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_tipoDocumento = null;
 		}
 	}
 	

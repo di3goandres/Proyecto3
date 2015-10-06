@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CarpetaPersonal.cs" />
     <Compile Include="Departamento.cs" />
+    <Compile Include="MetadataArchivos.cs" />
     <Compile Include="Operacion.cs" />
     <Compile Include="Pais.cs" />
     <Compile Include="Documento.cs" />

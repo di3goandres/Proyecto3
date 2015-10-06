@@ -121,6 +121,77 @@ namespace Uniandes.Controlador
 
         }
 
+
+
+        public List<CarpetaPersonal> ObtenerCarpetasPorUsuarioCarpeta(String userId, long? idCarpetaPersonal)
+        {
+
+            List<CarpetaPersonal> Resultados = new List<CarpetaPersonal>();
+
+
+            try
+            {
+                using (OperadorDataContext ctx = new OperadorDataContext())
+                {
+
+                    // tblCarpetaPersonal cpersonal = new tblCarpetaPersonal();
+                    //si se pasa null trae los padres de lo contrario traera los Hijos
+                    if (idCarpetaPersonal == null)
+                    {
+                        var cPersonal = (from cp in ctx.tblCarpetaPersonal
+                                         where cp.userIdApplicacion == userId &&
+                                          cp.idCarpetaPadre == (decimal?)null
+
+                                         select cp);
+
+
+                        if (cPersonal.Any())
+                        {
+                            foreach (var operacion in cPersonal)
+                            {
+                                Resultados.Add(MapeadorCarpetaPersonal.MapCarpetaToBizEntity(operacion));
+                            }
+                        }
+                    }
+                    else {
+
+
+                        var cPersonal = (from cp in ctx.tblCarpetaPersonal
+                                         where cp.userIdApplicacion == userId &&
+                                          cp.idCarpetaPadre == idCarpetaPersonal
+                                         select cp);
+
+
+                        if (cPersonal.Any())
+                        {
+                            foreach (var operacion in cPersonal)
+                            {
+                                Resultados.Add(MapeadorCarpetaPersonal.MapCarpetaToBizEntity(operacion));
+                            }
+                        }
+                    
+                    }
+
+                }
+
+                //  var ResultadoCarpeta = Resultados.Where(x => x.idCarpetaPadre == 0).OrderBy(x => x.NombreCarpeta).ToList();
+
+                return Resultados;
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+        }
+
+
+
+
+
         private static void CargarListaHijos(List<CarpetaPersonal> carpetaBiz)
         {
             try
@@ -147,9 +218,9 @@ namespace Uniandes.Controlador
             }
             catch (Exception exc) { throw exc; }
         }
-    
+
     }
 
-     
+
 
 }

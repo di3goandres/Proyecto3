@@ -609,6 +609,74 @@ namespace Uniandes.FileControl
             ftpStream.Dispose();
         }
 
+
+        /// <summary>
+        /// Copia desde el antivirus al repositorio!
+        /// </summary>
+        /// <param name="destinationKey"></param>
+        /// <param name="fileName"></param>
+        /// <param name="Carpeta"></param>
+        public void CopyAntivirusToUserRepositorio(string destinationKey, string fileName, string Carpeta)
+        {
+            try
+            {
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+                if (repository.Path.Equals(FileConfigSettings.GetAntivirusDirectory().Path))
+                    return;
+                if (repository == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+                var antivirusDir = FileConfigSettings.GetAntivirusDirectory();
+                if (antivirusDir == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave del Antivirus");
+                }
+                if (antivirusDir.IsFtp)
+                {
+                    var generateFilename = GetFileName(fileName, "0");
+                    _SendFtpToFtp(fileName, generateFilename, antivirusDir.Path, repository.Path + Carpeta, antivirusDir.FtpUser, repository.FtpUser, antivirusDir.FtpPassword, repository.FtpPassword);
+
+                }
+                else
+                {
+                    var filePath = Path.Combine(FileConfigSettings.GetAntivirusDirectory().Path, fileName);
+                    if (File.Exists(filePath) == false)
+                    {
+                        throw new Exception(string.Format("El archivo {0} no existe.", filePath));
+                    }
+
+
+                    var filename = Path.GetFileName(filePath);
+                    if (repository.IsFtp == false)
+                    {
+                        if (!Directory.Exists(repository.Path))
+                            Directory.CreateDirectory(repository.Path);
+                        File.Copy(filePath, Path.Combine(repository.Path, filename), true);
+                    }
+                    else
+                    {
+                        string user = repository.FtpUser;
+                        string password = repository.FtpPassword;
+                        _SendLocalToFtp(filePath, repository.Path + Carpeta, user, password, filename);
+                    }
+                    File.Delete(filePath);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
+
+
+
+
+
+
 
 }

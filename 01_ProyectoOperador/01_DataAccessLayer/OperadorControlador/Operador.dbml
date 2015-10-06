@@ -9,10 +9,13 @@
   </Table>
   <Table Name="dbo.tblCarpetaPersonal" Member="tblCarpetaPersonal">
     <Type Name="tblCarpetaPersonal">
-      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="idCarpetaPadre" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="NombreCarpeta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal2" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPadre" Type="tblCarpetaPersonal" />
+      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tbl_metadataArchivos" />
+      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal1" ThisKey="idCarpetaPadre" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO">
@@ -32,6 +35,28 @@
       <Column Name="idDepartamento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="codigoDANE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="tb002_DEPARTAMENTO_tb003_MUNICIPIO" Member="tb002_DEPARTAMENTO" ThisKey="idDepartamento" OtherKey="idDepartamento" Type="tb002_DEPARTAMENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_metadataArchivos" Member="tbl_metadataArchivos">
+    <Type Name="tbl_metadataArchivos">
+      <Column Name="idDMtadataArchivo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="extension" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="autor" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_cargue" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="tamanio" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tblCarpetaPersonal" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
+      <Association Name="tbl_tipoDocumento_tbl_metadataArchivos" Member="tbl_tipoDocumento" ThisKey="idTipoDocumento" OtherKey="idTipoDocumento" Type="tbl_tipoDocumento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tipoDocumento" Member="tbl_tipoDocumento">
+    <Type Name="tbl_tipoDocumento">
+      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tipoDocumento" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_tipoDocumento_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idTipoDocumento" OtherKey="idTipoDocumento" Type="tbl_metadataArchivos" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_tipoId" Member="tbl_tipoId">

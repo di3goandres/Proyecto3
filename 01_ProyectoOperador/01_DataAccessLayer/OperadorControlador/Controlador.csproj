@@ -51,6 +51,8 @@
     <Compile Include="DaoUsuario.cs" />
     <Compile Include="DepartamentosDao.cs" />
     <Compile Include="MapeadorCarpetaPersonal.cs" />
+    <Compile Include="MapeadorMetadataArchivos.cs" />
+    <Compile Include="MetadataArchivoDao.cs" />
     <Compile Include="Operador.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

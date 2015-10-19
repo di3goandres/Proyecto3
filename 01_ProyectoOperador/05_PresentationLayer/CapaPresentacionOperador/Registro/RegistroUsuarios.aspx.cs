@@ -65,6 +65,8 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 
 
 
+        
+
 
 
         if (!resultado)
@@ -96,8 +98,9 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                       
                         var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario);
                         DaoUsuario registroAPP = new DaoUsuario();
-
-                        string CarpetaInicial = "CC"+ NUMERO_IDENTIFICACION;
+                        var datosTIpo = new TipoidentificacionDao().obtenerTipos();
+                        var tipoID = datosTIpo.Where(x => x.id_tipoId == TIPO_IDENTIFICACION).Select(x => x.abreviado_tipoId).First();
+                        string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
 
                         var usuaripoRegistrarApp =  registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
                             "OPERADOR_REPOSITORY_USER",CarpetaInicial );
@@ -209,7 +212,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            AppLog.Write(" Error obteniendo la informacion Inicial. ", AppLog.LogMessageType.Error, ex, "BansatLog");
+            AppLog.Write(" Error obteniendo la informacion Inicial. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             return new
             {

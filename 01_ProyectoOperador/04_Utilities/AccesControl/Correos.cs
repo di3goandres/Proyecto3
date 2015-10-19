@@ -14,12 +14,19 @@ namespace Uniandes.Utilidades
             {
                 System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage("FROMMAIL".GetFromAppCfg(), email);
 
-                mail.Subject = "Diario de una migraña - Nueva Contraseña";
+                String imagen = "ImgEmail".GetFromAppCfg();
+                String Subject = "SubjectNuevaContra".GetFromAppCfg();
+                String Title = "Title".GetFromAppCfg();
+
+
+
+
+                mail.Subject = Subject;
 
                 string body = "<html lang='" + "en'" + "xmlns='" + "http://www.w3.org/1999/xhtml'>" +
                     "<head>" +
                         "<meta charset='" + "utf-8' />" +
-                        "<title>DIARIO DE UNA MIGRAÑA</title>" +
+                        "<title>" + Title + "</title>" +
                         "<style type='" + "text/css'>" +
                             ".auto-style1 {" +
                                 "font-size: small; font-family: Tahoma;" +
@@ -31,18 +38,18 @@ namespace Uniandes.Utilidades
                      * aca el mensaje
                      */
                     "<table><tr>"
-                    + "<td>  <img src='https://s.yimg.com/wv/images/45113a5e6a4b9c1e03793d36e373a38b_96.jpeg' class='img-responsive' alt='logos'/></td><td></td></tr>"
+                    + "<td>  <img src='" + imagen + "' class='img-responsive' alt='logos'/></td><td></td></tr>"
                       + "</table>" +
                         "<table><tr>"
                     + "<tr><td><td>Su nueva Contraseña es: </td><td>" + password + "</td></tr>"
                     + "<tr><td><td>Su Usuario de ingreso es:  </td><td>" + usuario + "</td></tr>"
 
-                    +"</table>" +
-                        //"Su nueva Contraseña es: " + password + "<br />" +
-                        //"Su Usuario de ingreso es: " + usuario + "<br />" +
+                    + "</table>" +
+                    //"Su nueva Contraseña es: " + password + "<br />" +
+                    //"Su Usuario de ingreso es: " + usuario + "<br />" +
 
                         "No olvide cambiar la contraseña nuevamente.<br /><br />" +
-                        "ADMINISTRADOR - DIARIO DE UNA MIGRAÑA" +
+                        "ADMINISTRADOR - " + Title +
                 "&nbsp;</p></body></html>";
 
 
@@ -60,8 +67,7 @@ namespace Uniandes.Utilidades
                 catch (System.Net.Mail.SmtpException ex)
                 {
                     //acciones
-                    AppLog.Write(" Error Enviand ocorreo de recuperacion de contraseña.", AppLog.LogMessageType.Error, ex, "HotelLog");
-
+                    AppLog.Write(" Error Enviand ocorreo de recuperacion de contraseña.", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                     return false;
 
 
@@ -70,9 +76,9 @@ namespace Uniandes.Utilidades
             }
             catch (Exception ex)
             {
-                AppLog.Write("Error Enviando Email", AppLog.LogMessageType.Error, ex, "UniandesLog");
+                AppLog.Write("Error Enviando Email", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                 throw;
-              
+
             }
         }
 
@@ -83,32 +89,35 @@ namespace Uniandes.Utilidades
             {
                 System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage("FROMMAIL".GetFromAppCfg(), email);
 
-                mail.Subject = "Diario de una Migraña - Nueva Usuario";
+                String imagen = "ImgEmail".GetFromAppCfg();
+                String Subject = "SubjectNuevaUsuario".GetFromAppCfg();
+                String Title = "Title".GetFromAppCfg();
+
+                mail.Subject = Subject;
 
                 string body = "<html lang='" + "en'" + "xmlns='" + "http://www.w3.org/1999/xhtml'>" +
                     "<head>" +
                         "<meta charset='" + "utf-8' />" +
-                        "<title>DIARIO DE UNA MIGRAÑA</title>" +
+                               "<title>" + Title + "</title>" +
                         "<style type='" + "text/css'>" +
                             ".auto-style1 {" +
                                 "font-size: small; font-family: Tahoma;" +
                             "}" +
                         "</style></head><body><p>" +
-
                         "<p>" +
                     /*
                      * aca el mensaje
                      */
-                      "<table><tr>"
-                    + "<td>  <img src='https://s.yimg.com/wv/images/45113a5e6a4b9c1e03793d36e373a38b_96.jpeg' class='img-responsive' alt='logos'/></td><td></td></tr></table>"
+                    "<table><tr>"
+                    + "<td>  <img src='" + imagen + "' class='img-responsive' alt='logos'/></td><td></td></tr>"
                     +
                         "Cordial Saludo<br /> Se ha creado una cuenta de usuario en nuestra plataforma<br /> para ingresar por favor utilizar como contraseña el numero de identificacion ingresado.<br />" +
                         "tanto para usuario y contraseña. <br /><br />" +
 
                         "No olvide cambiar la contraseña.<br /><br />" +
-                        "ADMINISTRADOR - DIARIO DE UNA MIGRAÑA" +
+                        "ADMINISTRADOR - " +Title +
                 "&nbsp;</p></body></html>";
-
+                
                 mail.Body = body;
                 mail.IsBodyHtml = true;
 
@@ -123,7 +132,7 @@ namespace Uniandes.Utilidades
                 catch (System.Net.Mail.SmtpException ex)
                 {
                     //acciones
-                    AppLog.Write(" Error Enviandocorreo de creacion de usuarios.", AppLog.LogMessageType.Error, ex, "UniandesLog");
+                    AppLog.Write(" Error Enviando correo de creacion de usuarios.", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                     return false;
 
 
@@ -132,7 +141,7 @@ namespace Uniandes.Utilidades
             }
             catch (Exception ex)
             {
-                AppLog.Write("Error Enviando Email", AppLog.LogMessageType.Error, ex, "UniandesLog");
+                AppLog.Write("Error Enviando Email", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                 throw;
 
             }

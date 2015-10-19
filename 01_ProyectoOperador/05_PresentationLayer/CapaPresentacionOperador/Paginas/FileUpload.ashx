@@ -10,19 +10,25 @@ using System.Linq;
 using AccesControl.Utilidades;
 
 using Uniandes.FileControl;
-
+using Uniandes.Controlador;
+using Uniandes.Encriptador;
 
 public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSessionState
 {
-    
-    public void ProcessRequest (HttpContext context) {
+
+    public void ProcessRequest(HttpContext context)
+    {
         JavaScriptSerializer ser = new JavaScriptSerializer();
         HttpFileCollection fileCollection;
         Operador.Entity.MetadataArchivos nuevaMetadata = new Operador.Entity.MetadataArchivos();
-        
+        string IdcarpetaActual = string.Empty;
+
         try
         {
+            EncriptadorTripleDES des = new EncriptadorTripleDES();
+            string uid = (string)SessionHelper.GetSessionData("ID_CARPETA_ACTUAL");
 
+            IdcarpetaActual = des.Decrypt(uid, true);
 
             context.Response.ContentType = "text/plain";
 
@@ -36,6 +42,7 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
         }
         catch (Exception ex)
         {
+            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
             var respuestaError = new { Estado = "ERROR", Mensaje = ex.Message };
             context.Response.Write(ser.Serialize(respuestaError));
             return;
@@ -60,12 +67,12 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
                     string ext = System.IO.Path.GetExtension(filename).ToLower();
                     nuevaMetadata.extension = ext;
                     nuevaMetadata.fecha_cargue = DateTime.Now;
-                    nuevaMetadata.idCarpetaPersonal = 3;
+
 
                     nuevaMetadata.idTipoDocumento = 1;
                     nuevaMetadata.nombre = filename;
-                    
-                    
+
+
                     listaNombresArchivos.Add(new FileNameControl() { Original = filename, });
                 }
             }
@@ -76,44 +83,66 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
             fileControl.UploadFileTsoScan(fileCollection);
             listaNombresArchivos = fileControl.AntivirusFileNames;
             //var fileLoaded = SessionHelper.GetSessionData("MIME_TYPES");
+            var idCarpeta = Convert.ToDecimal(IdcarpetaActual);
+            nuevaMetadata.idCarpetaPersonal = idCarpeta;
+            nuevaMetadata.nombre_generado = listaNombresArchivos.First().Generated;
+            nuevaMetadata.fecha_modificacion = DateTime.Now;
+            var usuario = (string)SessionHelper.GetSessionData("USUARIO_AUTENTICADO");
+            DaoUsuario obtenerUsuario = new DaoUsuario();
+            var datosUsuario = obtenerUsuario.ObtnerUsuario(usuario);
+            CarpetaPersonalDao daoCarpeta = new CarpetaPersonalDao();
+            var fullPath = daoCarpeta.fullPathPorCarpeta(idCarpeta);
+            fullPath = fullPath.Replace("\\", "/");
 
+            var direccionAlojamiento = @"" + datosUsuario.CarpetaInicial + @fullPath;
 
-            fileControl.CopyAntivirusToUserRepositorio("OPERADOR_REPOSITORY_USER", listaNombresArchivos.First().Generated, @"\CC1077845378\Carpeta001\Sub02CarpetaDe001");
+            fileControl.CopyAntivirusToUserRepositorio(datosUsuario.respositorioKey, listaNombresArchivos.First().Generated, direccionAlojamiento);
             Uniandes.Controlador.MetadataArchivoDao mDataArchibo = new Uniandes.Controlador.MetadataArchivoDao();
 
             nuevaMetadata.tamanio = listaNombresArchivos.First().tamanioArchivo.ToString();
             nuevaMetadata.autor = "usuario";
+            nuevaMetadata.userIdApplicacion = usuario;
             nuevaMetadata.idDMtadataArchivo = Guid.NewGuid();
-             mDataArchibo.RegistrarMetadataArchivo(nuevaMetadata);
+            mDataArchibo.RegistrarMetadataArchivo(nuevaMetadata);
 
             var respuesta = new { Estado = "OK", Mensaje = ".", Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuesta));
         }
         catch (MaximumSizeExeption ex)
         {
+            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
             var respuestaVirus = new { Estado = "SIZE", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosMaximum = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (InvalidMimeTypesException ex)
         {
+            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
             var respuestaVirus = new { Estado = "MIME", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosMime = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (VirusFileExeption ex)
         {
+            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
             var respuestaVirus = new { Estado = "VIRUS", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosVirus = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (Exception ex)
         {
+            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
             var respuestaError = new { Estado = "ERROR", Mensaje = "Ha ocurrido un error cargando.", ErrorMessage = ex.ToString(), Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuestaError));
         }
 
     }
- 
-    public bool IsReusable {
-        get {
+
+    public bool IsReusable
+    {
+        get
+        {
             return false;
         }
     }

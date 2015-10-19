@@ -8,6 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
       <h2>Pregunta de seguiridad  / Cambio de contraseña</h2>
+    <center>
     <div class="form"> 
         <table class="table" style="width: 650px; padding-left: 0px; margin-left: 0px; text-align: left">
             
@@ -55,6 +56,7 @@
             </tr>
         </table>
     </div>
+        </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder3" Runat="Server">
 </asp:Content>

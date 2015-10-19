@@ -21,8 +21,8 @@
     </div>
 
 
-    <div id="cargarArchivos">
-        <div>
+    <%--<div id="cargarArchivos">
+       <%-- <div>
             <table style="width: 100%;">
                 <tr>
                     <td>
@@ -33,8 +33,8 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div class="Acdivocabutton-bar">
+        </div>--%>
+       <%-- <div class="Acdivocabutton-bar">
             <table style="width: 100%;">
                 <tr>
                     <td>
@@ -62,9 +62,9 @@
             </tr>
         </table>
 
-    </div>
+    </div>--%>
 
-    <asp:ListBox ID="lstFruits" runat="server" SelectionMode="Multiple">
+   <%-- <asp:ListBox ID="lstFruits" runat="server" SelectionMode="Multiple">
         <asp:ListItem Text="Mango" Value="1" />
         <asp:ListItem Text="Apple" Value="2" />
         <asp:ListItem Text="Banana" Value="3" />
@@ -77,7 +77,7 @@
      <asp:TreeView ID="TreeView1" runat="server" 
         onselectednodechanged="TreeView1_SelectedNodeChanged">
 
-    </asp:TreeView>
+    </asp:TreeView>--%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="contentScripts" runat="Server">
 </asp:Content>

@@ -32,6 +32,7 @@ namespace Uniandes.Controlador
                 TipoIdentificacion entidad = new TipoIdentificacion();
                 entidad.id_tipoId = Convert.ToInt32(dr["id_tipoId"].ToString());
                 entidad.nombre_tipoId = dr["nombre_tipoId"].ToString();
+                entidad.abreviado_tipoId = dr["abreviado_tipoId"].ToString();
                 retorno.Add(entidad);
             }
             dr.Close();

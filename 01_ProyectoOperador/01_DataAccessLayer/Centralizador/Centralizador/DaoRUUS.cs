@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Centralizador.Entity;
+using Uniandes.Utilidades;
 
 namespace Centralizador.DAO
 {
@@ -14,6 +15,9 @@ namespace Centralizador.DAO
 
             try
             {
+                AppLog.Write(" Ingrese validarExisteUsuarios ", AppLog.LogMessageType.Info, null, "CentralizadorColombiano");
+                AppLog.Write(string.Format(" datos tipo identificacion: {0}, numero de identificacion {1}.",  idTipoIdentificacion.ToString(),identificacionUsuario) , AppLog.LogMessageType.Info, null, "CentralizadorColombiano");
+
                 using (CentralizadorDataContext ctx = new CentralizadorDataContext())
                 {
                     var usuario = (from efp in ctx.tb005_RRUS
@@ -33,6 +37,7 @@ namespace Centralizador.DAO
             }
             catch (Exception e)
             {
+                AppLog.Write(" Error validarExisteUsuarios ", AppLog.LogMessageType.Error, e, "CentralizadorColombiano");
                 return false;
             }
 

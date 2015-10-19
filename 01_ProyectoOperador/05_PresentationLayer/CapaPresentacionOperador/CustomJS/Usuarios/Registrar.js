@@ -139,6 +139,7 @@ function resultadoGuardarEditar(jsonrequest) {
         AlertUI(".:Información", data.mensaje.toString(), function () {
             document.location.target = "self";
             document.location.href = '../Login.aspx';
+            return;
         });
     }
     else {

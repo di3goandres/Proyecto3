@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Uniandes.Centralizador.AccesoDatos.Menu;
+using Uniandes.Controlador;
 using Uniandes.GestionUsuarios;
 
 
@@ -20,7 +21,7 @@ public partial class _Default : System.Web.UI.Page
         //if (!IsPostBack)
         //{
             string ola ="";
-
+         
             documentos doc = new documentos();
 
             //Byte[] bytes = File.ReadAllBytes(@"D:\10_pagos\Respuesta Transferencia.pdf");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Operador.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -47,5 +48,40 @@ namespace Uniandes.Controlador
 
 
         }
+
+
+
+        public UsuarioOperador ObtnerUsuario(string UUID)
+        {
+
+            UsuarioOperador retorno = new UsuarioOperador();
+
+            string fullName = string.Empty;
+            using (OperadorDataContext ctx = new OperadorDataContext())
+            {
+
+
+                var cUsuarios = (from cp in ctx.tbl_usuarios
+                                 where cp.userIdApplicacion == UUID
+                                 select cp);
+
+
+                if (cUsuarios.Any())
+                {
+                    retorno.respositorioKey = cUsuarios.First().repositorioKey;
+                    retorno.userIdApplicacion = cUsuarios.First().userIdApplicacion;
+                    retorno.userIdCentralizador = cUsuarios.First().userIdCentralizador;
+                    retorno.CarpetaInicial = cUsuarios.First().carpetaUsuarioInicial;
+
+                }
+            }
+
+            return retorno;
+        
+        }
+
+
+
+
     }
 }

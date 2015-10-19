@@ -41,10 +41,13 @@
     <Type Name="tbl_metadataArchivos">
       <Column Name="idDMtadataArchivo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="nombre_generado" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="extension" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="autor" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="fecha_cargue" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_Cargue" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_modificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="tamanio" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tblCarpetaPersonal" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
@@ -53,9 +56,9 @@
   </Table>
   <Table Name="dbo.tbl_tipoDocumento" Member="tbl_tipoDocumento">
     <Type Name="tbl_tipoDocumento">
-      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="tipoDocumento" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="descripcion" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Association Name="tbl_tipoDocumento_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idTipoDocumento" OtherKey="idTipoDocumento" Type="tbl_metadataArchivos" />
     </Type>
   </Table>

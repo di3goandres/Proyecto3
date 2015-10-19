@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="prueba.aspx.cs" Inherits="Paginas_jqueryfiletreedemo_prueba" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="prueba.aspx.cs" Inherits="Paginas_prueba" %>
 
 <!DOCTYPE html>
 

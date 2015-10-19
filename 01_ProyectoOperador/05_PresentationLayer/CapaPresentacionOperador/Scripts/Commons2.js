@@ -500,7 +500,7 @@ function DoJsonRequest(page, WebMethod, SuccessFunction, Data) {
 //Muestra un mensaje
 function AlertUI(title, text, onClose) {
 
-    $("#dialog-message").dialog("destroy");
+    //$("#dialog-message").dialog("destroy");
     $("#dialog-message").attr("title", title);
     $("#dialog-message-text").html(text);
 
@@ -522,7 +522,7 @@ function AlertUI(title, text, onClose) {
 
 function AlertUIFOCUS(title, text, onClose) {
 
-    $("#dialog-message").dialog("destroy");
+    //$("#dialog-message").dialog("close");
     $("#dialog-message").attr("title", title);
     $("#dialog-message-text").html(text);
 
@@ -642,7 +642,7 @@ var fileUploadAdd = DefaultFileUploadAdd;
 var fileUploadInputClass = 'fileUploadInput';
 var fileUploadListClass = 'file-fileupload-list';
 var fileUploadSubmit = DefaultFileUploadSubmit;
-var fileUploadIconFolder = "../../imagenes/";
+var fileUploadIconFolder = "../imagenes/";
 
 function LoadUploadFiles(inputFileUpload, divFileUploadId) {
     $(divFileUploadId).empty();
@@ -653,7 +653,8 @@ function LoadUploadFiles(inputFileUpload, divFileUploadId) {
     $(inputFileUpload).fileupload({
         replaceFileInput: true,
         dataType: 'json',
-        url: fileUploadUrl,
+        url: fileUploadUrl ,// + "&IDCarpeta="+nombreCarpetaActual,
+        
         //submit:fileUploadSubmit,
         //ways:function(){alert("ways");},
         start: function (data, data1, data2) {
@@ -758,14 +759,14 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
             var x = 0;
           
             var filename = file.Original.ReplaceAll(".", "-").ReplaceAll("|", "-").ReplaceAll("&", "-").ReplaceAll(" ", "-").ReplaceAll("$", "-").ReplaceAll("^", "-").ReplaceAll("{", "-").ReplaceAll("}", "-").ReplaceAll("[", "-").ReplaceAll("]", "").ReplaceAll("(", "-").ReplaceAll(")", "-").ReplaceAll('"', "-").ReplaceAll("'", "-").ReplaceAll("+", "-").ReplaceAll("#", "").ReplaceAll("@", "");
-            removeRepetidos(fileDivUploadId, filename);
+            //removeRepetidos(fileDivUploadId, filename);
 
 
             $(fileDivUploadId + ' .' + filename + ' .upload-done-img').remove();
             $(fileDivUploadId + ' .' + filename + ' .upload-done').remove();
             $(fileDivUploadId + ' .' + filename + ' .loading-file-img').remove();
             $(fileDivUploadId + ' .' + filename + ' .error-file-img').remove();
-
+           
 
             if (result.ArchivosMaximum != undefined && result.ArchivosMaximum != null && $.inArray(file.Original, result.ArchivosMaximum) == 0) {
                 $(fileDivUploadId + ' .' + filename + ' .actual-process').text('Este archivo supera el tamaño máximo permitido.');
@@ -800,15 +801,16 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
 
 
                 //$("#archivosAdjuntosTable").append(' </tbody></table>');
-                removeRepetidos(fileDivUploadId, filename);
+                //removeRepetidos(fileDivUploadId, filename);
                 $(fileDivUploadId + ' .' + filename).append('<i class="icon-axa_31 iconGray"></i>');
                 $(fileDivUploadId + ' .' + filename + ' .actual-process').text( file.tamanioArchivo/1024  +"KB");
                 $(fileDivUploadId + ' .' + filename).append('<input type="hidden" class="upload-done" name="doneFile" value="' + file.Generated + '">');
                
              
-                $(fileDivUploadId + ' .' + filename).append('<button class="remove-file-item btn btn-error"><i class="fa fa-ban"></i><span>Eliminar</span></button>');
+                //$(fileDivUploadId + ' .' + filename).append('<button class="remove-file-item btn btn-error"><i class="fa fa-ban"></i><span>Eliminar</span></button>');
 
                 $(fileDivUploadId + ' .' + filename).prepend('<img class="upload-done-AddRemoveHandler()img" src="' + fileUploadIconFolder + 'ok.png" alt="A la espera de carga de los archivos" />');
+               
             } else {
                 $(fileDivUploadId + ' .' + filename).prepend('<img class="error-file-img" src="' + fileUploadIconFolder + 'close.png" alt="error en la carga de archivos" />');
                 AlertUI("ERROR", result.Mensaje);
@@ -816,6 +818,7 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
         });
     }
     AddRemoveHandler();
+    traerDatosCarpeta();
 }
 
 function GetLoadFilenames(fileDivUploadId) {
@@ -862,7 +865,7 @@ function removeRepetidos(fileDivUploadId, filename) {
 
     for (var i = 0; i < todos.length; i++) {
         if (todos[i] == filename) {
-            $("#" + todos[i]).parents('.file-item:first').remove();
+            $("#" + todos[i]).parents('.file-item').remove();
         }
     }
 
@@ -873,6 +876,16 @@ function removeRepetidos(fileDivUploadId, filename) {
 
 }
 
+
+function removeALL(d) {
+    var names = GetLoadFilenames(d);
+    var todos = names.split(',');
+    for (var i = 0; i < todos.length; i++) {
+        $(d+" ul li:contains('"+todos[i]+"')").remove();
+            //$("#" + todos[i]).parents('.file-item:first').remove();
+        
+    }
+}
 function GetLoadFilenamesConvenio(fileDivUploadId) {
     var names = "";
     if ($(fileDivUploadId + ' .loading-file-img').length.toString() != "0") {

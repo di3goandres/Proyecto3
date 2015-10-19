@@ -40,7 +40,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CapaPresentacionOperador", 
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "25606"
+		VWDPort = "8666"
 	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{5D709956-E404-4E14-A97A-577F847C1CFB} = {5D709956-E404-4E14-A97A-577F847C1CFB}
@@ -53,6 +53,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCentralizador", "00_Entidades\EntidadesCentralizador\EntidadesCentralizador\EntidadesCentralizador.csproj", "{952DFAF9-ADA3-40EB-966F-7C2703DDAF50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionUsuarios", "01_DataAccessLayer\GestionUsuarios\GestionUsuarios.csproj", "{EB463085-D442-44A4-965C-C842B1A26A3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encriptador", "04_Utilities\Encriptador\Encriptador\Encriptador.csproj", "{C1C8427A-D972-4E18-87FB-0E74BEA811E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDocumental", "02_LogicLayer\GestorDocumental\GestorDocumental.csproj", "{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +132,18 @@ Global
 		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB463085-D442-44A4-965C-C842B1A26A3F}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,7 +157,9 @@ Global
 		{EB463085-D442-44A4-965C-C842B1A26A3F} = {22CA5E0E-163B-4F5F-A24D-9D3C9D5C4269}
 		{5D709956-E404-4E14-A97A-577F847C1CFB} = {A374AA63-0C55-4960-A85C-4A4EC6827A71}
 		{86ED1E88-0D33-47D0-A866-83B877178D76} = {7203F7C2-A713-457A-87F1-34B22F59D67E}
+		{3A286435-A5EC-4E18-AB84-E9FA46A90FE6} = {5E3A879E-E396-4D05-BAAA-9208C287767B}
 		{ACDE1BB6-27DE-4231-A540-1F009FA1E8B7} = {9D252732-6DCA-420F-8233-095EDA0EC512}
 		{D3BC3267-3E88-4A44-9B9D-75EEB14BAB77} = {9D252732-6DCA-420F-8233-095EDA0EC512}
+		{C1C8427A-D972-4E18-87FB-0E74BEA811E3} = {9D252732-6DCA-420F-8233-095EDA0EC512}
 	EndGlobalSection
 EndGlobal

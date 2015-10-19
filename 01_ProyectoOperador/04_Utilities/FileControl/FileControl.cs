@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Threading;
 using System.Net;
+using AccesControl.Utilidades;
 
 
 namespace Uniandes.FileControl
@@ -670,6 +671,184 @@ namespace Uniandes.FileControl
                 throw ex;
             }
         }
+
+
+
+        /// <summary>
+        /// Metodo para cambiar nombres de archivos y carpetas 
+        /// </summary>
+        /// <param name="nameFolder">nombre de la carpeta o del archivo</param>
+        /// <param name="newNameFoler">nuevo nombre del archivo o carpeta</param>
+        /// <param name="destinationKey">llave donde esta alojada la conexion al FTPs</param>
+        /// <returns></returns>
+        public bool _RenameFolderInFTP(string nameFolderFile, String newNameFoler, string destinationKey)
+        {
+            try
+            {
+                AppLog.Write(" Ingrese _RenameFolderInFTP ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+              
+                if (repository == null)
+                {
+                    AppLog.Write(" No se encontro ninguna configuración de repositorio para la llave", AppLog.LogMessageType.Error, null, "OperadorCarpeta");
+
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+
+                string user = repository.FtpUser;
+                string password = repository.FtpPassword;
+                //create the directory
+                string directory = repository.Path + nameFolderFile;
+                FtpWebRequest requestDir = (FtpWebRequest)FtpWebRequest.Create(new Uri(directory));
+                requestDir.Method = WebRequestMethods.Ftp.Rename;
+                requestDir.RenameTo = newNameFoler;
+                requestDir.Credentials = new NetworkCredential(user, password);
+                requestDir.UsePassive = true;
+                requestDir.UseBinary = true;
+                requestDir.KeepAlive = false;
+                FtpWebResponse response = (FtpWebResponse)requestDir.GetResponse();
+                Stream ftpStream = response.GetResponseStream();
+
+                ftpStream.Close();
+                response.Close();
+                AppLog.Write(" Finalizo correctamente", AppLog.LogMessageType.Error, null, "OperadorCarpeta");
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                AppLog.Write(" WebException", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLog.Write("Ha ocurrido un error", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Metodo para eliminar por completo directorios del repositorio
+        /// </summary>
+        /// <param name="nameFolderFile">nombre de la carpeta</param>
+        /// <param name="destinationKey"></param>
+        /// <returns></returns>
+        public bool _RemoveFolderInFTP(string nameFolderFile, string destinationKey)
+        {
+            try
+            {
+
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+                if (repository.Path.Equals(FileConfigSettings.GetAntivirusDirectory().Path))
+                    return false;
+                if (repository == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+
+                string user = repository.FtpUser;
+                string password = repository.FtpPassword;
+                //create the directory
+                string directory = repository.Path + nameFolderFile;
+                FtpWebRequest requestDir = (FtpWebRequest)FtpWebRequest.Create(new Uri(directory));
+                requestDir.Method = WebRequestMethods.Ftp.RemoveDirectory;
+
+                requestDir.Credentials = new NetworkCredential(user, password);
+                requestDir.UsePassive = true;
+                requestDir.UseBinary = true;
+                requestDir.KeepAlive = false;
+                FtpWebResponse response = (FtpWebResponse)requestDir.GetResponse();
+                Stream ftpStream = response.GetResponseStream();
+
+                ftpStream.Close();
+                response.Close();
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
+            }
+        }
+
+
+        public bool _RemoveFileInFTP(string fullpathandnameFile, string destinationKey)
+        {
+            try
+            {
+
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+                if (repository.Path.Equals(FileConfigSettings.GetAntivirusDirectory().Path))
+                    return false;
+                if (repository == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+
+                string user = repository.FtpUser;
+                string password = repository.FtpPassword;
+                //create the directory
+                string directory = repository.Path + fullpathandnameFile;
+                FtpWebRequest requestDir = (FtpWebRequest)FtpWebRequest.Create(new Uri(directory));
+                requestDir.Method = WebRequestMethods.Ftp.DeleteFile;
+
+                requestDir.Credentials = new NetworkCredential(user, password);
+                requestDir.UsePassive = true;
+                requestDir.UseBinary = true;
+                requestDir.KeepAlive = false;
+                FtpWebResponse response = (FtpWebResponse)requestDir.GetResponse();
+                Stream ftpStream = response.GetResponseStream();
+
+                ftpStream.Close();
+                response.Close();
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
+            }
+        }
+
+
+      
+
 
     }
 

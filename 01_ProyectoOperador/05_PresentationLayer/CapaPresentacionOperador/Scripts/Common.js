@@ -10,9 +10,9 @@ var selectRow;
 
 $(function () {
     serviceError = defaultError;
-    //$(".button").button();
-    //$(".datepicker").datepicker({dateFormat: 'dd/mm/yy' });
-    loadProperties();
+    $(".button").button();
+    $(".datepicker").datepicker({dateFormat: 'dd/mm/yy' });
+   // loadProperties();
     $(window).bind('resize', function () {}).trigger('resize');
     $(window).scrollLeft("100px");
 });

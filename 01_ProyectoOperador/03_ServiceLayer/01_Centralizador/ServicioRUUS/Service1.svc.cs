@@ -7,6 +7,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using Centralizador.DAO;
 using Centralizador.Entity;
+using Uniandes.Utilidades;
 
 namespace ServicioRUUS
 {
@@ -25,6 +26,7 @@ namespace ServicioRUUS
             }
             catch (Exception ee)
             {
+                AppLog.Write(" Error RegistrarUsuario ", AppLog.LogMessageType.Error, ee, "CentralizadorColombiano");
                 throw ee;
 
             }

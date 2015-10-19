@@ -6,13 +6,41 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Operador.Entity;
 using Uniandes.Controlador;
+using System.Threading;
+using System.Web.Security;
 
-public partial class Paginas_jqueryfiletreedemo_prueba : System.Web.UI.Page
+public partial class Paginas_prueba : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (!IsPostBack) {
+        if (!IsPostBack)
+        {
+            string uid = string.Empty;
+            try
+            {
+                if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                {
+
+                    string usuarioActual = Thread.CurrentPrincipal.Identity.Name;
+                   
+                    MembershipUser u = Membership.GetUser(usuarioActual);
+                    uid = u.ProviderUserKey.ToString();
+                    if (u.LastPasswordChangedDate.Equals(u.CreationDate))
+                    {
+                        Response.Redirect("../RestablecerContrasena/AsignarRespuestaSecretaContrasenia.aspx", true);
+                    }
+
+                }
+                else
+                {
+                    Response.Redirect("../Logoff.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             CarpetaPersonalDao cPdao = new CarpetaPersonalDao();
             MetadataArchivoDao mDatadao = new MetadataArchivoDao();
@@ -32,13 +60,13 @@ public partial class Paginas_jqueryfiletreedemo_prueba : System.Web.UI.Page
 
             if (dir == "/")
             {
-                resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuarioCarpeta("c6d7156d-bec0-4bdb-af6b-20802dff6c00", null);
+                resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuarioCarpeta(uid, null);
                 resultadoMetadata = mDatadao.ObtenerArchivosPorCarpetasDeUsuario(null);
 
             }
             if (dir != "/")
             {
-                resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuarioCarpeta("c6d7156d-bec0-4bdb-af6b-20802dff6c00", Convert.ToInt64( dir));
+                resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuarioCarpeta(uid, Convert.ToInt64(dir));
                 resultadoMetadata = mDatadao.ObtenerArchivosPorCarpetasDeUsuario(Convert.ToInt64(dir));
             }
 
@@ -49,22 +77,24 @@ public partial class Paginas_jqueryfiletreedemo_prueba : System.Web.UI.Page
 
             foreach (var data in resultadoCarpetas)
             {
-                Response.Write("\t<li class=\"directory collapsed\"><a href=\"#\" rel=\"" +  data.IdCarpetaPersonal + "/\">" + data.NombreCarpeta + "</a></li>\n");
+                Response.Write("\t<li class=\"directory collapsed\"><a href=\"#\" rel=\"" + data.IdCarpetaPersonal + "/\">" + data.NombreCarpeta + "</a></li>\n");
 
             }
 
-            
+
             foreach (var data in resultadoMetadata)
             {
 
-              
-                Response.Write("\t<li class=\"file ext_" + data.extension.Replace(".", "") + "\"><a href=\"#\" rel=\"" +  data.idDMtadataArchivo + "\">" + data.nombre + "</a></li>\n");
+
+                Response.Write("\t<li class=\"file ext_" + data.extension.Replace(".", "") + "\"><a href=\"#\" rel=\"" + data.idDMtadataArchivo + "\">" + data.nombre + "</a></li>\n");
             }
-         
+
             Response.Write("</ul>");
 
 
-        
         }
+
+
+
     }
 }

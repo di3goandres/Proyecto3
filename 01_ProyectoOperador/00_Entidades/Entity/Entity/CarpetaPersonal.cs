@@ -9,8 +9,9 @@ namespace Operador.Entity
     {
         public Decimal IdCarpetaPersonal { get; set; }
         public String userIdAplicacion { get; set; }
-        public Decimal idCarpetaPadre { get; set; }
+        public Nullable<Decimal> idCarpetaPadre { get; set; }
         public String NombreCarpeta { get; set; }
+        public String PathTotal { get; set; }
 
        public  List<CarpetaPersonal> Hijos { get; set; }
 

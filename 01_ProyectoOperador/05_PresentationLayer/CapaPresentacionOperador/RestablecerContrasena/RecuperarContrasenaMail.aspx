@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/shared/OutsideUniandes.master" AutoEventWireup="true" CodeFile="RecuperarContrasenaMail.aspx.cs" Inherits="RecuperarContrasenaMail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
-    
+
     <script src="../CustomJS/RecuperarContrasenaMail.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <center> 
     <h4>Recuperar Contraseña via email</h4>
     <div id="Nombreusuario"   style="margin-top:auto" class="form-group">
        <table class="tableIndicadores" style="width: 90%; margin-left: 0px">
@@ -53,6 +54,7 @@
         </table>
         
     </div>
+        </center>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentScripts" runat="Server">
 </asp:Content>

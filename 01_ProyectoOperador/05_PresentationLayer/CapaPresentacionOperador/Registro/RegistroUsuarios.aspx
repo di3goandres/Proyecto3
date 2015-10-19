@@ -20,7 +20,7 @@
     <center>
     <div id="EditarAgregar" class="form">
 
-        <table class="tableinside" border="0" style="width: 840px; padding-left: 0px; margin-left: 0px; text-align: left">
+        <table class="tableIndicadores" border="0" style="width: 840px; padding-left: 0px; margin-left: 0px; text-align: left">
             <tr>
                   <td >
                     <label>Primer Nombre</label></td>

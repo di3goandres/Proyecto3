@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="OutsideUniandes.master.cs" Inherits="Uniandes_incoder" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="OutsideUniandes.master.cs" Inherits="shared_OutsideUniandes" %>
 
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>CARPETA CIUDADANA</title>
+    <title>OPERADOR CARPETA CIUDADANA - MINMOSE SOFTWARE</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link href="../css/custom.css" rel="stylesheet" type="text/css">

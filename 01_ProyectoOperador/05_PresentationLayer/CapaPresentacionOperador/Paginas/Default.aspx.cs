@@ -28,113 +28,20 @@ public partial class Paginas_Default : System.Web.UI.Page
     protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
     {
 
-        Response.Write(TreeView1.SelectedNode.Value);
     }
 
     protected void Page_Load(object sender, EventArgs e)
     {
         try
         {
+            AppLog.Write(" Ingrese LOgin ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
             if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
-
-
-                //var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
-
-
-                //    CarpetaPersonalDao cPdao = new CarpetaPersonalDao();
-
-                //    List<string> carpetasTodasUsuario = new List<string>();
-                //    var resultadoCarpetas = cPdao.ObtenerCarpetasPorUsuario("c6d7156d-bec0-4bdb-af6b-20802dff6c00");
-
-                //int Node = 0;
-                //string carpetaUsuario = "CC1077845378/";
-                //TreeView1.Nodes.Clear();
-                //foreach (var cp in resultadoCarpetas)
-                //{
-                //    string Actual = carpetaUsuario + cp.NombreCarpeta;
-                //    TreeView1.Nodes.Add(new TreeNode(cp.NombreCarpeta, cp.IdCarpetaPersonal.ToString()));
-                    
-                //    carpetasTodasUsuario.Add(Actual);
-                //    if (cp.Hijos!=null && cp.Hijos.Count > 0)
-                //    {
-                //        foreach (var hijos in cp.Hijos)
-                //        {
-                //            carpetasTodasUsuario.Add(Actual + "/" + hijos.NombreCarpeta);
-                //            TreeView1.Nodes[Node].ChildNodes.Add(new TreeNode(hijos.NombreCarpeta, hijos.IdCarpetaPersonal.ToString()));
-                //        }
-                        
-                //    }
-                //    Node++;
-                //}
-
-
-                //foreach (var carpetasCrear in carpetasTodasUsuario) {
-                //    fileControl._CreateFolderInFTP(carpetasCrear, "OPERADOR_REPOSITORY_USER");
-                
-                //}
-
-
-                
-                //fileControl._CreateFolderInFTP("CC1077845378/Carpeta2", "OPERADOR_REPOSITORY_USER");
-                //fileControl._CreateFolderInFTP("CC1077845378/Carpeta2/subcarpeta1", "OPERADOR_REPOSITORY_USER");
-
-
-
-                //if (!Page.IsPostBack)
-                //{
-                //TreeView1.Nodes.Add(new TreeNode("Node1", "0"));
-                //TreeView1.Nodes[0].ChildNodes.Add(new TreeNode("ChildNode", "2"));
-                //TreeView1.Nodes.Add(new TreeNode("Node2"));
-                //TreeView1.Nodes[1].ChildNodes.Add(new TreeNode("ChildNode2"));
-                //TreeView1.Nodes.Add(new TreeNode("Node3"));
-                //TreeView1.Nodes[2].ChildNodes.Add(new TreeNode("ChildNode2"));
-
-                //}
-
-                // documentos doc = new documentos();
-                string datosMime = getMimeFromFile(@"D:\vcredist.tmp.jpeg.bmp");
-
-                Byte[] bytes = File.ReadAllBytes(@"D:\datos.png");
-                String file = Convert.ToBase64String(bytes);
-
-                // Example #2: Write one string to a text file.
-
-                // WriteAllText creates a file, writes the specified string to the file,
-                // and then closes the file.    You do NOT need to call Flush() or Close().
-                System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\64.txt", file);
-                string fileHexa = ByteArrayToString(bytes);
-
-
-
-                // WriteAllText creates a file, writes the specified string to the file,
-                // and then closes the file.    You do NOT need to call Flush() or Close().
-                System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\hexa.txt", fileHexa);
-
-
-                string hex = BitConverter.ToString(bytes);
-                hex.Replace("-", "");
-
-                System.IO.File.WriteAllText(@"C:\Users\USUARIO\Desktop\prueba archivos\bitConverter.txt", hex);
-
-
-                //// doc.insertar(file, "png", "datos.png");
-
-                // string path = @"D:\100_Cargues\";
-
-                // var documento = doc.consultar("");
-
-                // Byte[] bytess = Convert.FromBase64String(documento.contenido);
-
-
-
-
-                // File.WriteAllBytes(path + documento.nombre, bytes);
-
 
                 string usuarioActual = Thread.CurrentPrincipal.Identity.Name;
 
                 MembershipUser u = Membership.GetUser(usuarioActual);
+                SessionHelper.SetSessionData("USUARIO_AUTENTICADO", u.ProviderUserKey.ToString());
                 if (u.LastPasswordChangedDate.Equals(u.CreationDate))
                 {
                     Response.Redirect("../RestablecerContrasena/AsignarRespuestaSecretaContrasenia.aspx", true);
@@ -149,7 +56,7 @@ public partial class Paginas_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            AppLog.Write(" Error login ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
         }
     }
 

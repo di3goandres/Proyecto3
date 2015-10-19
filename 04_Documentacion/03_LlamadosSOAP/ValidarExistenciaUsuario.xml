@@ -1,0 +1,37 @@
+POST /Service1.asmx HTTP/1.1
+Host: localhost
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://tempuri.org/ValidarExistenciaUsuario"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ValidarExistenciaUsuario xmlns="http://tempuri.org/">
+      <usuario>
+        <UUID>string</UUID>
+        <idTipoIdentificacion>1</idTipoIdentificacion>
+        <numeroIdentificacion>1077845378</numeroIdentificacion>
+        <idMunicipioExpedicionDocumento>int</idMunicipioExpedicionDocumento>
+        <fechaExpedicion>dateTime</fechaExpedicion>
+        <primerApellido>string</primerApellido>
+        <segundoApellido>string</segundoApellido>
+        <primerNombre>string</primerNombre>
+        <segundoNombre>string</segundoNombre>
+        <genero>string</genero>
+        <fechaNacimiento>dateTime</fechaNacimiento>
+        <idMunicipioNacimiento>int</idMunicipioNacimiento>
+        <idPaisNacionalidad>int</idPaisNacionalidad>
+        <idMunicipioResidencia>int</idMunicipioResidencia>
+        <direccionResidencia>string</direccionResidencia>
+        <idMunicipioNotificacionCorrespondencia>int</idMunicipioNotificacionCorrespondencia>
+        <direccionNotificacionCorrespondencia>string</direccionNotificacionCorrespondencia>
+        <telefono>string</telefono>
+        <correoElectronico>string</correoElectronico>
+        <idMunicipioLaboral>int</idMunicipioLaboral>
+        <estadoCivil>string</estadoCivil>
+        <idOperador>int</idOperador>
+      </usuario>
+    </ValidarExistenciaUsuario>
+  </soap:Body>
+</soap:Envelope>

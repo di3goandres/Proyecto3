@@ -32,6 +32,7 @@ public partial class shared_UtilidadesSession : System.Web.UI.Page
     {
         try
         {
+            AppLog.Write(" Ingrese consultar Menu de usuarios ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
             List<Operacion> operacionesMenuUsua = new List<Operacion>();
             List<Operacion> operacionesMenuUsuaPerfiles = new List<Operacion>();
             List<Operacion> operacionesMenu = new List<Operacion>();
@@ -110,7 +111,8 @@ public partial class shared_UtilidadesSession : System.Web.UI.Page
             }
             else
             {
-                AppLog.Write("La session ha terminado ", AppLog.LogMessageType.Info, null, "HotelLog");
+                AppLog.Write("La session ha terminado ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+              
 
                 return new
                 {
@@ -120,12 +122,12 @@ public partial class shared_UtilidadesSession : System.Web.UI.Page
         }
         catch (EndSessionException end)
         {
-            AppLog.Write("Su session ha finalizado", AppLog.LogMessageType.Info, end, "HotelLog");
+            AppLog.Write("Su session ha finalizado", AppLog.LogMessageType.Info, end, "OperadorCarpeta");
             return new { OK = "Su session ha finalizado" };
         }
         catch (Exception ex)
         {
-            AppLog.Write(" Error obteniendo el menu del usuario. ", AppLog.LogMessageType.Error, ex, "HotelLog");
+            AppLog.Write(" Error obteniendo el menu del usuario. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
             return new { OK = "se presento un error consultando el menu de usuario." };
         }
     }

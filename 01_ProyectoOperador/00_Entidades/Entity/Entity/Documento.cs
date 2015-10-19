@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Centralizador.Entity
+namespace Operador.Entity
 {
     public class Documento
     {

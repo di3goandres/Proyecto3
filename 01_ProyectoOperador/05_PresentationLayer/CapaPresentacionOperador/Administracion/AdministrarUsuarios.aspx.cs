@@ -173,35 +173,41 @@ public partial class Administracion_AdministrarUsuarios : System.Web.UI.Page
         try
         {
 
-            DaoPerfil perfilDao = new DaoPerfil();
-            GestionUsuario gestor = new GestionUsuario();
+            //DaoPerfil perfilDao = new DaoPerfil();
+            //GestionUsuario gestor = new GestionUsuario();
 
 
-            bool resultado = false;
+            //bool resultado = false;
 
-            resultado = gestor.DeleteUser(ID);
-            GestionRoles gestRoles = new GestionRoles();
+            //resultado = gestor.DeleteUser(ID);
+            //GestionRoles gestRoles = new GestionRoles();
             #region ("Resultado agregar")
-            if (resultado)
-            {
+            //if (resultado)
+            //{
                 
 
-                return new
+            //    return new
+            //    {
+            //        OK = "OK",
+            //        mensaje = "Se ha Eliminado el registro Correctamente"
+
+            //    };
+            //}
+            //else
+            //{
+            //    return new
+            //    {
+            //        OK = "error",
+            //        mensaje = "No se ha podido eliminar el usuario."
+
+            //    };
+            //}
+             return new
                 {
                     OK = "OK",
-                    mensaje = "Se ha Eliminado el registro Correctamente"
+                    mensaje = "Sin implementar"
 
                 };
-            }
-            else
-            {
-                return new
-                {
-                    OK = "error",
-                    mensaje = "No se ha podido eliminar el usuario."
-
-                };
-            }
             #endregion
 
 

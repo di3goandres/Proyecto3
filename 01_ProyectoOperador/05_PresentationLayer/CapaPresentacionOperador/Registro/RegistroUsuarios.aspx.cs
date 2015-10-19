@@ -21,6 +21,47 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 
     }
 
+
+
+    /// <summary>
+    /// Metodo para validar la informacion ingresada por el usuario y sera enviada para validar en el centralizador
+    /// </summary>
+    /// <param name="TIPO_IDENTIFICACION"></param>
+    /// <param name="NUMERO_IDENTIFICACION"></param>
+    /// <returns></returns>
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static object validar(int TIPO_IDENTIFICACION, string NUMERO_IDENTIFICACION) {
+
+        Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
+        var Existe = serviciocentralizador.ValidarPorIdentificacionYTipo(NUMERO_IDENTIFICACION, TIPO_IDENTIFICACION);
+
+        if (Existe)
+        {
+
+            return new
+            {
+                OK = "existe",
+                mensaje = "El usuario se encuentra registrado actualmente en otro operador, Lamentamos las molestias, pronto podras estar con nosotros"
+            };
+
+        }
+        else {
+
+            return new
+            {
+                OK = "OK",
+                mensaje = "Continuaremos con el proceso de registro.",
+                NUMERO_IDENTIFICACION = NUMERO_IDENTIFICACION,
+                TIPO_IDENTIFICACION =TIPO_IDENTIFICACION
+
+            };
+
+        }
+    }
+
+
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public static object CrearUsuario(string NombresI, string NombresII, string ApellidosI, string ApellidosII, int TIPO_IDENTIFICACION, string NUMERO_IDENTIFICACION,
@@ -30,10 +71,37 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
         string telefono,
        string Email, string passwordQuestion, string SecurityAnswer)
     {
-
         string PERFILP = "USUARIOS";
         string Retorno = "";
         string status = "";
+        DateTime fechExpedicion = default(DateTime);
+        DateTime fechNacimiento = default(DateTime);
+        try
+        {
+
+            fechExpedicion = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
+        }
+        catch (Exception ex)
+        {
+            status="error";
+            Retorno = "Ingrese la fecha de expedición Valida";
+
+        }
+
+        try
+        {
+
+            fechNacimiento = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
+        }
+        catch (Exception ex)
+        {
+            status = "error";
+            Retorno = "Ingrese la fecha de nacimiento Valida";
+
+        }
+
+        #region ("Registro")
+
         Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
         Centralizador.Entity.Usuario nuevoUsuario = new Centralizador.Entity.Usuario();
 
@@ -46,9 +114,9 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
         nuevoUsuario.idMunicipioExpedicionDocumento = MunExpedicion;
 
 
-        nuevoUsuario.fechaExpedicion = Convert.ToDateTime(fechaExpedicion,CultureInfo.InvariantCulture);
+        nuevoUsuario.fechaExpedicion = fechExpedicion;
         nuevoUsuario.genero = Genero;
-        nuevoUsuario.fechaNacimiento = Convert.ToDateTime(fechaNacimiento,CultureInfo.InvariantCulture);
+        nuevoUsuario.fechaNacimiento = fechNacimiento;
         nuevoUsuario.idMunicipioNacimiento = MunNacimiento;
 
         nuevoUsuario.idPaisNacionalidad = Nacionalidad;
@@ -61,11 +129,11 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
         nuevoUsuario.correoElectronico = Email;
         nuevoUsuario.telefono = telefono;
         nuevoUsuario.idOperador = 1;
-        var resultado = serviciocentralizador.ValidarExistenciaUsuario(nuevoUsuario);
+        var resultado = serviciocentralizador.ValidarPorIdentificacionYTipo(nuevoUsuario.numeroIdentificacion, nuevoUsuario.idTipoIdentificacion);
 
 
 
-        
+
 
 
 
@@ -95,17 +163,17 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                     case MembershipCreateStatus.Success:
                         Roles.AddUserToRole(NUMERO_IDENTIFICACION, PERFILP);
 
-                      
+
                         var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario);
                         DaoUsuario registroAPP = new DaoUsuario();
                         var datosTIpo = new TipoidentificacionDao().obtenerTipos();
                         var tipoID = datosTIpo.Where(x => x.id_tipoId == TIPO_IDENTIFICACION).Select(x => x.abreviado_tipoId).First();
                         string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
 
-                        var usuaripoRegistrarApp =  registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
-                            "OPERADOR_REPOSITORY_USER",CarpetaInicial );
+                        var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
+                            "OPERADOR_REPOSITORY_USER", CarpetaInicial);
 
-                        #region crear carpeta en el servidor 
+                        #region crear carpeta en el servidor
                         var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
                         fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
@@ -167,16 +235,17 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                     Retorno = "Ingrese por favor una dirección de correo electrónico diferente.";
                 }
             }
-#endregion
+            #endregion
 
         }
         else
         {
 
             Retorno = "El usuario Se encuentra registrado en el centralizador";
-            status = "RegistradoCentralizador"; 
+            status = "RegistradoCentralizador";
 
         }
+        #endregion
         return new
         {
             status = status,
@@ -202,7 +271,15 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                 TIPOIDENTIFICACION = _GetParametrosIdentificacion(),
                 DEPARTAMENTOS = _GetDepartamentos(),
                 Generos = _getGeneros(),
-                Paises = _getPaises()
+                Paises = _getPaises(),
+                aniofechaIngresoMaxima = (DateTime.Now.Year), // se le restan los dias del mes para que de el ultimo del mes anterior
+                mesfechaIngresoMaxima = DateTime.Now.Month - 1,  // por que el datepicker de jquery empieza en cero
+                diafechaIngresoMaxima = DateTime.Now.Day,
+                aniofechaIngresoMinima = (DateTime.Now.AddYears(-100)).Year, // se le restan los dias del mes para que de el ultimo del mes anterior
+                mesfechaIngresoMinima = (DateTime.Now.AddYears(-100)).Month - 1,  // por que el datepicker de jquery empieza en cero
+                diafechaIngresoMinima = (DateTime.Now.AddDays(-1)).Day,
+
+                yearRange = (DateTime.Now.AddYears(-150).Year).ToString() + ":" + (DateTime.Now.Year).ToString(),
 
             };
 

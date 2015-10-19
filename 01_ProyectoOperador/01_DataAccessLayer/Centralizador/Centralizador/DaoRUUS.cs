@@ -10,6 +10,12 @@ namespace Centralizador.DAO
     public class DaoRUUS
     {
 
+        /// <summary>
+        /// valida la existencia del usuario por numero de identificacion y tipo de identificacion.
+        /// </summary>
+        /// <param name="identificacionUsuario"></param>
+        /// <param name="idTipoIdentificacion"></param>
+        /// <returns></returns>
         public bool validarExisteUsuarios(String identificacionUsuario, int idTipoIdentificacion)
         {
 
@@ -45,6 +51,11 @@ namespace Centralizador.DAO
         }
 
 
+        /// <summary>
+        /// Metodo para registrar un usuario en el Centralizador
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         public Usuario RegistrarUsuario(Usuario usuario)
         {
 

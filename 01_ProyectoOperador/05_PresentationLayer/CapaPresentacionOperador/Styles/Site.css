@@ -1589,7 +1589,7 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
 
     .form td input
     {
-        background-color: #A4A4A4;
+        background-color: #fff;
         border: solid 0px transparent;
     }
 

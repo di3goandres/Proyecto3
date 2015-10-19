@@ -19,6 +19,12 @@
   <wsdl:message name="IService1_ValidarExistenciaUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarExistenciaUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_ValidarPorIdentificacionYTipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPorIdentificacionYTipo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ValidarPorIdentificacionYTipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarPorIdentificacionYTipoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="RegistrarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/RegistrarUsuario" message="tns:IService1_RegistrarUsuario_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="ValidarExistenciaUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ValidarExistenciaUsuario" message="tns:IService1_ValidarExistenciaUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ValidarExistenciaUsuarioResponse" message="tns:IService1_ValidarExistenciaUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPorIdentificacionYTipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ValidarPorIdentificacionYTipo" message="tns:IService1_ValidarPorIdentificacionYTipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ValidarPorIdentificacionYTipoResponse" message="tns:IService1_ValidarPorIdentificacionYTipo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -42,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="ValidarExistenciaUsuario">
       <soap:operation soapAction="http://tempuri.org/IService1/ValidarExistenciaUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPorIdentificacionYTipo">
+      <soap:operation soapAction="http://tempuri.org/IService1/ValidarPorIdentificacionYTipo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

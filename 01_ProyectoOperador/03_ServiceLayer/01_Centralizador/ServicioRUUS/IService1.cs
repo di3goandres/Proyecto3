@@ -20,6 +20,10 @@ namespace ServicioRUUS
 
         [OperationContract]
         bool ValidarExistenciaUsuario(Usuario usuario);
+
+
+        [OperationContract]
+        bool ValidarPorIdentificacionYTipo(string numeroIdentificacion, int idTipoIdentificacion);
       
         // TODO: Add your service operations here
     }

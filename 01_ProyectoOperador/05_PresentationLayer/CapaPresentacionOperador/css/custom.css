@@ -423,3 +423,61 @@ div.dataTables_paginate {
       .btn-hamburger { left: auto; right: 12px;}
       .box { height: 1500px; }
 
+
+.tableregistro {
+
+
+}
+
+.h3 {
+    /*font-family: Gill Sans MT, Gill Sans MT, sans-serif;*/
+        font-family: inherit;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        font-size: 0.9em;
+        /*vertical-align: top;*/
+        color: #603813;
+}
+ .tableregistro tr td span
+    {
+        /*font-family: Gill Sans MT, Gill Sans MT, sans-serif;*/
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        font-size: 1.2em;
+        vertical-align: top;
+        color: #603813;
+    }
+
+    .tableregistro tr td label
+    {
+        /*font-family: Gill Sans MT, Gill Sans MT, sans-serif;*/
+        font-family: inherit;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        font-size: 0.9em;
+        /*vertical-align: top;*/
+        color: #603813;
+    }
+
+   
+
+   
+
+   
+
+   
+
+    /*.tableregistro tr td textarea
+    {
+        font-family: Gill Sans MT, Gill Sans MT, sans-serif;
+        font-style: normal;
+        text-align: left;
+        text-decoration: none;
+        border: 1px solid #005795;
+        width: 99%;
+        height: 130px;
+        resize: none;
+    }*/

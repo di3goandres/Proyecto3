@@ -2,25 +2,25 @@
 
 
 $(function () {
-    
-    $("#fechaExpedicion").datepicker({
-        selectOtherMonths: true, changeYear: true
-    } );
-    $("#fechanacimiento").datepicker({
-        selectOtherMonths: true, changeYear: true
-    });
+
+    $("#ValidarRegistro").show();
+    $("#RegistroUsuarios").hide();
+
     var option = '<option value="' + "0" + '">' + "SELECCIONE UNA OPCIÓN" + '</option>';
     ($('#municipiosList').append(option));
     ($('#MNacimiento').append(option));
     ($('#munResidencia').append(option));
-
-
+    ($('#MunicipioExpedicion').append(option));
     TraerInformacionInicial();
     $("#EditarCrear").button().click(function () {
         ValidarEditarAgregar();
     });
 
-   
+    $("#BotonValidarRegistro").button().click(function () {
+        ValidarRegistroUsuario();
+    });
+
+
 });
 
 
@@ -36,6 +36,8 @@ function cargarDatosInicales(jsonrequest) {
     }
     if (data.Ok == "OK") {
         fillSelect($("#TipoIdentificacion"), data.TIPOIDENTIFICACION);
+        fillSelect($("#ValidarTipoIdentificacion"), data.TIPOIDENTIFICACION);
+
         fillSelect($("#PreguntasSecretas"), data.PREGUNTAS);
         fillSelect($("#DepartamentoExpedicion"), data.DEPARTAMENTOS);
         fillSelect($("#Generos"), data.Generos);
@@ -49,21 +51,72 @@ function cargarDatosInicales(jsonrequest) {
 
         fillSelect($("#Nacionalidad"), data.Paises);
 
-        
+        $("#fechaExpedicion").datepicker({
+            selectOtherMonths: true, changeYear: true,
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            showOtherMonths: true,
+            //maxDate: new Date(data.aniofechaIngresoMaxima, data.mesfechaIngresoMaxima, data.diafechaIngresoMaxima),
+            yearRange: data.yearRange
+        });
+        $("#fechanacimiento").datepicker({
+            selectOtherMonths: true, changeYear: true,
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            showOtherMonths: true,
+            //maxDate: new Date(data.aniofechaIngresoMaxima, data.mesfechaIngresoMaxima, data.diafechaIngresoMaxima),
+            yearRange: data.yearRange
+        });
 
-      
+
     }
 }
 
 
+
+function ValidarRegistroUsuario() {
+    var parametros = {};
+    var parametrosNOpasan = {}
+    var n = false;
+
+    n = validarYAgregarDatos("#ValidarTipoIdentificacion", "select", "Seleccione un tipo de identificación", "TIPO_IDENTIFICACION", parametros);
+    if (!n) return;
+    n = validarYAgregarDatos("#ValidarNumeroIdentificacion", "input", "Ingrese el numero de identificacion por favor", "NUMERO_IDENTIFICACION", parametros);
+    if (!n) return;
+
+
+    var Pasar = $.toJSON(parametros);
+    DoJsonRequestBusy(pagina, 'validar', resultadoValidar, Pasar);
+}
+
+function resultadoValidar(jsonrequest) {
+    var data = jsonrequest.d;
+    if (data.OK == "OK") {
+        $("#TipoIdentificacion").val(data.TIPO_IDENTIFICACION);
+        $("#NumeroIdentificacion").val(data.NUMERO_IDENTIFICACION);
+        $('#NumeroIdentificacion').prop('disabled', true);
+        $("#TipoIdentificacion").prop('disabled', true);
+
+
+        AlertUI(".:Información", data.mensaje.toString(), function () {
+            $("#ValidarRegistro").hide();
+            $("#RegistroUsuarios").show();
+            return;
+        });
+    }
+    else {
+        AlertUI(".:Información", data.mensaje.toString());
+        return
+    }
+}
 
 
 function ValidarEditarAgregar() {
     var parametros = {};
     var parametrosNOpasan = {}
     var n = false;
-   
-  
+
+
     n = validarYAgregarDatos("#NombreI", "input", "Ingrese su nombre por favor", "NombresI", parametros);
     if (!n) return;
 
@@ -74,7 +127,7 @@ function ValidarEditarAgregar() {
 
     parametros.ApellidosII = $("#ApellidosII").val();
 
-    
+
     n = validarYAgregarDatos("#TipoIdentificacion", "select", "Seleccione un tipo de identificación", "TIPO_IDENTIFICACION", parametros);
     if (!n) return;
 
@@ -126,7 +179,7 @@ function ValidarEditarAgregar() {
     if (!n) return;
     n = validarYAgregarDatos("#Respuesta", "input", "Ingrese su respuesta a la pregunta secreta, por favor ", "SecurityAnswer", parametros);
     if (!n) return;
-   
+
 
     var Pasar = $.toJSON(parametros);
     DoJsonRequestBusy(pagina, 'CrearUsuario', resultadoGuardarEditar, Pasar);
@@ -154,8 +207,8 @@ function resultadoGuardarEditar(jsonrequest) {
 
 function cambioDepartamento(datOrigen, DataDestino) {
     //secccion para los dropdownlist de las  departamntos y municipios
-    $('#'+datOrigen).change(function () {
-        $('#'+DataDestino).empty(); //se limpia para agregar los datos del departamento seleccionado
+    $('#' + datOrigen).change(function () {
+        $('#' + DataDestino).empty(); //se limpia para agregar los datos del departamento seleccionado
         if ($('#' + datOrigen).val() == "0") {
             $('#' + DataDestino).empty();   //se limpia tambien los datos del municipio 
             var option = '<option value="' + "0" + '">' + "Seleccione una opción" + '</option>';
@@ -177,6 +230,6 @@ function cambioDepartamento(datOrigen, DataDestino) {
 
 function CargarDatosParametricosMunicipio(jsonrequest) {
     var respuesta = jsonrequest.d;
-    fillSelect("#"+respuesta.select, respuesta.items);
+    fillSelect("#" + respuesta.select, respuesta.items);
 
 }

@@ -49,5 +49,27 @@ namespace ServicioRUUS
 
             }
         }
+
+        /// <summary>
+        /// Metodo para consultar
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <param name="idTipoIdentificacion"></param>
+        /// <returns></returns>
+        public bool ValidarPorIdentificacionYTipo(string numeroIdentificacion, int idTipoIdentificacion)
+        {
+
+            try
+            {
+                DaoRUUS dao = new DaoRUUS();
+                return dao.validarExisteUsuarios(numeroIdentificacion, idTipoIdentificacion);
+            }
+            catch
+            {
+
+                return false;
+
+            }
+        }
     }
 }

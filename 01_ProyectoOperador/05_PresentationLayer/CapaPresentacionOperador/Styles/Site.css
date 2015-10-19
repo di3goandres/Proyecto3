@@ -1384,7 +1384,7 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
     -webkit-box-shadow: inset 0px 1px 0px 0px #d9fbbe;
     box-shadow: inset 0px 1px 0px 0px #d9fbbe;
     background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b8e356), color-stop(1, #6f804b) );
-    background: -moz-linear-gradient( center top, #b8e356 5%, #6f804b 100% );
+    background: -moz-linear-gradient( center top, #603813 5%, #a3ef88 100% );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cb842e', endColorstr='#6f804b');
     background-color: #D0FA58;
     -webkit-border-top-left-radius: 22px;

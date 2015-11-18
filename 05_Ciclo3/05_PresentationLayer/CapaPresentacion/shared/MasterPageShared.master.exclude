@@ -1,0 +1,167 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageShared.master.cs" Inherits="shared_MasterPageShared" %>
+
+<!DOCTYPE html>
+<html>
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <div id="up">
+    </div>
+    <title>..: INCODER :..</title>
+    <%--<link href="../Styles/jquery-ui-1.8.23.custom.css" rel="stylesheet" />--%>
+    <link href="../Styles/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+    <link href="../Styles/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="../Styles/AuxStyles.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/jquery/ui.jqgrid.css" rel="stylesheet" />
+    <%--<script src="../js/jquery-1.8.0.min.js" type="text/javascript"></script>--%>
+    <%--  <script src="../js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.4.1.min.js" type="text/javascript"></script>--%>
+    <script src="../js/jquery-1.10.2.js"></script>
+    <script src="../js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="../js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="../js/jquery-1.4.1-vsdoc.js"></script>
+    <script src="../js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
+    <script src="../js/grid.locale-en.js" type="text/javascript"></script>
+    <script src="../js/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="../Scripts/contextMenu.js"></script>
+    <script src="../Scripts/contextMenu.min.js"></script>
+    <script src="../Scripts/Commons2.js"></script>
+    <script src="../Scripts/Common.js"></script>
+    <script src="../Scripts/Master.js"></script>
+    <script src="../Scripts/SuperSubs.js"></script>
+    <script src="../Scripts/SuperFish.js"></script>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="global">
+            <table id="wrap" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr id="tr_header">
+                    <td valign="middle" align="right">
+                        <div class="header">
+                            <div>
+                                <center>
+                                <div id="encabezado">
+                                        <table class="table">
+                                            <tr>
+                                                <td>
+                                                   <%--<img src="../imagenes/cabezote.jpg" style="height:130px; width:400px" />--%>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    </center>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <br />
+                        <div id="menu">
+                            <table border="0" cellspacing="0" cellpadding="0" align="left">
+                                <tr>
+                                    <td>
+                                        <ul id="menu-ul" class="menu-ppl">
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+            <br />
+
+
+
+        </div>
+        <div style="width: 90%; text-align: right">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 100%; text-align: right">
+                        <div style="width: 100%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 100%">
+                                        <label>Ha iniciado sesión como:</label>
+                                        <p></p>
+                                        <asp:Label ID="lblUsuarioLogueado" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td>
+                    <div>
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="pageAdministracion">
+                                                    <div id="content">
+                                                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                                        </asp:ContentPlaceHolder>
+                                                    </div>
+                                                    <br />
+                                                    <br />
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+        <div id="piedepag">
+            INCODER
+        </div>
+    </form>
+
+</body>
+
+<asp:contentplaceholder id="contentScripts" runat="server">
+    </asp:contentplaceholder>
+
+<div id="dialog-message" title="" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span><span id="dialog-message-text" style="text-align: justify;"></span>
+    </p>
+</div>
+<div id="dialog-Busy" title="Procesando" style="display: none">
+    <br />
+    <b>Procesando, Un momento por favor...</b>
+    <br />
+    <br />
+    <div style="text-align: center;">
+        <%-- <span style="float: left; margin: 0 7px 50px 0;"></span><span id="Span1">--%>
+        <img id="ImgProcesando" alt="" border="0" src="../imagenes/ajax-loader2.gif" height="20px" />
+        <%--  </span>--%>
+    </div>
+</div>
+</html>

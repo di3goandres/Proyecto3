@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Incoder.Utilidades;
+
+
+public partial class shared_MasterPageShared : System.Web.UI.MasterPage
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
+        {
+            //var usu = new GestorUsuario().BuscarUsuarioNumeroIdentificacion(HttpContext.Current.User.Identity.Name);
+            //if (usu != null)
+            //    lblUsuarioLogueado.Text = usu.NOMBRE_RAZON_SOCIAL;
+            //else if (HttpContext.Current.User.Identity.Name == "admin")
+                //lblUsuarioLogueado.Text = "Administrador";
+        }
+        //try
+        //{
+
+        //    if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
+        //    {
+        //        string usuarioActual = Thread.CurrentPrincipal.Identity.Name;
+
+        //        MembershipUser u = Membership.GetUser(usuarioActual);
+        //        if (u.LastPasswordChangedDate.Equals(u.CreationDate))
+        //        {
+        //            Response.Redirect("../RestablecerContrasena/AsignarRespuestaSecretaContrasena.aspx", true);
+
+        //        }
+        //        string ola = "";
+
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("../Logoff.aspx");
+        //    }
+
+        //}
+        //catch (ThreadAbortException)
+        //{
+        //}
+        //catch (Exception ex)
+        //{
+
+        //    AppLog.Write(" Error Cargando la pagina de inicio pagina/defaul", AppLog.LogMessageType.Error, ex, "BansatLog");
+        //}
+    }
+}

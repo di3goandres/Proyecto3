@@ -1,0 +1,598 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+body
+{
+    background-color: Black;
+    background: black;
+    font-size: .80em;
+    font-family: "Gill Sans MT" , "Gill Sans MT" , "Segoe UI" , Gill Sans MT, Gill Sans MT, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+}
+
+a:link, a:visited
+{
+    color: Black;
+}
+
+a:hover
+{
+    color: #A5DF00;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #A5DF00;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em; /*height: 25px;*/
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #A1C472;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+    width: 960px;
+    background-color: #fff;
+    margin: 20px auto 0px auto;
+    border: 0px solid #496077;
+}
+
+.header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: #4b6c9e;
+    width: 100%;
+    color: #000;
+    top: 1px;
+    left: 1px;
+    height: 222px;
+}
+
+.header h1
+{
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #f9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+.main
+{
+    padding: 0px 12px;
+    margin: 12px 8px 8px 8px;
+    min-height: 600px;
+}
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink
+{
+    background-color: White;
+    width: 100%;
+    height: 30px;
+}
+
+div.menu
+{
+    padding: 4px 0px 4px 8px;
+}
+
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{
+    background-color: black;
+    border: 1px #4e667d solid;
+    color: #dde4ec;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+div.menu ul li a:hover
+{
+    background-color: #bfcbd6;
+    color: #465c71;
+    text-decoration: none;
+}
+
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+fieldset p
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline
+{
+    display: inline;
+}
+
+legend
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+    text-align:left;
+}
+
+input.passwordEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.loginDisplay
+{
+    background-color: Black;
+    background: black;
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: White;
+}
+
+.loginDisplay a:link
+{
+    color: white;
+}
+
+.loginDisplay a:visited
+{
+    color: white;
+}
+
+.loginDisplay a:hover
+{
+    color: white;
+}
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}
+.widelabel
+{
+    display: -moz-inline-block;
+    border-width: thick;
+    display: inline-block;
+    width: 173px;
+    margin-left: auto;
+    height: 24px;
+}
+#encabezado
+{
+    background-image: url('../Paginas/imagenes/logo_header.png');
+    background-repeat: no-repeat;
+    color: #7D2C83;
+    height: 50px;
+}
+
+
+#page
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+
+#piedepag
+{
+    background-color: black;
+    height: 50px;
+    color: #FFFF00;
+    font-family: Gill Sans MT, Geneva, sans-serif;
+    font-size: 15px;
+    padding: 3px;
+    text-align: center;
+}
+
+.table
+{
+    border: 1 #FF0000;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.table tr td
+{
+    font-family: Gill Sans MT, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: left;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 60%;
+}
+
+.table th
+{
+    font-family: Gill Sans MT, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: left;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 40%;
+    color: #FFFF00;
+}
+
+.table tr td label
+{
+    text-align: left;
+    left: 1px;
+}
+
+.table tr td input
+{
+    font-family: Gill Sans MT, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: left;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 90%;
+}
+
+.table tr td select
+{
+    font-family: Gill Sans MT, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: right;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 90%;
+}
+
+.table tr td textarea
+{
+    font-family: Gill Sans MT, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: right;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 90%;
+}
+
+.check
+{
+    border: 1 #FF0000;
+    text-align: left;
+    width: 90%;
+}
+
+
+/*
+estilos de la tabal de filtros de busqueda
+*/
+.table-filtro-busqueda
+{
+    border: 1 #FF0000;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.table-filtro-busqueda tr td
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: right;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 20%;
+}
+.table-filtro-busqueda tr td input
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: left;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 90%;
+}
+
+.table-filtro-busqueda tr td select
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    text-align: right;
+    text-decoration: none;
+    border: 1 #FF0000;
+    width: 91%;
+}
+.table-filtro-busqueda tr td input[type="button"]
+{
+    text-align: center;
+    width: 70%;
+}
+.titulo div
+{
+    position: relative;
+    top: 12px;
+    text-align: center;
+}
+
+
+
+
+/*
+estilos Ajustados
+*/
+
+
+DIV.content-container
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.main-title
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    color: #286ED0;
+    text-align: center;
+    width: 100%;
+}
+
+.acdivocabutton-bar
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 20px;
+    padding: 5px 5px 5px 5px;
+    text-align: left;
+    background-color: White;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+
+/**  otro ejemplo de menú */
+
+a
+{
+    display: block;
+    text-decoration: none;
+    color: #EFFBEF;
+    padding: 5px;
+}
+
+
+
+ul
+{
+    width: 100%;
+    height: 28px;
+}
+
+ul, li
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav
+{
+    font-family: 'Arial' , sans-serif;
+    background: url('../imagenes/menuBackgroudn.png') repeat-x 0 0; /*url('http://i56.tinypic.com/2vi05cj_th.jpg') repeat-x 0 0;*/
+}
+
+#nav li
+{
+    float: left;
+    position: relative;
+    width: 125px;
+    font-size: 14px;
+    font-variant: small-caps;
+    border-top: 1px solid #3ADF00;
+    border-bottom: 1px solid #3ADF00;
+}
+
+.submenu
+{
+    display: none;
+    position: absolute;
+    left: -1px;
+    border: none;
+    height: auto;
+    background: none;
+}
+
+#nav .submenu li
+{
+    float: none;
+    position: static;
+    margin: 0;
+    font-size: 11px;
+    font-variant: normal;
+    border: 1px solid #3ADF00;
+    border-top: none;
+    width: 124px;
+}
+
+#nav .submenu li a
+{
+    color: #EFFBEF;
+    background: url('../imagenes/menuBackgroudn.png') repeat-x 0 0;
+    width: 114px;
+    height: 16px;
+}
+/*fin ejemplo*/
+
+.collapsePanelHeader
+{
+	width: 100%;
+	height: 30px;
+	background-image: url(../imagenes/bg-menu-main.png);
+	background-repeat: repeat-x;
+	color: #FFF;
+	font-weight: bold;
+}
+.collapsePanelHeader1
+{
+	width: 100%;
+	height: 30px;
+	background-image: url(../imagenes/bg-menu-main1.png);
+	background-repeat: repeat-x;
+	color: #000;
+	font-weight: bold;
+}
+.collapsePanelHeader2
+{
+	width: 100%;
+	height: 25px;
+	background-image: url(../imagenes/menuBackgroudn.png);
+	background-repeat: repeat-x;
+	color: #FFFFFF;
+}body {
+}

@@ -1,0 +1,262 @@
+@font-face {
+	font-family: 'axa';
+	src:url('../fonts/axa.eot?dpzsfa');
+	src:url('../fonts/axa.eot?#iefixdpzsfa') format('embedded-opentype'),
+		url('../fonts/axa.ttf?dpzsfa') format('truetype'),
+		url('../fonts/axa.woff?dpzsfa') format('woff'),
+		url('../fonts/axa.svg?dpzsfa#axa') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+i {
+	font-family: 'axa';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-axa_01:before {
+	content: "\e600";
+}
+.icon-axa_02:before {
+	content: "\e601";
+}
+.icon-axa_03:before {
+	content: "\e602";
+}
+.icon-axa_04:before {
+	content: "\e603";
+}
+.icon-axa_05:before {
+	content: "\e604";
+}
+.icon-axa_06:before {
+	content: "\e605";
+}
+.icon-axa_07:before {
+	content: "\e606";
+}
+.icon-axa_08:before {
+	content: "\e607";
+}
+.icon-axa_09:before {
+	content: "\e608";
+}
+.icon-axa_10:before {
+	content: "\e609";
+}
+.icon-axa_11:before {
+	content: "\e60a";
+}
+.icon-axa_12:before {
+	content: "\e60b";
+}
+.icon-axa_13:before {
+	content: "\e60c";
+}
+.icon-axa_14:before {
+	content: "\e60d";
+}
+.icon-axa_15:before {
+	content: "\e60e";
+}
+.icon-axa_16:before {
+	content: "\e60f";
+}
+.icon-axa_17:before {
+	content: "\e610";
+}
+.icon-axa_18:before {
+	content: "\e611";
+}
+.icon-axa_19:before {
+	content: "\e612";
+}
+.icon-axa_20:before {
+	content: "\e613";
+}
+.icon-axa_21:before {
+	content: "\e614";
+}
+.icon-axa_22:before {
+	content: "\e615";
+}
+.icon-axa_23:before {
+	content: "\e616";
+}
+.icon-axa_24:before {
+	content: "\e617";
+}
+.icon-axa_25:before {
+	content: "\e618";
+}
+.icon-axa_26:before {
+	content: "\e619";
+}
+.icon-axa_27:before {
+	content: "\e61a";
+}
+.icon-axa_28:before {
+	content: "\e61b";
+}
+.icon-axa_29:before {
+	content: "\e61c";
+}
+.icon-axa_30:before {
+	content: "\e61d";
+}
+.icon-axa_31:before {
+	content: "\e61e";
+}
+.icon-axa_32:before {
+	content: "\e61f";
+}
+.icon-axa_33:before {
+	content: "\e620";
+}
+.icon-axa_34:before {
+	content: "\e621";
+}
+.icon-axa_35:before {
+	content: "\e622";
+}
+.icon-axa_36:before {
+	content: "\e623";
+}
+.icon-axa_37:before {
+	content: "\e624";
+}
+.icon-axa_38:before {
+	content: "\e625";
+}
+.icon-axa_39:before {
+	content: "\e626";
+}
+.icon-axa_40:before {
+	content: "\e627";
+}
+.icon-axa_41:before {
+	content: "\e628";
+}
+.icon-axa_42:before {
+	content: "\e629";
+}
+.icon-axa_43:before {
+	content: "\e62a";
+}
+.icon-axa_44:before {
+	content: "\e62b";
+}
+.icon-axa_45:before {
+	content: "\e62c";
+}
+.icon-axa_46:before {
+	content: "\e62d";
+}
+.icon-axa_47:before {
+	content: "\e62e";
+}
+.icon-axa_48:before {
+	content: "\e62f";
+}
+.icon-axa_49:before {
+	content: "\e630";
+}
+.icon-axa_50:before {
+	content: "\e631";
+}
+.icon-axa_51:before {
+	content: "\e632";
+}
+.icon-axa_52:before {
+	content: "\e633";
+}
+.icon-axa_54:before {
+	content: "\e634";
+}
+.icon-axa_55:before {
+	content: "\e635";
+}
+.icon-axa_56:before {
+	content: "\e636";
+}
+.icon-axa_57:before {
+	content: "\e637";
+}
+.icon-axa_58:before {
+	content: "\e638";
+}
+.icon-axa_59:before {
+	content: "\e639";
+}
+.icon-axa_60:before {
+	content: "\e63a";
+}
+.icon-axa_61:before {
+	content: "\e63b";
+}
+.icon-axa_62:before {
+	content: "\e63c";
+}
+.icon-axa_63:before {
+	content: "\e63d";
+}
+.icon-axa_64:before {
+	content: "\e63e";
+}
+.icon-axa_65:before {
+	content: "\e63f";
+}
+.icon-axa_66:before {
+	content: "\e640";
+}
+.icon-axa_67:before {
+	content: "\e641";
+}
+.icon-axa_68:before {
+	content: "\e642";
+}
+.icon-axa_69:before {
+	content: "\e643";
+}
+.icon-axa_70:before {
+	content: "\e644";
+}
+.icon-axa_71:before {
+	content: "\e645";
+}
+.icon-axa_72:before {
+	content: "\e646";
+}
+.icon-axa_73:before {
+	content: "\e647";
+}
+.icon-axa_74:before {
+	content: "\e648";
+}
+.icon-axa_75:before {
+	content: "\e649";
+}
+.icon-axa_76:before {
+	content: "\e64a";
+}
+.icon-axa_77:before {
+	content: "\e64b";
+}
+.icon-axa_78:before {
+	content: "\e64c";
+}
+.icon-axa_79:before {
+	content: "\e64d";
+}
+.icon-axa_80:before {
+	content: "\e64e";
+}

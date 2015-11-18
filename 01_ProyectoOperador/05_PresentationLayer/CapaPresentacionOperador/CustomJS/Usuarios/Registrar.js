@@ -187,12 +187,13 @@ function ValidarEditarAgregar() {
 
 function resultadoGuardarEditar(jsonrequest) {
     var data = jsonrequest.d;
-    if (data.Ok == "OK") {
+    if (data.status == "OK") {
         $("#EditarAgregar").dialog('close');
         AlertUI(".:Información", data.mensaje.toString(), function () {
             document.location.target = "self";
             document.location.href = '../Login.aspx';
             return;
+           
         });
     }
     else {

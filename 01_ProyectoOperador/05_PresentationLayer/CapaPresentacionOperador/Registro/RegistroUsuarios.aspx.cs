@@ -71,186 +71,208 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
         string telefono,
        string Email, string passwordQuestion, string SecurityAnswer)
     {
-        string PERFILP = "USUARIOS";
-        string Retorno = "";
-        string status = "";
-        DateTime fechExpedicion = default(DateTime);
-        DateTime fechNacimiento = default(DateTime);
-        try
-        {
-
-            fechExpedicion = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
-        }
-        catch (Exception ex)
-        {
-            status="error";
-            Retorno = "Ingrese la fecha de expedición Valida";
-
-        }
 
         try
         {
-
-            fechNacimiento = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
-        }
-        catch (Exception ex)
-        {
-            status = "error";
-            Retorno = "Ingrese la fecha de nacimiento Valida";
-
-        }
-
-        #region ("Registro")
-
-        Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
-        Centralizador.Entity.Usuario nuevoUsuario = new Centralizador.Entity.Usuario();
-
-        nuevoUsuario.primerNombre = NombresI;
-        nuevoUsuario.segundoNombre = NombresII;
-        nuevoUsuario.segundoApellido = ApellidosII;
-        nuevoUsuario.primerApellido = ApellidosI;
-        nuevoUsuario.idTipoIdentificacion = TIPO_IDENTIFICACION;
-        nuevoUsuario.numeroIdentificacion = NUMERO_IDENTIFICACION;
-        nuevoUsuario.idMunicipioExpedicionDocumento = MunExpedicion;
-
-
-        nuevoUsuario.fechaExpedicion = fechExpedicion;
-        nuevoUsuario.genero = Genero;
-        nuevoUsuario.fechaNacimiento = fechNacimiento;
-        nuevoUsuario.idMunicipioNacimiento = MunNacimiento;
-
-        nuevoUsuario.idPaisNacionalidad = Nacionalidad;
-        nuevoUsuario.idMunicipioResidencia = munResidencia;
-        nuevoUsuario.idMunicipioNotificacionCorrespondencia = munResidencia;
-        nuevoUsuario.direccionNotificacionCorrespondencia = DireccionResidencia;
-        nuevoUsuario.direccionResidencia = DireccionResidencia;
-        nuevoUsuario.idMunicipioLaboral = munResidencia;
-        nuevoUsuario.estadoCivil = "S";
-        nuevoUsuario.correoElectronico = Email;
-        nuevoUsuario.telefono = telefono;
-        nuevoUsuario.idOperador = 1;
-        var resultado = serviciocentralizador.ValidarPorIdentificacionYTipo(nuevoUsuario.numeroIdentificacion, nuevoUsuario.idTipoIdentificacion);
-
-
-
-
-
-
-
-        if (!resultado)
-        {
-
-            #region creacion de usuario en en sistema operador
-            //
-
-
-            MembershipUser a = Membership.GetUser(NUMERO_IDENTIFICACION);
-
-            string porEmail = string.Empty;
-            porEmail = Membership.GetUserNameByEmail(Email);
-            if (a == null && string.IsNullOrEmpty(porEmail))
+            string PERFILP = "USUARIOS";
+            string Retorno = "";
+            string status = "";
+            DateTime fechExpedicion = default(DateTime);
+            DateTime fechNacimiento = default(DateTime);
+            try
             {
-                #region ("Creacion")
-                MembershipCreateStatus createStatus;
-                MembershipUser newUser =
-                           Membership.CreateUser(NUMERO_IDENTIFICACION, NUMERO_IDENTIFICACION,
-                                                 Email, passwordQuestion,
-                                                 SecurityAnswer, true,
-                                                 out createStatus);
 
-                switch (createStatus)
+                fechExpedicion = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                AppLog.Write(" Error convirtiendo la fecha de expedicionInicial. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+                status = "error";
+                Retorno = "Ingrese la fecha de expedición Valida";
+
+            }
+
+            try
+            {
+
+                fechNacimiento = Convert.ToDateTime(fechaExpedicion, CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                AppLog.Write(" Error convirtiendo la fecha de Nacimiento. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+
+                status = "error";
+                Retorno = "Ingrese la fecha de nacimiento Valida";
+
+            }
+
+            #region ("Registro")
+
+            Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
+            Centralizador.Entity.Usuario nuevoUsuario = new Centralizador.Entity.Usuario();
+
+            nuevoUsuario.primerNombre = NombresI;
+            nuevoUsuario.segundoNombre = NombresII;
+            nuevoUsuario.segundoApellido = ApellidosII;
+            nuevoUsuario.primerApellido = ApellidosI;
+            nuevoUsuario.idTipoIdentificacion = TIPO_IDENTIFICACION;
+            nuevoUsuario.numeroIdentificacion = NUMERO_IDENTIFICACION;
+            nuevoUsuario.idMunicipioExpedicionDocumento = MunExpedicion;
+
+
+            nuevoUsuario.fechaExpedicion = fechExpedicion;
+            nuevoUsuario.genero = Genero;
+            nuevoUsuario.fechaNacimiento = fechNacimiento;
+            nuevoUsuario.idMunicipioNacimiento = MunNacimiento;
+
+            nuevoUsuario.idPaisNacionalidad = Nacionalidad;
+            nuevoUsuario.idMunicipioResidencia = munResidencia;
+            nuevoUsuario.idMunicipioNotificacionCorrespondencia = munResidencia;
+            nuevoUsuario.direccionNotificacionCorrespondencia = DireccionResidencia;
+            nuevoUsuario.direccionResidencia = DireccionResidencia;
+            nuevoUsuario.idMunicipioLaboral = munResidencia;
+            nuevoUsuario.estadoCivil = "S";
+            nuevoUsuario.correoElectronico = Email;
+            nuevoUsuario.telefono = telefono;
+            nuevoUsuario.idOperador = 1;
+            AppLog.Write(" inicio consulta si existe el usuario. ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+
+            var resultado = serviciocentralizador.ValidarPorIdentificacionYTipo(nuevoUsuario.numeroIdentificacion, nuevoUsuario.idTipoIdentificacion);
+
+            AppLog.Write(" fin consulta si existe el usuario Resutlado:" + resultado.ToString(), AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+
+
+
+
+
+
+            if (!resultado)
+            {
+
+                #region creacion de usuario en en sistema operador
+                //
+
+
+                MembershipUser a = Membership.GetUser(NUMERO_IDENTIFICACION);
+
+                string porEmail = string.Empty;
+                porEmail = Membership.GetUserNameByEmail(Email);
+                if (a == null && string.IsNullOrEmpty(porEmail))
                 {
-                    case MembershipCreateStatus.Success:
-                        Roles.AddUserToRole(NUMERO_IDENTIFICACION, PERFILP);
+                    #region ("Creacion")
+                    MembershipCreateStatus createStatus;
+                    MembershipUser newUser =
+                               Membership.CreateUser(NUMERO_IDENTIFICACION, NUMERO_IDENTIFICACION,
+                                                     Email, passwordQuestion,
+                                                     SecurityAnswer, true,
+                                                     out createStatus);
+
+                    switch (createStatus)
+                    {
+                        case MembershipCreateStatus.Success:
+                            Roles.AddUserToRole(NUMERO_IDENTIFICACION, PERFILP);
 
 
-                        var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario);
-                        DaoUsuario registroAPP = new DaoUsuario();
-                        var datosTIpo = new TipoidentificacionDao().obtenerTipos();
-                        var tipoID = datosTIpo.Where(x => x.id_tipoId == TIPO_IDENTIFICACION).Select(x => x.abreviado_tipoId).First();
-                        string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
+                            var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario);
+                            DaoUsuario registroAPP = new DaoUsuario();
+                            var datosTIpo = new TipoidentificacionDao().obtenerTipos();
+                            var tipoID = datosTIpo.Where(x => x.id_tipoId == TIPO_IDENTIFICACION).Select(x => x.abreviado_tipoId).First();
+                            string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
+                            AppLog.Write(" Inicio Creacion Usuario" , AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
-                        var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
-                            "OPERADOR_REPOSITORY_USER", CarpetaInicial);
+                            var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
+                                "OPERADOR_REPOSITORY_USER", CarpetaInicial);
+                            AppLog.Write(" Fin Creacion Usuario", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
-                        #region crear carpeta en el servidor
-                        var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+                            #region crear carpeta en el servidor
+                            var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
-                        fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
-                        #endregion
-
-
-                        #region Enviar Correo de confirmacion de creacion de cuenta.
-                        var enviar = new Correos().EnviarEmailCreacionDeUsuario(Email);
-                        #endregion
+                            fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
+                            #endregion
 
 
+                            #region Enviar Correo de confirmacion de creacion de cuenta.
+                            var enviar = new Correos().EnviarEmailCreacionDeUsuario(Email);
+                            #endregion
 
 
-                        status = "OK";
-                        Retorno = "La cuenta del usuario, ha sido creada con exito";
 
-                        break;
 
-                    case MembershipCreateStatus.DuplicateUserName:
+                            status = "OK";
+                            Retorno = "La cuenta del usuario, ha sido creada con exito";
+
+                            break;
+
+                        case MembershipCreateStatus.DuplicateUserName:
+                            status = "Existe";
+                            Retorno = "Ya existe un usuario con ese nombre de usuario";
+                            //CreateAccountResults.Text = "Ya existe un usuario con ese nombre de usuario";//"There already exists a user with this username.";
+                            break;
+
+                        case MembershipCreateStatus.DuplicateEmail:
+                            status = "Duplicado";
+                            Retorno = "Ya existe un usuario con este email.";// "There already exists a user with this email address.";
+                            break;
+
+                        case MembershipCreateStatus.InvalidEmail:
+                            status = "email";
+                            Retorno = "La dirección de correo electrónico que nos ha facilitado en inválida.";//"There email address you provided in invalid.";
+                            break;
+
+                        case MembershipCreateStatus.InvalidPassword:
+                            status = "password";
+                            Retorno = "La contraseña que ha proporcionado no es válido. Debe ser de siete caracteres y tener al menos un carácter no alfanumérico.";//"The password you provided is invalid. It must be seven characters long and have at least one non-alphanumeric character.";
+                            break;
+
+                        default:
+                            status = "Error";
+                            Retorno = "Hubo un error desconocido, la cuenta de usuario no fue creado.";//"There was an unknown error; the user account was NOT created.";
+                            break;
+                    }
+                    #endregion
+                }
+                else
+                {
+                    if (a != null)
+                    {
                         status = "Existe";
-                        Retorno = "Ya existe un usuario con ese nombre de usuario";
-                        //CreateAccountResults.Text = "Ya existe un usuario con ese nombre de usuario";//"There already exists a user with this username.";
-                        break;
+                        Retorno = "El nombre de usuario ya existe.";
+                    }
+                    //        CreateAccountResults.Text = "El usuario ya existe";
 
-                    case MembershipCreateStatus.DuplicateEmail:
-                        status = "Duplicado";
-                        Retorno = "Ya existe un usuario con este email.";// "There already exists a user with this email address.";
-                        break;
-
-                    case MembershipCreateStatus.InvalidEmail:
-                        status = "email";
-                        Retorno = "La dirección de correo electrónico que nos ha facilitado en inválida.";//"There email address you provided in invalid.";
-                        break;
-
-                    case MembershipCreateStatus.InvalidPassword:
-                        status = "password";
-                        Retorno = "La contraseña que ha proporcionado no es válido. Debe ser de siete caracteres y tener al menos un carácter no alfanumérico.";//"The password you provided is invalid. It must be seven characters long and have at least one non-alphanumeric character.";
-                        break;
-
-                    default:
-                        status = "Error";
-                        Retorno = "Hubo un error desconocido, la cuenta de usuario no fue creado.";//"There was an unknown error; the user account was NOT created.";
-                        break;
+                    if (!string.IsNullOrEmpty(porEmail))
+                    {
+                        status = "EmailCambiar";
+                        Retorno = "Ingrese por favor una dirección de correo electrónico diferente.";
+                    }
                 }
                 #endregion
+
             }
             else
             {
-                if (a != null)
-                {
-                    status = "Existe";
-                    Retorno = "El nombre de usuario ya existe.";
-                }
-                //        CreateAccountResults.Text = "El usuario ya existe";
 
-                if (!string.IsNullOrEmpty(porEmail))
-                {
-                    status = "EmailCambiar";
-                    Retorno = "Ingrese por favor una dirección de correo electrónico diferente.";
-                }
+                Retorno = "El usuario Se encuentra registrado en el centralizador";
+                status = "RegistradoCentralizador";
+
             }
             #endregion
-
+            return new
+            {
+                status = status,
+                mensaje = Retorno
+            };
         }
-        else
-        {
+        catch (Exception ex) {
 
-            Retorno = "El usuario Se encuentra registrado en el centralizador";
-            status = "RegistradoCentralizador";
-
+            AppLog.Write(" Error Creacion de usuario en el sistema " , AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            return new
+            {
+                status = "error",
+                mensaje = "Ha ocurrido un error inesperado intentelo nuevamente o mas tarde"
+            };
+        
         }
-        #endregion
-        return new
-        {
-            status = status,
-            mensaje = Retorno
-        };
     }
 
 

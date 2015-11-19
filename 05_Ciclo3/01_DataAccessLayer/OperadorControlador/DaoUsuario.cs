@@ -19,7 +19,9 @@ namespace Uniandes.Controlador
         /// <param name="repositorioKey"></param>
         /// <param name="carpetaUsuarioInicial"></param>
         /// <returns></returns>
-        public int RegistrarUsuario(String app, String centralizador, String repositorioKey, String carpetaUsuarioInicial)
+        public int RegistrarUsuario(String app, String centralizador, String repositorioKey, 
+            String carpetaUsuarioInicial, String nombres,
+            String Apellidos, int tipoIdentificacion, String numeroIdentificacion)
         {
 
             try
@@ -33,7 +35,10 @@ namespace Uniandes.Controlador
                 cmd.Parameters.Add("@userIdCentralizador", SqlDbType.VarChar);
                 cmd.Parameters.Add("@repositorioKey", SqlDbType.VarChar);
                 cmd.Parameters.Add("@carpetaUsuarioInicial", SqlDbType.VarChar);
-
+                cmd.Parameters.Add("@Nombres", SqlDbType.VarChar);
+                cmd.Parameters.Add("@Apellidos", SqlDbType.VarChar);
+                cmd.Parameters.Add("@tipoIdentificacion ", SqlDbType.Int);
+                cmd.Parameters.Add("@numeroIdentificacion", SqlDbType.VarChar);
 
 
 
@@ -41,10 +46,15 @@ namespace Uniandes.Controlador
 
                 #region(Pasar parametros del procedimiento almacenado)
 
-                cmd.Parameters["@userIdApplicacion"].Value /*   */= app;
-                cmd.Parameters["@userIdCentralizador"].Value/* */ = centralizador;
-                cmd.Parameters["@repositorioKey"].Value /*   */= repositorioKey;
+                cmd.Parameters["@userIdApplicacion"].Value /*     */= app;
+                cmd.Parameters["@userIdCentralizador"].Value/*   */ = centralizador;
+                cmd.Parameters["@repositorioKey"].Value /*        */= repositorioKey;
                 cmd.Parameters["@carpetaUsuarioInicial"].Value/* */ = carpetaUsuarioInicial;
+
+                cmd.Parameters["@Nombres"].Value/*               */ = nombres;
+                cmd.Parameters["@Apellidos"].Value/*             */ = Apellidos;
+                cmd.Parameters["@tipoIdentificacion"].Value/*    */ = tipoIdentificacion;
+                cmd.Parameters["@numeroIdentificacion"].Value/*  */ = numeroIdentificacion;
 
 
 
@@ -89,6 +99,14 @@ namespace Uniandes.Controlador
                     retorno.userIdApplicacion = cUsuarios.First().userIdApplicacion;
                     retorno.userIdCentralizador = cUsuarios.First().userIdCentralizador;
                     retorno.CarpetaInicial = cUsuarios.First().carpetaUsuarioInicial;
+
+                    retorno.Nombres = cUsuarios.First().Nombres;
+                    retorno.Activo = cUsuarios.First().Activo;
+                    retorno.Apellidos = cUsuarios.First().Apellidos;
+                    retorno.tipoIdentificacion = cUsuarios.First().tipoIdentificacion;
+                    retorno.numeroIdentificacion = cUsuarios.First().numeroIdentificacion;
+
+
 
                 }
             }

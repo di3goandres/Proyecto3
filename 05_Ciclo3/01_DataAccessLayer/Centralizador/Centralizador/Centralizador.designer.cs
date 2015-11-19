@@ -30,12 +30,12 @@ namespace Centralizador.DAO
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
-    partial void Inserttbl011_SoapMessage(tbl011_SoapMessage instance);
-    partial void Updatetbl011_SoapMessage(tbl011_SoapMessage instance);
-    partial void Deletetbl011_SoapMessage(tbl011_SoapMessage instance);
     partial void Inserttb001_PAIS(tb001_PAIS instance);
     partial void Updatetb001_PAIS(tb001_PAIS instance);
     partial void Deletetb001_PAIS(tb001_PAIS instance);
+    partial void Inserttbl011_SoapMessage(tbl011_SoapMessage instance);
+    partial void Updatetbl011_SoapMessage(tbl011_SoapMessage instance);
+    partial void Deletetbl011_SoapMessage(tbl011_SoapMessage instance);
     partial void Inserttb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
     partial void Updatetb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
     partial void Deletetb002_DEPARTAMENTO(tb002_DEPARTAMENTO instance);
@@ -89,19 +89,19 @@ namespace Centralizador.DAO
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tbl011_SoapMessage> tbl011_SoapMessage
-		{
-			get
-			{
-				return this.GetTable<tbl011_SoapMessage>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tb001_PAIS> tb001_PAIS
 		{
 			get
 			{
 				return this.GetTable<tb001_PAIS>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl011_SoapMessage> tbl011_SoapMessage
+		{
+			get
+			{
+				return this.GetTable<tbl011_SoapMessage>();
 			}
 		}
 		
@@ -175,6 +175,172 @@ namespace Centralizador.DAO
 			{
 				return this.GetTable<tbl010_TipoOperaciones>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb001_PAIS")]
+	public partial class tb001_PAIS : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPais;
+		
+		private string _nombrePais;
+		
+		private string _codigoDane;
+		
+		private EntitySet<tb002_DEPARTAMENTO> _tb002_DEPARTAMENTO;
+		
+		private EntitySet<tb005_RRUS> _tb005_RRUS;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPaisChanging(int value);
+    partial void OnidPaisChanged();
+    partial void OnnombrePaisChanging(string value);
+    partial void OnnombrePaisChanged();
+    partial void OncodigoDaneChanging(string value);
+    partial void OncodigoDaneChanged();
+    #endregion
+		
+		public tb001_PAIS()
+		{
+			this._tb002_DEPARTAMENTO = new EntitySet<tb002_DEPARTAMENTO>(new Action<tb002_DEPARTAMENTO>(this.attach_tb002_DEPARTAMENTO), new Action<tb002_DEPARTAMENTO>(this.detach_tb002_DEPARTAMENTO));
+			this._tb005_RRUS = new EntitySet<tb005_RRUS>(new Action<tb005_RRUS>(this.attach_tb005_RRUS), new Action<tb005_RRUS>(this.detach_tb005_RRUS));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPais", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idPais
+		{
+			get
+			{
+				return this._idPais;
+			}
+			set
+			{
+				if ((this._idPais != value))
+				{
+					this.OnidPaisChanging(value);
+					this.SendPropertyChanging();
+					this._idPais = value;
+					this.SendPropertyChanged("idPais");
+					this.OnidPaisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombrePais", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombrePais
+		{
+			get
+			{
+				return this._nombrePais;
+			}
+			set
+			{
+				if ((this._nombrePais != value))
+				{
+					this.OnnombrePaisChanging(value);
+					this.SendPropertyChanging();
+					this._nombrePais = value;
+					this.SendPropertyChanged("nombrePais");
+					this.OnnombrePaisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigoDane", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string codigoDane
+		{
+			get
+			{
+				return this._codigoDane;
+			}
+			set
+			{
+				if ((this._codigoDane != value))
+				{
+					this.OncodigoDaneChanging(value);
+					this.SendPropertyChanging();
+					this._codigoDane = value;
+					this.SendPropertyChanged("codigoDane");
+					this.OncodigoDaneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb001_PAIS_tb002_DEPARTAMENTO", Storage="_tb002_DEPARTAMENTO", ThisKey="idPais", OtherKey="idPais")]
+		public EntitySet<tb002_DEPARTAMENTO> tb002_DEPARTAMENTO
+		{
+			get
+			{
+				return this._tb002_DEPARTAMENTO;
+			}
+			set
+			{
+				this._tb002_DEPARTAMENTO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb001_PAIS_tb005_RRUS", Storage="_tb005_RRUS", ThisKey="idPais", OtherKey="idPaisNacionalidad")]
+		public EntitySet<tb005_RRUS> tb005_RRUS
+		{
+			get
+			{
+				return this._tb005_RRUS;
+			}
+			set
+			{
+				this._tb005_RRUS.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tb002_DEPARTAMENTO(tb002_DEPARTAMENTO entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb001_PAIS = this;
+		}
+		
+		private void detach_tb002_DEPARTAMENTO(tb002_DEPARTAMENTO entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb001_PAIS = null;
+		}
+		
+		private void attach_tb005_RRUS(tb005_RRUS entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb001_PAIS = this;
+		}
+		
+		private void detach_tb005_RRUS(tb005_RRUS entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb001_PAIS = null;
 		}
 	}
 	
@@ -463,144 +629,6 @@ namespace Centralizador.DAO
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb001_PAIS")]
-	public partial class tb001_PAIS : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idPais;
-		
-		private string _nombrePais;
-		
-		private string _codigoDane;
-		
-		private EntitySet<tb002_DEPARTAMENTO> _tb002_DEPARTAMENTO;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidPaisChanging(int value);
-    partial void OnidPaisChanged();
-    partial void OnnombrePaisChanging(string value);
-    partial void OnnombrePaisChanged();
-    partial void OncodigoDaneChanging(string value);
-    partial void OncodigoDaneChanged();
-    #endregion
-		
-		public tb001_PAIS()
-		{
-			this._tb002_DEPARTAMENTO = new EntitySet<tb002_DEPARTAMENTO>(new Action<tb002_DEPARTAMENTO>(this.attach_tb002_DEPARTAMENTO), new Action<tb002_DEPARTAMENTO>(this.detach_tb002_DEPARTAMENTO));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPais", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idPais
-		{
-			get
-			{
-				return this._idPais;
-			}
-			set
-			{
-				if ((this._idPais != value))
-				{
-					this.OnidPaisChanging(value);
-					this.SendPropertyChanging();
-					this._idPais = value;
-					this.SendPropertyChanged("idPais");
-					this.OnidPaisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombrePais", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nombrePais
-		{
-			get
-			{
-				return this._nombrePais;
-			}
-			set
-			{
-				if ((this._nombrePais != value))
-				{
-					this.OnnombrePaisChanging(value);
-					this.SendPropertyChanging();
-					this._nombrePais = value;
-					this.SendPropertyChanged("nombrePais");
-					this.OnnombrePaisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigoDane", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string codigoDane
-		{
-			get
-			{
-				return this._codigoDane;
-			}
-			set
-			{
-				if ((this._codigoDane != value))
-				{
-					this.OncodigoDaneChanging(value);
-					this.SendPropertyChanging();
-					this._codigoDane = value;
-					this.SendPropertyChanged("codigoDane");
-					this.OncodigoDaneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb001_PAIS_tb002_DEPARTAMENTO", Storage="_tb002_DEPARTAMENTO", ThisKey="idPais", OtherKey="idPais")]
-		public EntitySet<tb002_DEPARTAMENTO> tb002_DEPARTAMENTO
-		{
-			get
-			{
-				return this._tb002_DEPARTAMENTO;
-			}
-			set
-			{
-				this._tb002_DEPARTAMENTO.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tb002_DEPARTAMENTO(tb002_DEPARTAMENTO entity)
-		{
-			this.SendPropertyChanging();
-			entity.tb001_PAIS = this;
-		}
-		
-		private void detach_tb002_DEPARTAMENTO(tb002_DEPARTAMENTO entity)
-		{
-			this.SendPropertyChanging();
-			entity.tb001_PAIS = null;
 		}
 	}
 	
@@ -1320,7 +1348,7 @@ namespace Centralizador.DAO
 		
 		private int _idMunicipioNacimiento;
 		
-		private string _idPaisNacionalidad;
+		private int _idPaisNacionalidad;
 		
 		private int _idMunicipioResidencia;
 		
@@ -1338,7 +1366,9 @@ namespace Centralizador.DAO
 		
 		private string _estadoCivil;
 		
-		private int _idOperador;
+		private System.Nullable<int> _idOperador;
+		
+		private EntityRef<tb001_PAIS> _tb001_PAIS;
 		
 		private EntityRef<tb003_MUNICIPIO> _tb003_MUNICIPIO;
 		
@@ -1384,7 +1414,7 @@ namespace Centralizador.DAO
     partial void OnfechaNacimientoChanged();
     partial void OnidMunicipioNacimientoChanging(int value);
     partial void OnidMunicipioNacimientoChanged();
-    partial void OnidPaisNacionalidadChanging(string value);
+    partial void OnidPaisNacionalidadChanging(int value);
     partial void OnidPaisNacionalidadChanged();
     partial void OnidMunicipioResidenciaChanging(int value);
     partial void OnidMunicipioResidenciaChanged();
@@ -1402,12 +1432,13 @@ namespace Centralizador.DAO
     partial void OnidMunicipioLaboralChanged();
     partial void OnestadoCivilChanging(string value);
     partial void OnestadoCivilChanged();
-    partial void OnidOperadorChanging(int value);
+    partial void OnidOperadorChanging(System.Nullable<int> value);
     partial void OnidOperadorChanged();
     #endregion
 		
 		public tb005_RRUS()
 		{
+			this._tb001_PAIS = default(EntityRef<tb001_PAIS>);
 			this._tb003_MUNICIPIO = default(EntityRef<tb003_MUNICIPIO>);
 			this._tb003_MUNICIPIO1 = default(EntityRef<tb003_MUNICIPIO>);
 			this._tb003_MUNICIPIO2 = default(EntityRef<tb003_MUNICIPIO>);
@@ -1690,8 +1721,8 @@ namespace Centralizador.DAO
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPaisNacionalidad", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string idPaisNacionalidad
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPaisNacionalidad", DbType="Int NOT NULL")]
+		public int idPaisNacionalidad
 		{
 			get
 			{
@@ -1701,6 +1732,10 @@ namespace Centralizador.DAO
 			{
 				if ((this._idPaisNacionalidad != value))
 				{
+					if (this._tb001_PAIS.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnidPaisNacionalidadChanging(value);
 					this.SendPropertyChanging();
 					this._idPaisNacionalidad = value;
@@ -1882,8 +1917,8 @@ namespace Centralizador.DAO
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOperador", DbType="Int NOT NULL")]
-		public int idOperador
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOperador", DbType="Int")]
+		public System.Nullable<int> idOperador
 		{
 			get
 			{
@@ -1902,6 +1937,40 @@ namespace Centralizador.DAO
 					this._idOperador = value;
 					this.SendPropertyChanged("idOperador");
 					this.OnidOperadorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb001_PAIS_tb005_RRUS", Storage="_tb001_PAIS", ThisKey="idPaisNacionalidad", OtherKey="idPais", IsForeignKey=true)]
+		public tb001_PAIS tb001_PAIS
+		{
+			get
+			{
+				return this._tb001_PAIS.Entity;
+			}
+			set
+			{
+				tb001_PAIS previousValue = this._tb001_PAIS.Entity;
+				if (((previousValue != value) 
+							|| (this._tb001_PAIS.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tb001_PAIS.Entity = null;
+						previousValue.tb005_RRUS.Remove(this);
+					}
+					this._tb001_PAIS.Entity = value;
+					if ((value != null))
+					{
+						value.tb005_RRUS.Add(this);
+						this._idPaisNacionalidad = value.idPais;
+					}
+					else
+					{
+						this._idPaisNacionalidad = default(int);
+					}
+					this.SendPropertyChanged("tb001_PAIS");
 				}
 			}
 		}
@@ -2137,7 +2206,7 @@ namespace Centralizador.DAO
 					}
 					else
 					{
-						this._idOperador = default(int);
+						this._idOperador = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("tb006_OPERADOR");
 				}
@@ -2387,6 +2456,8 @@ namespace Centralizador.DAO
 		
 		private int _idAuditoria;
 		
+		private string _codAuditori;
+		
 		private string _nombreAuditoria;
 		
 		private string _descripcionAuditoria;
@@ -2399,6 +2470,8 @@ namespace Centralizador.DAO
     partial void OnCreated();
     partial void OnidAuditoriaChanging(int value);
     partial void OnidAuditoriaChanged();
+    partial void OncodAuditoriChanging(string value);
+    partial void OncodAuditoriChanged();
     partial void OnnombreAuditoriaChanging(string value);
     partial void OnnombreAuditoriaChanged();
     partial void OndescripcionAuditoriaChanging(string value);
@@ -2411,7 +2484,7 @@ namespace Centralizador.DAO
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAuditoria", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAuditoria", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idAuditoria
 		{
 			get
@@ -2427,6 +2500,26 @@ namespace Centralizador.DAO
 					this._idAuditoria = value;
 					this.SendPropertyChanged("idAuditoria");
 					this.OnidAuditoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codAuditori", DbType="VarChar(4)")]
+		public string codAuditori
+		{
+			get
+			{
+				return this._codAuditori;
+			}
+			set
+			{
+				if ((this._codAuditori != value))
+				{
+					this.OncodAuditoriChanging(value);
+					this.SendPropertyChanging();
+					this._codAuditori = value;
+					this.SendPropertyChanged("codAuditori");
+					this.OncodAuditoriChanged();
 				}
 			}
 		}
@@ -2557,7 +2650,7 @@ namespace Centralizador.DAO
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLogAuditoria", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLogAuditoria", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long idLogAuditoria
 		{
 			get

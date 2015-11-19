@@ -19,12 +19,14 @@ namespace ServicioRUUS
         Usuario RegistrarUsuario(Usuario usuario, String IndentificadorCarpeta);
 
         [OperationContract]
-        RespuestasCentralizador  ValidarExistenciaUsuario(Usuario usuario, String IndentificadorCarpeta);
+        RespuestasCentralizador ValidarExistenciaUsuario(Usuario usuario, String IndentificadorCarpeta);
 
 
         [OperationContract]
         RespuestasCentralizador ValidarPorIdentificacionYTipo(string numeroIdentificacion, int idTipoIdentificacion, String IndentificadorCarpeta);
-      
+
+        [OperationContract]
+        Usuario ConsultarUsuario(String identificadoUsuario, string IdentificadorCarpetaciudadana);
         // TODO: Add your service operations here
     }
 

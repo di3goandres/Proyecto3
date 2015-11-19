@@ -810,7 +810,10 @@ function DefaultFileUploadDone(e, data, fileDivUploadId) {
                 //$(fileDivUploadId + ' .' + filename).append('<button class="remove-file-item btn btn-error"><i class="fa fa-ban"></i><span>Eliminar</span></button>');
 
                 $(fileDivUploadId + ' .' + filename).prepend('<img class="upload-done-AddRemoveHandler()img" src="' + fileUploadIconFolder + 'ok.png" alt="A la espera de carga de los archivos" />');
-               
+                AlertUI(".:Información", result.Mensaje, function () {
+                    AddRemoveHandler();
+                    traerDatosCarpeta();
+                });
             } else {
                 $(fileDivUploadId + ' .' + filename).prepend('<img class="error-file-img" src="' + fileUploadIconFolder + 'close.png" alt="error en la carga de archivos" />');
                 AlertUI("ERROR", result.Mensaje);

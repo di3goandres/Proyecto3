@@ -65,11 +65,13 @@
                    
                 </table>
             </td>
+
+            <td></td>
         </tr>
     </table>
 
     <div id="cargarArchivos">
-        <div id="event_result"></div>
+       <%-- <div id="event_result"></div>--%>
         <table>
             <tr>
                 <th>Adjuntar archivo

@@ -209,8 +209,9 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                             string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
                             AppLog.Write(" Inicio Creacion Usuario" , AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
-                            var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(), Usuarioregistrado.UUID.ToString(),
-                                "OPERADOR_REPOSITORY_USER", CarpetaInicial);
+                            var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(),
+                                Usuarioregistrado.UUID.ToString(),
+                                "OPERADOR_REPOSITORY_USER", CarpetaInicial, Usuarioregistrado.primerNombre + " " + Usuarioregistrado.segundoNombre,  Usuarioregistrado.primerApellido + " " + Usuarioregistrado.segundoApellido,Usuarioregistrado.idTipoIdentificacion, Usuarioregistrado.numeroIdentificacion );
                             AppLog.Write(" Fin Creacion Usuario", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
                             #region crear carpeta en el servidor

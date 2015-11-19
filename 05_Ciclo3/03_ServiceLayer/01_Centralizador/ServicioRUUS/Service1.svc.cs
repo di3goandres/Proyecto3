@@ -73,5 +73,20 @@ namespace ServicioRUUS
 
             }
         }
+
+
+        public Usuario ConsultarUsuario(string identificadoUsuario, string IdentificadorCarpetaciudadana)
+        {
+            try
+            {
+                DaoRUUS dao = new DaoRUUS();
+                return dao.ConsultarUsuario(identificadoUsuario, IdentificadorCarpetaciudadana);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
     }
 }

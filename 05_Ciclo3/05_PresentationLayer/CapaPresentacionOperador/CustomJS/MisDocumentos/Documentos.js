@@ -94,7 +94,7 @@ function terminoGuardarCarpeta(jsonrequest) {
             esCrear = true;
             $("#EditarCrearCarpeta").val("Crear Carpeta");
             $('#EditarCarpeta').dialog({
-                width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Crear Carpeta', closeOnEscape: false,
+                width: 500, height: 280, modal: true, resizable: false, draggable: false, title: 'Crear Carpeta', closeOnEscape: false,
                 open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
             });
         } else {
@@ -103,7 +103,7 @@ function terminoGuardarCarpeta(jsonrequest) {
             EsEditar = false;
       
             $('#EditarCarpeta').dialog({
-                width: 450, height: 280, modal: true, resizable: false, draggable: false, title: 'Renombrar Carpeta', closeOnEscape: false,
+                width: 500, height: 280, modal: true, resizable: false, draggable: false, title: 'Renombrar Carpeta', closeOnEscape: false,
                 open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
             });
         }
@@ -214,8 +214,13 @@ function terminoGuardarCarpeta(jsonrequest) {
         $("#jstree2").jstree('destroy');
         var data = jsonrequest.d;
         $("#dialog-Busy").dialog('close');
-        if (data.status == "Error Consultando información inicial.") {
-            AlertUI(".:Error", data.mensaje);
+        if (data.status != "OK") {
+            AlertUI(".:Error", data.mensaje, function () {
+                document.location.target = "self";
+                document.location.href = '../Logoff.aspx';
+                return;
+
+            });
         
             return false;
         }

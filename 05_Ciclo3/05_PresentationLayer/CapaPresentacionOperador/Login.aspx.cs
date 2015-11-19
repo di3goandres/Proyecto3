@@ -18,6 +18,10 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
+        Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
+        var re = serviciocentralizador.ConsultarUsuario("bbd1b83f-47eb-4a47-86d7-93e1f23e6eb3", "");
         //if (!IsPostBack)
         //{
             string ola ="";

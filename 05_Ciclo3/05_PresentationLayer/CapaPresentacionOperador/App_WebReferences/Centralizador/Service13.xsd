@@ -2,6 +2,12 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Centralizador.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Centralizador.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="Usuario">
     <xs:sequence>
+      <xs:element minOccurs="0" name="NombreMunicipioExpedicionDocumento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreMunicipioLaboral" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreMunicipioNacimiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreMunicipioNotificacionCorrespondencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreMunicipioResidencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombrePaisNacionalidad" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UUID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="correoElectronico" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="direccionNotificacionCorrespondencia" nillable="true" type="xs:string" />
@@ -10,12 +16,17 @@
       <xs:element minOccurs="0" name="fechaExpedicion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechaNacimiento" type="xs:dateTime" />
       <xs:element minOccurs="0" name="genero" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idDepartamentoExpedicionDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="idDepartamentoLaboral" type="xs:int" />
+      <xs:element minOccurs="0" name="idDepartamentoNacimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="idDepartamentoNotificacionCorrespondencia" type="xs:int" />
+      <xs:element minOccurs="0" name="idDepartamentoResidencia" type="xs:int" />
       <xs:element minOccurs="0" name="idMunicipioExpedicionDocumento" type="xs:int" />
       <xs:element minOccurs="0" name="idMunicipioLaboral" type="xs:int" />
       <xs:element minOccurs="0" name="idMunicipioNacimiento" type="xs:int" />
       <xs:element minOccurs="0" name="idMunicipioNotificacionCorrespondencia" type="xs:int" />
       <xs:element minOccurs="0" name="idMunicipioResidencia" type="xs:int" />
-      <xs:element minOccurs="0" name="idOperador" type="xs:int" />
+      <xs:element minOccurs="0" name="idOperador" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="idPaisNacionalidad" type="xs:int" />
       <xs:element minOccurs="0" name="idTipoIdentificacion" type="xs:int" />
       <xs:element minOccurs="0" name="numeroIdentificacion" nillable="true" type="xs:string" />

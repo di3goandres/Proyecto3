@@ -119,44 +119,21 @@ namespace Uniandes.Controlador
                     }
                     else
                     {
-                        var actual = (from cp in ctx.tblCarpetaPersonal
-                                      where cp.idCarpetaPersonal == idCarpeta
-                                      select cp).First();
+                        var carpetas = (from cp in ctx.tblCarpetaPersonal
+                                        where cp.idCarpetaPadre == idCarpeta
+                                         && cp.NombreCarpeta.ToUpper() == nombreCarpeta.ToUpper()
+                                        select cp);
 
-
-                        if (actual.idCarpetaPadre == null)
+                        if (carpetas.Any())
                         {
-                            var carpeta = (from cp in ctx.tblCarpetaPersonal
-                                           where cp.idCarpetaPadre == (decimal?)null
-                                                && cp.NombreCarpeta.ToUpper() == nombreCarpeta.ToUpper()
-                                           select cp);
 
-                            if (carpeta.Any())
-                            {
-                                //si existen 
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
+                            return true;
                         }
-                        else {
-                            var carpeta = (from cp in ctx.tblCarpetaPersonal
-                                           where cp.idCarpetaPadre == actual.idCarpetaPadre
-                                                && cp.NombreCarpeta.ToUpper() == nombreCarpeta.ToUpper()
-                                           select cp);
+                        else
+                        {
+                            return false;
+                        }
 
-                            if (carpeta.Any())
-                            {
-                                //si existen 
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        }
 
                     }
                 }

@@ -1,4 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="centralizador" Class="CentralizadorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tb001_PAIS" Member="tb001_PAIS">
+    <Type Name="tb001_PAIS">
+      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombrePais" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="codigoDane" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO" ThisKey="idPais" OtherKey="idPais" Type="tb002_DEPARTAMENTO" />
+      <Association Name="tb001_PAIS_tb005_RRUS" Member="tb005_RRUS" ThisKey="idPais" OtherKey="idPaisNacionalidad" Type="tb005_RRUS" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl011_SoapMessage" Member="tbl011_SoapMessage">
     <Type Name="tbl011_SoapMessage">
       <Column Name="idSoapMessage" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -10,14 +19,6 @@
       <Column Name="ejemplo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="tb006_OPERADOR_tbl011_SoapMessage" Member="tb006_OPERADOR" ThisKey="idOperador" OtherKey="idOperador" Type="tb006_OPERADOR" IsForeignKey="true" />
       <Association Name="tbl010_TipoOperaciones_tbl011_SoapMessage" Member="tbl010_TipoOperaciones" ThisKey="idTIpoOperacion" OtherKey="idTIpoOperacion" Type="tbl010_TipoOperaciones" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tb001_PAIS" Member="tb001_PAIS">
-    <Type Name="tb001_PAIS">
-      <Column Name="idPais" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="nombrePais" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="codigoDane" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO" ThisKey="idPais" OtherKey="idPais" Type="tb002_DEPARTAMENTO" />
     </Type>
   </Table>
   <Table Name="dbo.tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO">
@@ -68,7 +69,7 @@
       <Column Name="genero" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
       <Column Name="fechaNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="idMunicipioNacimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idPaisNacionalidad" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="idPaisNacionalidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idMunicipioResidencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="direccionResidencia" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="idMunicipioNotificacionCorrespondencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -77,7 +78,8 @@
       <Column Name="correoElectronico" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="idMunicipioLaboral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="estadoCivil" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idOperador" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tb001_PAIS_tb005_RRUS" Member="tb001_PAIS" ThisKey="idPaisNacionalidad" OtherKey="idPais" Type="tb001_PAIS" IsForeignKey="true" />
       <Association Name="tb003_MUNICIPIO_tb005_RRUS" Member="tb003_MUNICIPIO" ThisKey="idMunicipioExpedicionDocumento" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
       <Association Name="tb003_MUNICIPIO_tb005_RRUS1" Member="tb003_MUNICIPIO1" ThisKey="idMunicipioNotificacionCorrespondencia" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
       <Association Name="tb003_MUNICIPIO_tb005_RRUS2" Member="tb003_MUNICIPIO2" ThisKey="idMunicipioLaboral" OtherKey="IdMunicipio" Type="tb003_MUNICIPIO" IsForeignKey="true" />
@@ -100,7 +102,8 @@
   </Table>
   <Table Name="dbo.tb007_TIPOS_AUDITORIA" Member="tb007_TIPOS_AUDITORIA">
     <Type Name="tb007_TIPOS_AUDITORIA">
-      <Column Name="idAuditoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idAuditoria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="codAuditori" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
       <Column Name="nombreAuditoria" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="descripcionAuditoria" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
       <Association Name="tb007_TIPOS_AUDITORIA_tb008_LOG_AUDITORIA" Member="tb008_LOG_AUDITORIA" ThisKey="idAuditoria" OtherKey="idAuditoria" Type="tb008_LOG_AUDITORIA" />
@@ -108,7 +111,7 @@
   </Table>
   <Table Name="dbo.tb008_LOG_AUDITORIA" Member="tb008_LOG_AUDITORIA">
     <Type Name="tb008_LOG_AUDITORIA">
-      <Column Name="idLogAuditoria" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idLogAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="idAuditoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="fechaLog" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />

@@ -84,6 +84,7 @@ public partial class Paginas_MisDocumentos_Documentos : System.Web.UI.Page
         {
             return new
             {
+                mensaje = "Session Finalizada",
                 status = "error",
             };
         }
@@ -92,7 +93,7 @@ public partial class Paginas_MisDocumentos_Documentos : System.Web.UI.Page
         List<TreeField> ListaTodos = new List<TreeField>();
         List<TreeField> Listaretorno = new List<TreeField>();
         GestorArbol gArbolDao = new GestorArbol();
-        ListaTodos = gArbolDao.ObtenerArbolPorUsuario(uid);
+        ListaTodos = gArbolDao.ObtenerArbolPorUsuario(uid, true);
       
         foreach (var datos in ListaTodos)
         {

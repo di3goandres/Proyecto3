@@ -7,15 +7,12 @@
       <Association Name="tb001_PAIS_tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO" ThisKey="idPais" OtherKey="idPais" Type="tb002_DEPARTAMENTO" />
     </Type>
   </Table>
-  <Table Name="dbo.tblCarpetaPersonal" Member="tblCarpetaPersonal">
-    <Type Name="tblCarpetaPersonal">
-      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="idCarpetaPadre" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="NombreCarpeta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal2" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPadre" Type="tblCarpetaPersonal" />
-      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tbl_metadataArchivos" />
-      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal1" ThisKey="idCarpetaPadre" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
+  <Table Name="dbo.tblEstadoMensajes" Member="tblEstadoMensajes">
+    <Type Name="tblEstadoMensajes">
+      <Column Name="idEstadoMensajes" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="tblEstadoMensajes_tblBandejaNotificaciones" Member="tblBandejaNotificaciones" ThisKey="idEstadoMensajes" OtherKey="Estado" Type="tblBandejaNotificaciones" />
     </Type>
   </Table>
   <Table Name="dbo.tb002_DEPARTAMENTO" Member="tb002_DEPARTAMENTO">
@@ -50,8 +47,9 @@
       <Column Name="fecha_modificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="tamanio" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tblCarpetaPersonal" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
+      <Association Name="tbl_metadataArchivos_tblDocumentosAdjuntos" Member="tblDocumentosAdjuntos" ThisKey="idDMtadataArchivo" OtherKey="idDMetadaArchivo" Type="tblDocumentosAdjuntos" />
       <Association Name="tbl_tipoDocumento_tbl_metadataArchivos" Member="tbl_tipoDocumento" ThisKey="idTipoDocumento" OtherKey="idTipoDocumento" Type="tbl_tipoDocumento" IsForeignKey="true" />
+      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tblCarpetaPersonal" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_tipoDocumento" Member="tbl_tipoDocumento">
@@ -67,6 +65,7 @@
       <Column Name="id_tipoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="nombre_tipoId" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="abreviado_tipoId" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_tipoId_tbl_usuarios" Member="tbl_usuarios" ThisKey="id_tipoId" OtherKey="tipoIdentificacion" Type="tbl_usuarios" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_usuarios" Member="tbl_usuarios">
@@ -76,6 +75,48 @@
       <Column Name="userIdCentralizador" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="repositorioKey" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="carpetaUsuarioInicial" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="tipoIdentificacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="numeroIdentificacion" Type="System.String" DbType="VarChar(17)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_tipoId_tbl_usuarios" Member="tbl_tipoId" ThisKey="tipoIdentificacion" OtherKey="id_tipoId" Type="tbl_tipoId" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblBandejaNotificaciones" Member="tblBandejaNotificaciones">
+    <Type Name="tblBandejaNotificaciones">
+      <Column Name="idBandejaNotificaciones" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userIdAplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="UsuarioEnvia" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaEnvio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Adjunto" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Leido" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tamanio" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="tblBandejaNotificaciones_tblDocumentosAdjuntos" Member="tblDocumentosAdjuntos" ThisKey="idBandejaNotificaciones" OtherKey="idBandejaNotificaciones" Type="tblDocumentosAdjuntos" />
+      <Association Name="tblEstadoMensajes_tblBandejaNotificaciones" Member="tblEstadoMensajes" ThisKey="Estado" OtherKey="idEstadoMensajes" Type="tblEstadoMensajes" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCarpetaPersonal" Member="tblCarpetaPersonal">
+    <Type Name="tblCarpetaPersonal">
+      <Column Name="idCarpetaPersonal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userIdApplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="idCarpetaPadre" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NombreCarpeta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tblCarpetaPersonal_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPersonal" Type="tbl_metadataArchivos" />
+      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal2" ThisKey="idCarpetaPersonal" OtherKey="idCarpetaPadre" Type="tblCarpetaPersonal" />
+      <Association Name="tblCarpetaPersonal_tblCarpetaPersonal" Member="tblCarpetaPersonal1" ThisKey="idCarpetaPadre" OtherKey="idCarpetaPersonal" Type="tblCarpetaPersonal" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblDocumentosAdjuntos" Member="tblDocumentosAdjuntos">
+    <Type Name="tblDocumentosAdjuntos">
+      <Column Name="idDocumentosAdjuntos" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idBandejaNotificaciones" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idDMetadaArchivo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_metadataArchivos_tblDocumentosAdjuntos" Member="tbl_metadataArchivos" ThisKey="idDMetadaArchivo" OtherKey="idDMtadataArchivo" Type="tbl_metadataArchivos" IsForeignKey="true" />
+      <Association Name="tblBandejaNotificaciones_tblDocumentosAdjuntos" Member="tblBandejaNotificaciones" ThisKey="idBandejaNotificaciones" OtherKey="idBandejaNotificaciones" Type="tblBandejaNotificaciones" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

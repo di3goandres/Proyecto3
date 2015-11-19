@@ -47,4 +47,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ConsultarUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="identificadoUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="IdentificadorCarpetaciudadana" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Centralizador.Entity" minOccurs="0" name="ConsultarUsuarioResult" nillable="true" type="q6:Usuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

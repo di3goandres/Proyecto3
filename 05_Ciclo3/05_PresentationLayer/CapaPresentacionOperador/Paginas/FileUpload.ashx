@@ -49,10 +49,13 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
         }
         ///Se obtienen los tipos MIME de sesión, si existen.
         ///
+        var mimeTypes = "MIME_TYPES".GetFromAppCfg().Split(',');
         var mimeTypesObject = SessionHelper.GetSessionData("MIME_TYPES");
         List<string> TiposPermitidos = (mimeTypesObject == null) ? new List<string>() : (List<string>)mimeTypesObject;
         var listaNombresArchivos = new List<FileNameControl>();
-        var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+      var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()), mimeTypes.ToList());
+      //  var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+        
 
         try
         {
@@ -105,7 +108,7 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
             nuevaMetadata.idDMtadataArchivo = Guid.NewGuid();
             mDataArchibo.RegistrarMetadataArchivo(nuevaMetadata);
 
-            var respuesta = new { Estado = "OK", Mensaje = ".", Archivos = listaNombresArchivos };
+            var respuesta = new { Estado = "OK", Mensaje = "Se han cargado los archivos correctamente", Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuesta));
         }
         catch (MaximumSizeExeption ex)

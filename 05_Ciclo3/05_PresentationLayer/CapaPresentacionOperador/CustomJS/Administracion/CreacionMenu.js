@@ -327,9 +327,13 @@ function ValidarEditarAgregar() {
     n = validarYAgregarDatos("#MenuName", "input", "Ingrese el nombre del menú ", "MenuName", parametros);
     if (!n) return;
 
-    if (esPadre) {
+    if (!esPadre) {
         n = validarYAgregarDatos("#url", "input", "Ingrese por favor la URl asociada", "URL", parametros);
         if (!n) return;
+    } else {
+
+        parametros.URL = "";
+
     }
 
 

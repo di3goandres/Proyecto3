@@ -42,7 +42,7 @@
             <tr>
                
                 <td style="width: 100%">
-                    <input id="validarYcrear" type="button"  class="center-block btn_cafe btn-success btn" style="background:#603813" value="Asignar Nueva contraseña" />
+                    <input id="validarYcrear" type="button"  class="center-block btn_cafe btn-success btn" style="background:#603813" style="background:#603813" value="Asignar Nueva contraseña" />
                 </td>
             </tr>
         </table>

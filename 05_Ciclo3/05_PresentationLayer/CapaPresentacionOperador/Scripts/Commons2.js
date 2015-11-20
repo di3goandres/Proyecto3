@@ -568,6 +568,7 @@ function ConfirmUI(title, text, onContinuar) {
 
 // Llenar un select con los datos obtenidos del request
 function fillSelect(ddl, data) {
+    $(ddl).empty();
     var option = '<option value="' + "0" + '">' + "SELECCIONE UNA OPCIÓN" + '</option>';
     $(ddl).append(option);
     $.each(data, function (index, itemData) {
@@ -603,6 +604,26 @@ function DoJsonRequestBusy(page, WebMethod, SuccessFunction, Data) {
         }
     });
 }
+
+
+
+function DoJsonRequestSinBusy(page, WebMethod, SuccessFunction, Data) {
+    OnBusy();
+    jQuery.ajax({
+        error: function (jsonrequest) {
+            $("#dialog-Busy").dialog('close');
+            OnError(jsonrequest);
+        },
+        timeout: 900000, //15 minutos
+        url: page + WebMethod,
+        data: Data, dataType: 'json', type: 'POST', contentType: "application/json; charset=utf-8",
+        success: function (jsonrequest) {
+           
+            SuccessFunction(jsonrequest);
+        }
+    });
+}
+
 //Muestra dialog de ocupado.
 
 function OnBusy() {

@@ -37,12 +37,18 @@
 }
 
 .btn_ficha{
-	background:#6A5845;
+	background:#ECF6CE;
 	border:1px solid #6A5845;
     text-align:center;
     font-size:14px;
-    color:white;
+    color:black;
+    font-family:Georgia;
+     font-style: italic;
 }
+    .btn_ficha:hover {
+        background:#F5D0A9;
+    }
+
 
 .link_blanco{
 	color:#fff;
@@ -445,14 +451,15 @@ div.dataTables_paginate {
         font-style: normal;
         text-align: left;
         text-decoration: none;
-        font-size: 1.2em;
+        font-size: 0.9em;
         vertical-align: top;
-        color: #603813;
+        color: #6A5845;
     }
 
     .tableregistro tr td label
     {
         /*font-family: Gill Sans MT, Gill Sans MT, sans-serif;*/
+         font-family:Georgia, serif;
         font-family: inherit;
         font-style: normal;
         text-align: left;
@@ -464,6 +471,14 @@ div.dataTables_paginate {
 
 
 
+.botonCustom {
+
+    border: 1px solid #aaaaaa;
+	background: #cccccc url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x;
+	color: #222222;
+	font-weight: bold;
+
+}
 
 
 .failureNotification {

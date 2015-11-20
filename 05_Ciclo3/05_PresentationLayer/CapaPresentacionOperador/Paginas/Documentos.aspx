@@ -14,10 +14,12 @@
     <link rel="stylesheet" href="./assets/dist/themes/default/style.min.css" />
     <link rel="stylesheet" href="./assets/docs.css" />
     <script src="../js/jquery.jqGrid.min.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <%-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>--%>
 
+    <script src="../js/jquery-1.11.1min.js" type="text/javascript"></script>
+    <script src="../js/jquery-ui.min.js" type="text/javascript"></script>
 
 
 
@@ -44,13 +46,15 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder3" runat="Server">
 
+    <center>
+    <div id="RegistroUsuarios" class="form">  <div class="container_login" style="width:75%">
+         <div class="row" style="width:75%">
+            <h3 style="color:#603813">Mis Documentos</h3>
     <table>
         <tr>
             <td>
                 <table class="accountInfo" style="padding-right: 100px">
-                    <tr>
-                        <td>Mis Documentos</td>
-                    </tr>
+                    
                     <tr style="width: 40%">
                         <td>
                             <%--  <div id="capa"></div>--%>
@@ -69,9 +73,22 @@
             <td></td>
         </tr>
     </table>
+       
+         <br />
+         <br />
+         <br />
 
+         </div>
+        
+
+         </div>
+        <br />
+         <br />
+         <br />
+         </div>
+        </center>
     <div id="cargarArchivos">
-       <%-- <div id="event_result"></div>--%>
+        <%-- <div id="event_result"></div>--%>
         <table>
             <tr>
                 <th>Adjuntar archivo
@@ -102,7 +119,7 @@
     <div id="EditarCarpeta" class="form;  col-md-6">
         <br />
 
-        <table >
+        <table>
             <tr>
                 <td style="width: 50%">
                     <label style="width: 80%">Nombre Carpeta</label></td>
@@ -115,7 +132,7 @@
 
                 <td style="width: 50%">
                     <input id="EditarCrearCarpeta" type="button" class="center-block btn_ficha btn-success" value="Crear" />
-                    </td>
+                </td>
                 <td style="width: 45%">
                     <input id="CerrarEditarCrearCarpeta" type="button" class="center-block btn_ficha btn-success" value="Cancelar" />
                 </td>

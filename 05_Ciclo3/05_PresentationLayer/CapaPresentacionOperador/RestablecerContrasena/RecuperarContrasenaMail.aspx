@@ -47,7 +47,7 @@
                          <tr>
                              
                              <td>
-                                 <input type="button" id="EnviarEmail" class="loginButton center-block btn_cafe btn-success btn btn-lg"  value="Enviar Email" /></td>
+                                 <input type="button" id="EnviarEmail" class="center-block btn_cafe btn-success btn" style="background:#603813"value="Enviar Email" /></td>
 
                          </tr>
                      </table>

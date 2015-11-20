@@ -28,6 +28,8 @@ namespace ServicioRUUS
         [OperationContract]
         Usuario ConsultarUsuario(String identificadoUsuario, string IdentificadorCarpetaciudadana);
         // TODO: Add your service operations here
+        [OperationContract]
+        bool ActualizarDatosUsuario(Usuario entity, string IdentificadorCarpetaciudadana);
     }
 
 

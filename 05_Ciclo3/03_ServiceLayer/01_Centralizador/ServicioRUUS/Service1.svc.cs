@@ -88,5 +88,21 @@ namespace ServicioRUUS
 
             }
         }
+
+
+        public bool ActualizarDatosUsuario(Usuario entity, string IdentificadorCarpetaciudadana)
+        {
+            try
+            {
+                DaoRUUS dao = new DaoRUUS();
+                return dao.ActualizarDatosUsuario(entity, IdentificadorCarpetaciudadana);
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+
+            }
+        }
     }
 }

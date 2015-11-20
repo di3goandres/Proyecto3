@@ -5,10 +5,13 @@
 <html lang="en">
 <head id="Head1" runat="server">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+ <%--   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>--%>
+     <script src="../js/jquery-1.11.1min.js"></script>
+    <%--<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>--%>
+    <script src="../js/jquery-ui.min.js"></script>
 
-    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />--%>
+   <%-- <link href="../Styles/jquery-ui.css" rel="stylesheet" />--%>
     <script src="../Scripts/jquery.address-1.6.js" type="text/javascript"></script>
     <script src="../Scripts/vakata.js" type="text/javascript"></script>
     <script src="../Scripts/dist/jstree.min.js" type="text/javascript"></script>

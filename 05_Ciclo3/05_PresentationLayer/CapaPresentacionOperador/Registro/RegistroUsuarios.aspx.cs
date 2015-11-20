@@ -143,7 +143,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
             #region ("Registro")
 
             Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
-            Centralizador.Entity.Usuario nuevoUsuario = new Centralizador.Entity.Usuario();
+            Centralizador.Usuario nuevoUsuario = new Centralizador.Usuario();
 
             nuevoUsuario.primerNombre = NombresI;
             nuevoUsuario.segundoNombre = NombresII;

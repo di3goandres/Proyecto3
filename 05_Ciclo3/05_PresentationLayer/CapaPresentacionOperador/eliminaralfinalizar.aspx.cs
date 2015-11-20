@@ -71,7 +71,7 @@ public partial class eliminaralfinalizar : System.Web.UI.Page
             </soapenv:Envelope>";
         a.SoapAction = "http://tempuri.org/ValidarExistenciaUsuario";
         Operador.Entity.UsuarioOperador nuevo = new Operador.Entity.UsuarioOperador();
-        Centralizador.Entity.Usuario nuevos = new Centralizador.Entity.Usuario();
+        Centralizador.Usuario nuevos = new Centralizador.Usuario();
 
      
 
@@ -87,7 +87,7 @@ public partial class eliminaralfinalizar : System.Web.UI.Page
 
 
 
-    public void crearSOAP(Centralizador.Entity.Usuario MyObject)
+    public void crearSOAP(Centralizador.Usuario MyObject)
     {
 
 

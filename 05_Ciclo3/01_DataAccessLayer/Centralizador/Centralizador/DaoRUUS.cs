@@ -190,22 +190,14 @@ namespace Centralizador.DAO
                             oldEntity.direccionResidencia = entity.direccionResidencia;
                             Comentarios = Comentarios.AppendLine("Se Actualiza dirección de Residencia");
                         }
-                        if (oldEntity.idMunicipioNotificacionCorrespondencia != entity.idMunicipioNotificacionCorrespondencia)
-                        {
-                            oldEntity.idMunicipioNotificacionCorrespondencia = entity.idMunicipioNotificacionCorrespondencia;
-                            Comentarios = Comentarios.AppendLine("Se Actualiza Municipio de Correspondencia");
-                        }
-                        if (oldEntity.direccionNotificacionCorrespondencia != entity.direccionNotificacionCorrespondencia)
-                        {
-                            oldEntity.direccionNotificacionCorrespondencia = entity.direccionNotificacionCorrespondencia;
-                            Comentarios = Comentarios.AppendLine("Se Actualiza dirección  de Correspondencia");
-                        }
+                       
+                       
                         if (oldEntity.telefono != entity.telefono)
                         {
                             oldEntity.telefono = entity.telefono;
                             Comentarios = Comentarios.AppendLine("Se Actualiza Telefono");
                         }
-                        oldEntity.telefono = entity.telefono;
+                 
 
                         ctx.Refresh(System.Data.Linq.RefreshMode.KeepCurrentValues, oldEntity);
                         ctx.SubmitChanges();

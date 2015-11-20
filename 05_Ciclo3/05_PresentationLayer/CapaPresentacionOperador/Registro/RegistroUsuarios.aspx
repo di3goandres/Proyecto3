@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/shared/MasterPageOutside.master" AutoEventWireup="true" CodeFile="RegistroUsuarios.aspx.cs" Inherits="Registro_RegistroUsuarios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
+    <link rel="stylesheet" href="./assets/docs.css" />
     <script src="../CustomJS/Usuarios/Registrar.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <h3>Registro usuarios</h3>
+
 
     <br />
     <table class="tableinside">
@@ -19,6 +20,7 @@
     <div id="RegistroUsuarios" class="form">
         <div class="container_login" style="width:75%">
          <div class="row" style="width:75%">
+              <h3>Registro usuarios</h3>
             <h3 style="color:#603813">Datos Personales</h3>
         <table  class="tableregistro" style ="width: 740px; padding-left: 0px; margin-left: 0px; text-align: left;padding:4px" >
             <tr>
@@ -84,6 +86,11 @@
                     <label>Nacionalidad</label><select id="Nacionalidad" class="TextEntry form-control"></select>
                 </td>
              </tr>
+            </table>
+              </div>
+             <div class="row" style="width:75%">
+                  <h3 style="color:#603813">Datos de Ubicación </h3>
+                <table  class="tableregistro" style ="width: 740px; padding-left: 0px; margin-left: 0px; text-align: left;padding:4px" >
             <tr>
                 <td style ="width:49%;padding:5px">
                     <label>Departamento Residencia</label>
@@ -107,14 +114,19 @@
                     <input  class="TextEntry form-control"  id="telefono" type="text"  onkeypress="return EvaluarTexto('Numeros',this,event);" maxlength="20" /></td>
            
             </tr>
-
-            <tr>
+                      <tr>
                
                <td style ="width:49%;padding:5px">
                     <label>Email</label>
                     <input id="Email" type="text"  class="TextEntry form-control" /></td>
                  <td style ="width:49%;padding:5px"></td>
              </tr>
+</table>
+              </div>
+             <div class="row" style="width:75%">
+                  <h3 style="color:#603813">Pregunta de Seguridad</h3>
+                <table  class="tableregistro" style ="width: 740px; padding-left: 0px; margin-left: 0px; text-align: left;padding:4px" >
+          
              <tr>
                <td style ="width:49%;padding:5px">
                     <label>Pregunta secreta</label>
@@ -127,6 +139,14 @@
 
         </table>
 
+                 </div>
+
+             <div class="row" style="width:75%">
+                  <h3 style="color:#603813">Adjuntar Documentos requeridos</h3>
+                <table  class="tableregistro" style ="width: 740px; padding-left: 0px; margin-left: 0px; text-align: left;padding:4px" >
+          
+                    </table>
+                 </div>
         <br />
         <br />
 
@@ -136,6 +156,12 @@
                
                 <td >
                     <input id="EditarCrear" type="button" value="Registrarse"   class="loginButton center-block btn_cafe btn-success btn"/>
+                </td>
+              <td></td>
+               <td >
+                    <%--<input id="Regresar" type="button" value="Regresar"   class="loginButton center-block btn_cafe btn-success btn
+
+                        --%><a href="RegistroUsuarios.aspx" class="loginButton center-block btn_cafe btn-success btn">Regresar</a>
                 </td>
             </tr></table>
               <br />

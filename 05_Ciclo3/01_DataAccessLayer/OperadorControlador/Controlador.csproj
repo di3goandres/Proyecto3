@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BandejaNotificacionesDAO.cs" />
     <Compile Include="CarpetaPersonalDao.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="DaoUsuario.cs" />

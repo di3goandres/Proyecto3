@@ -51,6 +51,9 @@ namespace Uniandes.Controlador
     partial void Inserttbl_tipoId(tbl_tipoId instance);
     partial void Updatetbl_tipoId(tbl_tipoId instance);
     partial void Deletetbl_tipoId(tbl_tipoId instance);
+    partial void Inserttbl_TipologiaDocumental(tbl_TipologiaDocumental instance);
+    partial void Updatetbl_TipologiaDocumental(tbl_TipologiaDocumental instance);
+    partial void Deletetbl_TipologiaDocumental(tbl_TipologiaDocumental instance);
     partial void Inserttbl_usuarios(tbl_usuarios instance);
     partial void Updatetbl_usuarios(tbl_usuarios instance);
     partial void Deletetbl_usuarios(tbl_usuarios instance);
@@ -142,6 +145,14 @@ namespace Uniandes.Controlador
 			get
 			{
 				return this.GetTable<tbl_tipoId>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_TipologiaDocumental> tbl_TipologiaDocumental
+		{
+			get
+			{
+				return this.GetTable<tbl_TipologiaDocumental>();
 			}
 		}
 		
@@ -1252,11 +1263,17 @@ namespace Uniandes.Controlador
 		
 		private decimal _idTipoDocumento;
 		
+		private System.Nullable<int> _idTipologiaDocumental;
+		
+		private string _codigo;
+		
 		private string _tipoDocumento;
 		
 		private string _descripcion;
 		
 		private EntitySet<tbl_metadataArchivos> _tbl_metadataArchivos;
+		
+		private EntityRef<tbl_TipologiaDocumental> _tbl_TipologiaDocumental;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -1264,6 +1281,10 @@ namespace Uniandes.Controlador
     partial void OnCreated();
     partial void OnidTipoDocumentoChanging(decimal value);
     partial void OnidTipoDocumentoChanged();
+    partial void OnidTipologiaDocumentalChanging(System.Nullable<int> value);
+    partial void OnidTipologiaDocumentalChanged();
+    partial void OncodigoChanging(string value);
+    partial void OncodigoChanged();
     partial void OntipoDocumentoChanging(string value);
     partial void OntipoDocumentoChanged();
     partial void OndescripcionChanging(string value);
@@ -1273,10 +1294,11 @@ namespace Uniandes.Controlador
 		public tbl_tipoDocumento()
 		{
 			this._tbl_metadataArchivos = new EntitySet<tbl_metadataArchivos>(new Action<tbl_metadataArchivos>(this.attach_tbl_metadataArchivos), new Action<tbl_metadataArchivos>(this.detach_tbl_metadataArchivos));
+			this._tbl_TipologiaDocumental = default(EntityRef<tbl_TipologiaDocumental>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipoDocumento", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipoDocumento", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal idTipoDocumento
 		{
 			get
@@ -1292,6 +1314,50 @@ namespace Uniandes.Controlador
 					this._idTipoDocumento = value;
 					this.SendPropertyChanged("idTipoDocumento");
 					this.OnidTipoDocumentoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipologiaDocumental", DbType="Int")]
+		public System.Nullable<int> idTipologiaDocumental
+		{
+			get
+			{
+				return this._idTipologiaDocumental;
+			}
+			set
+			{
+				if ((this._idTipologiaDocumental != value))
+				{
+					if (this._tbl_TipologiaDocumental.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidTipologiaDocumentalChanging(value);
+					this.SendPropertyChanging();
+					this._idTipologiaDocumental = value;
+					this.SendPropertyChanged("idTipologiaDocumental");
+					this.OnidTipologiaDocumentalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigo", DbType="VarChar(50)")]
+		public string codigo
+		{
+			get
+			{
+				return this._codigo;
+			}
+			set
+			{
+				if ((this._codigo != value))
+				{
+					this.OncodigoChanging(value);
+					this.SendPropertyChanging();
+					this._codigo = value;
+					this.SendPropertyChanged("codigo");
+					this.OncodigoChanged();
 				}
 			}
 		}
@@ -1346,6 +1412,40 @@ namespace Uniandes.Controlador
 			set
 			{
 				this._tbl_metadataArchivos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TipologiaDocumental_tbl_tipoDocumento", Storage="_tbl_TipologiaDocumental", ThisKey="idTipologiaDocumental", OtherKey="idTipologiaDocumental", IsForeignKey=true)]
+		public tbl_TipologiaDocumental tbl_TipologiaDocumental
+		{
+			get
+			{
+				return this._tbl_TipologiaDocumental.Entity;
+			}
+			set
+			{
+				tbl_TipologiaDocumental previousValue = this._tbl_TipologiaDocumental.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TipologiaDocumental.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TipologiaDocumental.Entity = null;
+						previousValue.tbl_tipoDocumento.Remove(this);
+					}
+					this._tbl_TipologiaDocumental.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_tipoDocumento.Add(this);
+						this._idTipologiaDocumental = value.idTipologiaDocumental;
+					}
+					else
+					{
+						this._idTipologiaDocumental = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_TipologiaDocumental");
+				}
 			}
 		}
 		
@@ -1517,6 +1617,120 @@ namespace Uniandes.Controlador
 		{
 			this.SendPropertyChanging();
 			entity.tbl_tipoId = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_TipologiaDocumental")]
+	public partial class tbl_TipologiaDocumental : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idTipologiaDocumental;
+		
+		private string _Tipologia;
+		
+		private EntitySet<tbl_tipoDocumento> _tbl_tipoDocumento;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidTipologiaDocumentalChanging(int value);
+    partial void OnidTipologiaDocumentalChanged();
+    partial void OnTipologiaChanging(string value);
+    partial void OnTipologiaChanged();
+    #endregion
+		
+		public tbl_TipologiaDocumental()
+		{
+			this._tbl_tipoDocumento = new EntitySet<tbl_tipoDocumento>(new Action<tbl_tipoDocumento>(this.attach_tbl_tipoDocumento), new Action<tbl_tipoDocumento>(this.detach_tbl_tipoDocumento));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipologiaDocumental", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idTipologiaDocumental
+		{
+			get
+			{
+				return this._idTipologiaDocumental;
+			}
+			set
+			{
+				if ((this._idTipologiaDocumental != value))
+				{
+					this.OnidTipologiaDocumentalChanging(value);
+					this.SendPropertyChanging();
+					this._idTipologiaDocumental = value;
+					this.SendPropertyChanged("idTipologiaDocumental");
+					this.OnidTipologiaDocumentalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipologia", DbType="VarChar(50)")]
+		public string Tipologia
+		{
+			get
+			{
+				return this._Tipologia;
+			}
+			set
+			{
+				if ((this._Tipologia != value))
+				{
+					this.OnTipologiaChanging(value);
+					this.SendPropertyChanging();
+					this._Tipologia = value;
+					this.SendPropertyChanged("Tipologia");
+					this.OnTipologiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TipologiaDocumental_tbl_tipoDocumento", Storage="_tbl_tipoDocumento", ThisKey="idTipologiaDocumental", OtherKey="idTipologiaDocumental")]
+		public EntitySet<tbl_tipoDocumento> tbl_tipoDocumento
+		{
+			get
+			{
+				return this._tbl_tipoDocumento;
+			}
+			set
+			{
+				this._tbl_tipoDocumento.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_tipoDocumento(tbl_tipoDocumento entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TipologiaDocumental = this;
+		}
+		
+		private void detach_tbl_tipoDocumento(tbl_tipoDocumento entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TipologiaDocumental = null;
 		}
 	}
 	
@@ -1847,19 +2061,23 @@ namespace Uniandes.Controlador
 		
 		private decimal _idBandejaNotificaciones;
 		
-		private string _userIdAplicacion;
+		private System.Nullable<decimal> _idBandejaNotificacionPadre;
 		
-		private string _UsuarioEnvia;
+		private string _userIdAplicacionDestino;
+		
+		private string _NombreEnvia;
+		
+		private string _userIdAplicacionOrigen;
+		
+		private string _Destinatarios;
 		
 		private System.DateTime _fechaEnvio;
 		
 		private string _Mensaje;
 		
-		private string _Subject;
+		private string _Asunto;
 		
 		private bool _Adjunto;
-		
-		private bool _Leido;
 		
 		private int _Estado;
 		
@@ -1875,20 +2093,24 @@ namespace Uniandes.Controlador
     partial void OnCreated();
     partial void OnidBandejaNotificacionesChanging(decimal value);
     partial void OnidBandejaNotificacionesChanged();
-    partial void OnuserIdAplicacionChanging(string value);
-    partial void OnuserIdAplicacionChanged();
-    partial void OnUsuarioEnviaChanging(string value);
-    partial void OnUsuarioEnviaChanged();
+    partial void OnidBandejaNotificacionPadreChanging(System.Nullable<decimal> value);
+    partial void OnidBandejaNotificacionPadreChanged();
+    partial void OnuserIdAplicacionDestinoChanging(string value);
+    partial void OnuserIdAplicacionDestinoChanged();
+    partial void OnNombreEnviaChanging(string value);
+    partial void OnNombreEnviaChanged();
+    partial void OnuserIdAplicacionOrigenChanging(string value);
+    partial void OnuserIdAplicacionOrigenChanged();
+    partial void OnDestinatariosChanging(string value);
+    partial void OnDestinatariosChanged();
     partial void OnfechaEnvioChanging(System.DateTime value);
     partial void OnfechaEnvioChanged();
     partial void OnMensajeChanging(string value);
     partial void OnMensajeChanged();
-    partial void OnSubjectChanging(string value);
-    partial void OnSubjectChanged();
+    partial void OnAsuntoChanging(string value);
+    partial void OnAsuntoChanged();
     partial void OnAdjuntoChanging(bool value);
     partial void OnAdjuntoChanged();
-    partial void OnLeidoChanging(bool value);
-    partial void OnLeidoChanged();
     partial void OnEstadoChanging(int value);
     partial void OnEstadoChanged();
     partial void OntamanioChanging(string value);
@@ -1922,42 +2144,102 @@ namespace Uniandes.Controlador
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userIdAplicacion", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string userIdAplicacion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idBandejaNotificacionPadre", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> idBandejaNotificacionPadre
 		{
 			get
 			{
-				return this._userIdAplicacion;
+				return this._idBandejaNotificacionPadre;
 			}
 			set
 			{
-				if ((this._userIdAplicacion != value))
+				if ((this._idBandejaNotificacionPadre != value))
 				{
-					this.OnuserIdAplicacionChanging(value);
+					this.OnidBandejaNotificacionPadreChanging(value);
 					this.SendPropertyChanging();
-					this._userIdAplicacion = value;
-					this.SendPropertyChanged("userIdAplicacion");
-					this.OnuserIdAplicacionChanged();
+					this._idBandejaNotificacionPadre = value;
+					this.SendPropertyChanged("idBandejaNotificacionPadre");
+					this.OnidBandejaNotificacionPadreChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioEnvia", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
-		public string UsuarioEnvia
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userIdAplicacionDestino", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string userIdAplicacionDestino
 		{
 			get
 			{
-				return this._UsuarioEnvia;
+				return this._userIdAplicacionDestino;
 			}
 			set
 			{
-				if ((this._UsuarioEnvia != value))
+				if ((this._userIdAplicacionDestino != value))
 				{
-					this.OnUsuarioEnviaChanging(value);
+					this.OnuserIdAplicacionDestinoChanging(value);
 					this.SendPropertyChanging();
-					this._UsuarioEnvia = value;
-					this.SendPropertyChanged("UsuarioEnvia");
-					this.OnUsuarioEnviaChanged();
+					this._userIdAplicacionDestino = value;
+					this.SendPropertyChanged("userIdAplicacionDestino");
+					this.OnuserIdAplicacionDestinoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreEnvia", DbType="VarChar(500)")]
+		public string NombreEnvia
+		{
+			get
+			{
+				return this._NombreEnvia;
+			}
+			set
+			{
+				if ((this._NombreEnvia != value))
+				{
+					this.OnNombreEnviaChanging(value);
+					this.SendPropertyChanging();
+					this._NombreEnvia = value;
+					this.SendPropertyChanged("NombreEnvia");
+					this.OnNombreEnviaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userIdAplicacionOrigen", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string userIdAplicacionOrigen
+		{
+			get
+			{
+				return this._userIdAplicacionOrigen;
+			}
+			set
+			{
+				if ((this._userIdAplicacionOrigen != value))
+				{
+					this.OnuserIdAplicacionOrigenChanging(value);
+					this.SendPropertyChanging();
+					this._userIdAplicacionOrigen = value;
+					this.SendPropertyChanged("userIdAplicacionOrigen");
+					this.OnuserIdAplicacionOrigenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destinatarios", DbType="VarChar(MAX)")]
+		public string Destinatarios
+		{
+			get
+			{
+				return this._Destinatarios;
+			}
+			set
+			{
+				if ((this._Destinatarios != value))
+				{
+					this.OnDestinatariosChanging(value);
+					this.SendPropertyChanging();
+					this._Destinatarios = value;
+					this.SendPropertyChanged("Destinatarios");
+					this.OnDestinatariosChanged();
 				}
 			}
 		}
@@ -2002,22 +2284,22 @@ namespace Uniandes.Controlador
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subject", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
-		public string Subject
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Asunto", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Asunto
 		{
 			get
 			{
-				return this._Subject;
+				return this._Asunto;
 			}
 			set
 			{
-				if ((this._Subject != value))
+				if ((this._Asunto != value))
 				{
-					this.OnSubjectChanging(value);
+					this.OnAsuntoChanging(value);
 					this.SendPropertyChanging();
-					this._Subject = value;
-					this.SendPropertyChanged("Subject");
-					this.OnSubjectChanged();
+					this._Asunto = value;
+					this.SendPropertyChanged("Asunto");
+					this.OnAsuntoChanged();
 				}
 			}
 		}
@@ -2038,26 +2320,6 @@ namespace Uniandes.Controlador
 					this._Adjunto = value;
 					this.SendPropertyChanged("Adjunto");
 					this.OnAdjuntoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Leido", DbType="Bit NOT NULL")]
-		public bool Leido
-		{
-			get
-			{
-				return this._Leido;
-			}
-			set
-			{
-				if ((this._Leido != value))
-				{
-					this.OnLeidoChanging(value);
-					this.SendPropertyChanging();
-					this._Leido = value;
-					this.SendPropertyChanged("Leido");
-					this.OnLeidoChanged();
 				}
 			}
 		}

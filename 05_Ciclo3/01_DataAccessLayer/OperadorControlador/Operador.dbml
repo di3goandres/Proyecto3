@@ -54,10 +54,13 @@
   </Table>
   <Table Name="dbo.tbl_tipoDocumento" Member="tbl_tipoDocumento">
     <Type Name="tbl_tipoDocumento">
-      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idTipoDocumento" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idTipologiaDocumental" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="codigo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="tipoDocumento" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Association Name="tbl_tipoDocumento_tbl_metadataArchivos" Member="tbl_metadataArchivos" ThisKey="idTipoDocumento" OtherKey="idTipoDocumento" Type="tbl_metadataArchivos" />
+      <Association Name="tbl_TipologiaDocumental_tbl_tipoDocumento" Member="tbl_TipologiaDocumental" ThisKey="idTipologiaDocumental" OtherKey="idTipologiaDocumental" Type="tbl_TipologiaDocumental" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_tipoId" Member="tbl_tipoId">
@@ -66,6 +69,13 @@
       <Column Name="nombre_tipoId" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="abreviado_tipoId" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
       <Association Name="tbl_tipoId_tbl_usuarios" Member="tbl_usuarios" ThisKey="id_tipoId" OtherKey="tipoIdentificacion" Type="tbl_usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_TipologiaDocumental" Member="tbl_TipologiaDocumental">
+    <Type Name="tbl_TipologiaDocumental">
+      <Column Name="idTipologiaDocumental" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tipologia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tbl_TipologiaDocumental_tbl_tipoDocumento" Member="tbl_tipoDocumento" ThisKey="idTipologiaDocumental" OtherKey="idTipologiaDocumental" Type="tbl_tipoDocumento" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_usuarios" Member="tbl_usuarios">
@@ -86,13 +96,15 @@
   <Table Name="dbo.tblBandejaNotificaciones" Member="tblBandejaNotificaciones">
     <Type Name="tblBandejaNotificaciones">
       <Column Name="idBandejaNotificaciones" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="userIdAplicacion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="UsuarioEnvia" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="idBandejaNotificacionPadre" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="userIdAplicacionDestino" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreEnvia" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="userIdAplicacionOrigen" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Destinatarios" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="fechaEnvio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Mensaje" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" />
-      <Column Name="Subject" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Asunto" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="Adjunto" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="Leido" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="tamanio" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="tblBandejaNotificaciones_tblDocumentosAdjuntos" Member="tblDocumentosAdjuntos" ThisKey="idBandejaNotificaciones" OtherKey="idBandejaNotificaciones" Type="tblDocumentosAdjuntos" />

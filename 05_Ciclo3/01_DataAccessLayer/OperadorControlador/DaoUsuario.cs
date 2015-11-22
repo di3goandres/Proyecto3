@@ -116,6 +116,35 @@ namespace Uniandes.Controlador
         }
 
 
+        public string obtenerIdentficadorUnicoUsuario(int idTIpoIdentificacion, string NumeroIdentificacion)
+        {
+
+
+            string uid = string.Empty;
+            using (OperadorDataContext ctx = new OperadorDataContext())
+            {
+
+
+                var cUsuarios = (from cp in ctx.tbl_usuarios
+                                 where cp.numeroIdentificacion == NumeroIdentificacion
+                                 select cp);
+
+
+                if (cUsuarios.Any())
+                {
+
+                    uid = cUsuarios.First().userIdApplicacion;// +"-" + cUsuarios.First().tbl_tipoId.abreviado_tipoId;
+                
+
+
+                }
+            }
+
+            return uid;
+
+        }
+
+
 
 
     }

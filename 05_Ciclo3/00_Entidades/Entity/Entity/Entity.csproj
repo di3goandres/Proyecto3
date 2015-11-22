@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BandejaNotificaciones.cs" />
     <Compile Include="CarpetaPersonal.cs" />
+    <Compile Include="ConsultaMensajes.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="MetadataArchivos.cs" />
     <Compile Include="Operacion.cs" />

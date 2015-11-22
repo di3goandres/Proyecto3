@@ -114,7 +114,7 @@
                 <%--<ul id="menu-ul" class="menu-ppl">--%>
                 <%--    <ul id="menu-ul">
                         </ul>--%>
-
+                
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">
                         <img src="../img/user2.png"></img>&nbsp;<loggedintemplate>
@@ -124,7 +124,7 @@
 
                 </ul>
             </div>
-
+            
             <!-- /.navbar-collapse -->
 
             </div>
@@ -133,8 +133,11 @@
 
         </nav>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+      
+
         </asp:ContentPlaceHolder>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+           
         </asp:ContentPlaceHolder>
     </form>
 

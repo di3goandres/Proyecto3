@@ -25,10 +25,10 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
 
         try
         {
-            EncriptadorTripleDES des = new EncriptadorTripleDES();
-            string uid = (string)SessionHelper.GetSessionData("ID_CARPETA_ACTUAL");
+           
+         
 
-            IdcarpetaActual = des.Decrypt(uid, true);
+         
 
             context.Response.ContentType = "text/plain";
 
@@ -42,7 +42,7 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
         }
         catch (Exception ex)
         {
-            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write("Ha ocurrido un Error en FileUploadMessage.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
             var respuestaError = new { Estado = "ERROR", Mensaje = ex.Message };
             context.Response.Write(ser.Serialize(respuestaError));
             return;
@@ -86,55 +86,35 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
             fileControl.UploadFileTsoScan(fileCollection);
             listaNombresArchivos = fileControl.AntivirusFileNames;
             //var fileLoaded = SessionHelper.GetSessionData("MIME_TYPES");
-            var idCarpeta = Convert.ToDecimal(IdcarpetaActual);
-            nuevaMetadata.idCarpetaPersonal = idCarpeta;
-            nuevaMetadata.nombre_generado = listaNombresArchivos.First().Generated;
-            nuevaMetadata.fecha_modificacion = DateTime.Now;
-            var usuario = (string)SessionHelper.GetSessionData("USUARIO_AUTENTICADO");
-            DaoUsuario obtenerUsuario = new DaoUsuario();
-            var datosUsuario = obtenerUsuario.ObtnerUsuario(usuario);
-            CarpetaPersonalDao daoCarpeta = new CarpetaPersonalDao();
-            var fullPath = daoCarpeta.fullPathPorCarpeta(idCarpeta);
-            fullPath = fullPath.Replace("\\", "/");
-
-            var direccionAlojamiento = @"" + datosUsuario.CarpetaInicial + @fullPath;
-
-            fileControl.CopyAntivirusToUserRepositorio(datosUsuario.respositorioKey, listaNombresArchivos.First().Generated, direccionAlojamiento);
-            Uniandes.Controlador.MetadataArchivoDao mDataArchibo = new Uniandes.Controlador.MetadataArchivoDao();
-
-            nuevaMetadata.tamanio = listaNombresArchivos.First().tamanioArchivo.ToString();
-            nuevaMetadata.autor = "usuario";
-            nuevaMetadata.userIdApplicacion = usuario;
-            nuevaMetadata.idDMtadataArchivo = Guid.NewGuid();
-            mDataArchibo.RegistrarMetadataArchivo(nuevaMetadata);
+            
 
             var respuesta = new { Estado = "OK", Mensaje = "Se han cargado los archivos correctamente", Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuesta));
         }
         catch (MaximumSizeExeption ex)
         {
-            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write("Ha ocurrido un Error en FileUploadMessage.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             var respuestaVirus = new { Estado = "SIZE", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosMaximum = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (InvalidMimeTypesException ex)
         {
-            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write("Ha ocurrido un Error en FileUploadMessage.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             var respuestaVirus = new { Estado = "MIME", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosMime = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (VirusFileExeption ex)
         {
-            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write("Ha ocurrido un Error en FileUploadMessage.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             var respuestaVirus = new { Estado = "VIRUS", Mensaje = ex.Message, Archivos = listaNombresArchivos, ArchivosVirus = ex.FileNames };
             context.Response.Write(ser.Serialize(respuestaVirus));
         }
         catch (Exception ex)
         {
-            AppLog.Write("Ha ocurrido un Error en FileUpload.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write("Ha ocurrido un Error en FileUploadMessage.ashx", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             var respuestaError = new { Estado = "ERROR", Mensaje = "Ha ocurrido un error cargando.", ErrorMessage = ex.ToString(), Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuestaError));

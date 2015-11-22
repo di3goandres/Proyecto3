@@ -9,10 +9,13 @@ $(function () {
     TraerInformacionInicial();
    
 
+    $("#EnviarMensaje").button().click(function () {
+        
+    });
     $("#BotonValidarRegistro").button().click(function () {
         ValidarRegistroUsuario();
     });
-
+    LoadUploadFilesSend('#fileUploadSolicitud', '#ArchivosAdjuntosDiv', 'FileUploadMessage.ashx');
 
 });
 
@@ -88,6 +91,8 @@ function resultadoValidar(jsonrequest) {
         /**
         SE PROCEDE A ARMAR EL MENSAJE PARA ENVIAR.
         */
+        $("#BotonValidarRegistro").hide();
+        
         $("#Mensaje").show();
         $('#ValidarTipoIdentificacion').prop('disabled', true);
         $("#ValidarNumeroIdentificacion").prop('disabled', true);

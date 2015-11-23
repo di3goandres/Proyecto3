@@ -5,7 +5,10 @@ $(function () {
 
     $("#Mensaje").hide();
 
-  
+    $('#ValidarTipoIdentificacion').prop('disabled', false);
+    $("#ValidarNumeroIdentificacion").prop('disabled', false);
+    $("#ValidarNumeroIdentificacion").val("");
+    $("#ValidarTipoIdentificacion").val("0");
     TraerInformacionInicial();
    
 

@@ -42,7 +42,7 @@ function TraerBandejaEntrada() {
         url: pagina + 'GetGridDataWithPagingBandejaNotificaciones',
         rowList: [10, 20, 30],
         viewsortcols: [true, 'horizontal', true],
-        scroll: true,
+      //  scroll: true,
         loadonce: false,
         viewrecords: true,
         mtype: 'POST',

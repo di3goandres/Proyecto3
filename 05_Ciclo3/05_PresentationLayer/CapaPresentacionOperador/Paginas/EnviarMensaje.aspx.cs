@@ -10,9 +10,11 @@ using Uniandes.Controlador;
 using Operador.Entity;
 using Uniandes.Utilidades;
 using Uniandes.FileControl;
+using Uniandes.GestorMensajeria;
 
 public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 {
+    private static string REPOSITORY = "OPERADOR_REPOSITORY_USER";
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -100,7 +102,103 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
     }
 
 
+    /// <summary>
+    /// Metodo para enviar mensajes
+    /// </summary>
+    /// <param name="Asunto"></param>
+    /// <param name="cuerpoMensaje"></param>
+    /// <param name="FILENAMES"></param>
+    /// <returns></returns>
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static object EnviarMensaje(string Asunto, string cuerpoMensaje, string FILENAMES)
+    {
+        try
+        {
+            #region Envio Mensajes
+            TransferenciaMensajes MENSAJE = new TransferenciaMensajes();
+            List<ListaDestinatarios> destino = new List<ListaDestinatarios>();
 
+            var idTipo = (int)SessionHelper.GetSessionData("TIPO_IDENTIFICACION_ENVIO");
+            var numero = (string)SessionHelper.GetSessionData("NUMERO_IDENTIFICACION_ENVIO");
+
+
+
+            destino.Add(new ListaDestinatarios()
+            {
+
+                NumeroIdentificacion = numero,
+                tipoIdentificacion = idTipo
+            });
+
+            List<Archivo> archivosEnviar = new List<Archivo>();
+            List<string> archivos = FILENAMES.Split(',').Where(x => string.IsNullOrWhiteSpace(x) == false).ToList();
+            var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+            DateTime FechaEnvio = DateTime.Now;
+            byte[] datosArchivo = null;
+            foreach (string nombreArchivo in archivos)
+            {
+                datosArchivo = fileControl.GetFileFromAntivirus(REPOSITORY, nombreArchivo);
+                string DatosArchivoString = Convert.ToBase64String(datosArchivo);
+                archivosEnviar.Add(new Archivo()
+                {
+                    Contenido = DatosArchivoString,
+                    FechaCargueArchivo = FechaEnvio,
+                    FechaExpedicionArchivo = FechaEnvio,
+                    FechaVigencia = FechaEnvio,
+                    NombreArchivo = nombreArchivo,
+                    ArchivoExpedidoPor = "",
+
+                });
+            }
+            var usuario = (UsuarioOperador)SessionHelper.GetSessionData("USUARIO");
+
+            ListaDestinatarios origien = new ListaDestinatarios();
+            origien.tipoIdentificacion =  usuario.tipoIdentificacion.Value;
+            origien.NumeroIdentificacion = usuario.numeroIdentificacion;
+
+            MENSAJE.archivo = archivosEnviar;
+            MENSAJE.Asunto = Asunto;
+            MENSAJE.Mensaje = cuerpoMensaje;
+            MENSAJE.destinatarios = destino;
+            MENSAJE.Origen = origien;
+            MENSAJE.NombreEnvia = usuario.Nombres + " " + usuario.Apellidos;
+
+
+            GestorMensajeria gestor = new GestorMensajeria();
+
+            var resultadoEnvio = gestor.EnviarMensaje(MENSAJE);
+
+            if (resultadoEnvio)
+            {
+                return new
+                {
+                    OK = "OK",
+                    mensaje = "Se ha enviado el mensaje a los destinatarios Correctamente."
+                };
+            }
+            else
+            {
+                return new
+                {
+                    OK = "fallo",
+                    mensaje = "Ha ocurrido un error inesperado por favor intentelo mas tarde."
+                };
+
+            }
+            #endregion
+
+        }
+        catch (Exception ex)    {
+            AppLog.Write(" Error obteniendo la informacion Inicial. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            return new
+            {
+                OK = "error",
+                mensaje = "Ha ocurrido un error inesperado por favor intentelo mas tarde."
+            };
+        
+        }
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -110,14 +208,14 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
         try
         {
 
-            
+
 
             return new
             {
                 Ok = "OK",
-              
+
                 TIPOIDENTIFICACION = _GetParametrosIdentificacion(),
-               
+
                 //aniofechaIngresoMaxima = (DateTime.Now.Year), // se le restan los dias del mes para que de el ultimo del mes anterior
                 //mesfechaIngresoMaxima = DateTime.Now.Month - 1,  // por que el datepicker de jquery empieza en cero
                 //diafechaIngresoMaxima = DateTime.Now.Day,
@@ -159,7 +257,7 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 
         return retorno;
     }
-   
 
-    
+
+
 }

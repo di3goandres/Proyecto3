@@ -197,8 +197,8 @@ public partial class Paginas_Default : System.Web.UI.Page
                         proceso.NombreEnvia,
                         proceso.fechaEnvio.ToString("dd-MM-yyyy hh:mm"),
                         proceso.Asunto,
-                        proceso.Destinatarios,
                         proceso.Adjunto, 
+                        proceso.Destinatarios,
                         proceso.Estado,
                       
                         }

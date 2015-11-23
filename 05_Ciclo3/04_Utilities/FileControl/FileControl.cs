@@ -492,6 +492,41 @@ namespace Uniandes.FileControl
             return fileData;
         }
 
+
+        /// <summary>
+        /// Download file from Antivirus repository
+        /// </summary>
+        /// <param name="sourceKey"></param>
+        /// <param name="fileName"></param>
+        public byte[] GetFileFromAntivirus(string sourceKey, string fileName)
+        {
+            var sourceRepository = FileConfigSettings.GetAntivirusDirectory();
+
+            if (sourceRepository == null)
+                throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + sourceKey);
+            var sourcePath = sourceRepository.Path;
+
+            ///FTP Credentials
+            ///
+            if (sourceRepository.IsFtp)
+            {
+                string sourceUser = sourceRepository.FtpUser;
+                string sourcePassword = sourceRepository.FtpPassword;
+
+                WebClient requestRepository = new WebClient();
+                requestRepository.Credentials = new NetworkCredential(sourceUser, sourcePassword);
+                byte[] fileData = requestRepository.DownloadData(Path.Combine(sourcePath, fileName));
+                return fileData;
+            }
+            else
+            {
+                WebClient requestRepository = new WebClient();
+                byte[] fileData = requestRepository.DownloadData(Path.Combine(sourcePath, fileName));
+                return fileData;
+            }
+        }
+
+
         /// <summary>
         /// Envia un archivo de una ruta local a un ftp
         /// </summary>
@@ -687,7 +722,7 @@ namespace Uniandes.FileControl
             {
                 AppLog.Write(" Ingrese _RenameFolderInFTP ", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
                 var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
-              
+
                 if (repository == null)
                 {
                     AppLog.Write(" No se encontro ninguna configuración de repositorio para la llave", AppLog.LogMessageType.Error, null, "OperadorCarpeta");
@@ -847,7 +882,7 @@ namespace Uniandes.FileControl
         }
 
 
-      
+
 
 
     }

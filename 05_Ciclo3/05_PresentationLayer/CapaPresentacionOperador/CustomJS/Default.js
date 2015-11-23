@@ -37,7 +37,7 @@ function TraerBandejaEntrada() {
         emptyrecords: "Sin registros",
         rownumbers: true,
         shrinkToFit: true,
-        width: 100%,
+        width: '850px',
         datatype: "json",
         url: pagina + 'GetGridDataWithPagingBandejaNotificaciones',
         rowList: [10, 20, 30],
@@ -53,7 +53,7 @@ function TraerBandejaEntrada() {
             if (postData.searchOper === undefined) postData.searchOper = null;
             return $.toJSON(postData);
         },
-        colNames: ['ID', 'De', 'Fecha de Envio', 'Asunto'],
+        colNames: ['ID', 'De', 'Fecha de Envio', 'Asunto', 'Adjuntos'],
         colModel: [
                 {
                     name: 'ID', Index: "ID", sortable: false, width: 0, editable: true, edittype: 'text', hidden: true, editoptions: { readonly: true },
@@ -64,14 +64,20 @@ function TraerBandejaEntrada() {
                      editrules: { edithidden: true, required: true }
                  },
                 {
-                    name: 'FECHA', Index: "FECHA", sortable: false, width: 150, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
+                    name: 'FECHA', Index: "FECHA", sortable: false, width: 250, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
                     editrules: { edithidden: true, required: true }
                 }
                 ,
                  {
-                     name: 'ASUNTO', Index: "ASUNTO", sortable: false, width: 150, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
+                     name: 'ASUNTO', Index: "ASUNTO", sortable: false, width: 250, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'left',
                      editrules: { edithidden: true, required: true }
                  },
+                    {
+                        name: 'Adjunto', Index: "Adjunto", sortable: false, width: 50, editoptions: { value: "True:False" }, formatter: "checkbox", formatoptions: { disabled: true }, height: '100%', editable: true, hidden: false, align: 'center',
+                        editrules: { edithidden: true, required: true },
+
+                    },
+
                
         ],
         ondblClickRow: function (rowid, iRow, iCol, e) {

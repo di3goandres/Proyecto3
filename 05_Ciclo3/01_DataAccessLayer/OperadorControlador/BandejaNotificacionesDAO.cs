@@ -38,36 +38,49 @@ namespace Uniandes.Controlador
             }
         }
 
-        public bool EnviarMensaje(BandejaNotificaciones mensaje)
+        public bool EnviarMensaje(TransferenciaMensajes mensaje)
         {
             try
             {
 
                 List<tblBandejaNotificaciones> listaInsertMensajes = new List<tblBandejaNotificaciones>();
-                var enviarA = mensaje.DestintatariosList;
+                var enviarA = mensaje.destinatarios;
                 string IdUsuarios = string.Empty;
+                string idOrigen = string.Empty;
+                bool adjunto = mensaje.archivo.Count() > 0 ? true : false;
                 var fechaEnvio = DateTime.Now;
                 foreach (var data in enviarA)
                 {
 
                     IdUsuarios = new DaoUsuario().obtenerIdentficadorUnicoUsuario(data.tipoIdentificacion, data.NumeroIdentificacion);
-
-                    listaInsertMensajes.Add(new tblBandejaNotificaciones() {
+                    idOrigen = new DaoUsuario().obtenerIdentficadorUnicoUsuario(mensaje.Origen.tipoIdentificacion, mensaje.Origen.NumeroIdentificacion);
+                    listaInsertMensajes.Add(new tblBandejaNotificaciones()
+                    {
                         idBandejaNotificacionPadre = null,
                         userIdAplicacionDestino = IdUsuarios,
-                        NombreEnvia = mensaje.NombreEnvia, 
-                        userIdAplicacionOrigen = mensaje.userIdAplicacionOrigen,
-                        Destinatarios = mensaje.Destinatarios,
+                        NombreEnvia = mensaje.NombreEnvia,
+                        userIdAplicacionOrigen = idOrigen,
+                        Destinatarios = "",//mensaje.Destinatarios,
                         fechaEnvio = fechaEnvio,
-                        Mensaje =  mensaje.Mensaje,
+                        Mensaje = mensaje.Mensaje,
                         Asunto = mensaje.Asunto,
                         Estado = 1,
-                        tamanio = mensaje.tamanio
-
+                        tamanio = "",// mensaje.tamanio
+                        Adjunto = adjunto
                     });
 
 
                 }
+                using (OperadorDataContext ctx = new OperadorDataContext())
+                {
+
+
+
+                    ctx.tblBandejaNotificaciones.InsertAllOnSubmit(listaInsertMensajes);
+                    ctx.SubmitChanges();
+                }
+
+
 
 
 

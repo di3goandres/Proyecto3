@@ -25,10 +25,10 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
 
         try
         {
-           
-         
 
-         
+
+
+
 
             context.Response.ContentType = "text/plain";
 
@@ -53,9 +53,9 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
         var mimeTypesObject = SessionHelper.GetSessionData("MIME_TYPES");
         List<string> TiposPermitidos = (mimeTypesObject == null) ? new List<string>() : (List<string>)mimeTypesObject;
         var listaNombresArchivos = new List<FileNameControl>();
-     // var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()), mimeTypes.ToList());
+        // var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()), mimeTypes.ToList());
         var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
-        
+
 
         try
         {
@@ -86,7 +86,7 @@ public class FileUpload : IHttpHandler, System.Web.SessionState.IRequiresSession
             fileControl.UploadFileTsoScan(fileCollection);
             listaNombresArchivos = fileControl.AntivirusFileNames;
             //var fileLoaded = SessionHelper.GetSessionData("MIME_TYPES");
-            
+
 
             var respuesta = new { Estado = "OK", Mensaje = "Se han cargado los archivos correctamente", Archivos = listaNombresArchivos };
             context.Response.Write(ser.Serialize(respuesta));

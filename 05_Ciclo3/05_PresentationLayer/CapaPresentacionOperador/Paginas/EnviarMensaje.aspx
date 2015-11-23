@@ -56,7 +56,7 @@
                   <tr>
                 
                   <td style ="width:49%;padding:5px"><label>Mensaje </label>
-                    <textarea class="TextEntry form-control" id="Text2"  cols="10"   rows="10" ></textarea>
+                    <textarea class="TextEntry form-control" id="cuerpoMensaje"  cols="10"   rows="10" ></textarea>
                   </td>
                    </tr>
                    </table>

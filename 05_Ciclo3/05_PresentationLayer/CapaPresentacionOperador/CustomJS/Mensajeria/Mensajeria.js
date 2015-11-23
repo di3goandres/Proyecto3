@@ -10,7 +10,7 @@ $(function () {
    
 
     $("#EnviarMensaje").button().click(function () {
-        
+        validarEnviarMensaje();
     });
     $("#BotonValidarRegistro").button().click(function () {
         ValidarRegistroUsuario();
@@ -20,9 +20,54 @@ $(function () {
 });
 
 
+function validarEnviarMensaje() {
+
+    var parametros = {};
+    var n = false;
+    n = validarYAgregarDatos("#Asunto", "input", "Ingrese el asunto del mensaje, por favor", "Asunto", parametros);
+    if (!n) return;
+
+    n = validarYAgregarDatos("#cuerpoMensaje", "input", "Ingrese el mensaje que desea enviar, por favor", "cuerpoMensaje", parametros);
+    if (!n) return;
+    var filenames = GetLoadFilenames('#ArchivosAdjuntosDiv');
+
+    if (filenames == null || filenames == "") {
+        AlertUI(".:Info", "por favor ingresar por lo menos, un archivo adjunto.");
+        return;
+    }
+    parametros.FILENAMES = filenames;
+
+    var Pasar = $.toJSON(parametros);
+    DoJsonRequestBusy(pagina, 'EnviarMensaje', resultadoEnviarMensaje, Pasar);
+
+   
+}
+
+
+
+function resultadoEnviarMensaje(jsonrequest) {
+    var data = jsonrequest.d;
+    if (data.OK == "OK") {
+      
+
+        AlertUI(".:Información", data.mensaje.toString(), function () {
+
+            return;
+        });
+    }
+    else {
+        AlertUI(".:Información", data.mensaje.toString());
+        return
+    }
+}
+
 function TraerInformacionInicial() {
     DoJsonRequestBusy(pagina, "TraerInformacionInicial", cargarDatosInicales, '{}');
 }
+
+
+
+
 
 function cargarDatosInicales(jsonrequest) {
     var data = jsonrequest.d;

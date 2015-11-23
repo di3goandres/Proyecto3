@@ -24,7 +24,7 @@ namespace Uniandes.Controlador
                     Total = DATOS.Count();
                     if (DATOS.Any())
                     {
-                        DATOS = DATOS.Skip(SKIP).Take(NumeroDeregistros);
+                        DATOS = DATOS.OrderByDescending(x=>x.fechaEnvio).Skip(SKIP).Take(NumeroDeregistros);
                         listaRetorno = DATOS.ToList();
                     }
                 }

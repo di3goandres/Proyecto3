@@ -33,7 +33,7 @@ namespace Uniandes.Controlador
                     {
                         var entidad = MapeadorCarpetaPersonal.MapCarpetaFromBizEntity(carpeta);
                         entidad.idCarpetaPadre = entidad.idCarpetaPadre == 0 ? null : entidad.idCarpetaPadre;
-
+                        entidad.EsSistema = false;
                         ctx.tblCarpetaPersonal.InsertOnSubmit(entidad);
                         ctx.SubmitChanges();
 
@@ -105,6 +105,7 @@ namespace Uniandes.Controlador
                         var carpeta = (from cp in ctx.tblCarpetaPersonal
                                        where cp.idCarpetaPadre == (decimal?)null
                                        && cp.NombreCarpeta.ToUpper() == nombreCarpeta.ToUpper()
+                                       && cp.EsSistema == false
                                        select cp);
 
                         if (carpeta.Any())
@@ -122,6 +123,8 @@ namespace Uniandes.Controlador
                         var carpetas = (from cp in ctx.tblCarpetaPersonal
                                         where cp.idCarpetaPadre == idCarpeta
                                          && cp.NombreCarpeta.ToUpper() == nombreCarpeta.ToUpper()
+                                         && cp.EsSistema == false
+
                                         select cp);
 
                         if (carpetas.Any())
@@ -165,6 +168,8 @@ namespace Uniandes.Controlador
 
                     var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                      where cp.userIdApplicacion == userId
+                                       && cp.EsSistema == false
+
                                      select cp);
 
 
@@ -198,13 +203,47 @@ namespace Uniandes.Controlador
         }
 
 
+        public decimal  obtenerIdCarpeta(String userId, String Carpeta)
+        {
+
+            decimal retorno = 0;
+            try
+            {
+                using (OperadorDataContext ctx = new OperadorDataContext())
+                {
+
+
+                    var cPersonal = (from cp in ctx.tblCarpetaPersonal
+                                     where cp.userIdApplicacion == userId
+                                       && cp.EsSistema == true
+                                       && cp.NombreCarpeta == Carpeta
+
+                                     select cp);
+
+
+                    if (cPersonal.Any())
+                    {
+                        retorno = cPersonal.First().idCarpetaPersonal;
+                    }
+                }
+
+                return retorno;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+        }
+
         /// <summary>
         /// Obtiene todas las carptas del usuario, adicionalmente se le coloca el full path de cada carpeta. y las entrega todas, sin forma 
         /// de arbol
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public List<CarpetaPersonal> ObtenerTodasCarpetasPorUsuario(String userId)
+        public List<CarpetaPersonal> ObtenerTodasCarpetasPorUsuario(String userId, decimal idCarpeta)
         {
             List<CarpetaPersonal> Resultados = new List<CarpetaPersonal>();
             List<CarpetaPersonal> ResultadosConPath = new List<CarpetaPersonal>();
@@ -216,6 +255,8 @@ namespace Uniandes.Controlador
 
                     var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                      where cp.userIdApplicacion == userId
+                                       && cp.EsSistema == false
+
                                      select cp);
 
 
@@ -275,6 +316,7 @@ namespace Uniandes.Controlador
                         var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                          where cp.userIdApplicacion == userId &&
                                           cp.idCarpetaPadre == (decimal?)null
+                                       && cp.EsSistema == false
 
                                          select cp);
 
@@ -294,6 +336,8 @@ namespace Uniandes.Controlador
                         var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                          where cp.userIdApplicacion == userId &&
                                           cp.idCarpetaPadre == idCarpetaPersonal
+                                       && cp.EsSistema == false
+
                                          select cp);
 
 
@@ -379,6 +423,8 @@ namespace Uniandes.Controlador
 
                 var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                  where cp.idCarpetaPersonal == idCarpeta
+                                       && cp.EsSistema == false
+
                                  select cp);
 
 

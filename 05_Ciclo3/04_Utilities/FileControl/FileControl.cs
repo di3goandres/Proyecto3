@@ -560,6 +560,37 @@ namespace Uniandes.FileControl
 
         }
 
+
+        private void _SendFileStringToFtp(String file, string ftpPath, string user, string password, string destinyFileName)
+        {
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Path.Combine(ftpPath, destinyFileName));
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(user, password);
+
+            Stream ftpStream = request.GetRequestStream();
+
+
+            var byteArray = Convert.FromBase64String(file);
+
+            Stream stream = new MemoryStream(byteArray);
+            int length = 1024;
+            byte[] buffer = new byte[length];
+            int bytesRead = 0;
+
+            do
+            {
+                bytesRead = stream.Read(buffer, 0, length);
+                ftpStream.Write(buffer, 0, bytesRead);
+            } while (bytesRead != 0);
+
+            stream.Close();
+            stream.Dispose();
+            ftpStream.Close();
+            ftpStream.Dispose();
+
+        }
+
         /// <summary>
         /// Envia un archivo de una ruta local a un ftp
         /// </summary>
@@ -707,6 +738,46 @@ namespace Uniandes.FileControl
             }
         }
 
+
+
+
+        /// <summary>
+        /// Envio de archivos de la ruta de antivirus a otra carpeta ya sea local o FTP configurada en el web.config en la sección FilesSection
+        /// </summary>
+        /// <param name="destinationKey"></param>
+        /// <param name="fileName"></param>
+        public void CopyStringByteFileToRepositorio(string destinationKey,string Carpeta,  String fileName, string NameFile)
+        {
+            try
+            {
+                var repository = FileConfigSettings.GetRepositoryDirectory(destinationKey);
+                if (repository.Path.Equals(FileConfigSettings.GetAntivirusDirectory().Path))
+                    return;
+                if (repository == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave " + destinationKey);
+                }
+
+                var antivirusDir = FileConfigSettings.GetAntivirusDirectory();
+                if (antivirusDir == null)
+                {
+                    throw new RepositoryKeyExeption("No se encontro ninguna configuración de repositorio para la llave del Antivirus");
+                }
+
+                if (repository.IsFtp) {
+
+                    _SendFileStringToFtp(fileName, repository.Path + Carpeta, repository.FtpUser, repository.FtpPassword, NameFile);
+                
+                
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
 
         /// <summary>

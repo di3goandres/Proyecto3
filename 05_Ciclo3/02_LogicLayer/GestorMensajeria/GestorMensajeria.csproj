@@ -43,6 +43,13 @@
     <Reference Include="Uniandes.Controlador">
       <HintPath>S:\Uniandes.Controlador.dll</HintPath>
     </Reference>
+    <Reference Include="Uniandes.FileControl">
+      <HintPath>S:\Uniandes.FileControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Uniandes.Utilidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Uniandes.Utilidades.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestorMensajeria.cs" />

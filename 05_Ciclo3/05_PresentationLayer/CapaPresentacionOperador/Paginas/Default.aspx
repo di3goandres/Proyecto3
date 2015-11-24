@@ -10,15 +10,8 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--inicio del contenido   -->
-    <div class="row">
-        <div style="padding: 55px;">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <%--<div class="col-md-9"><img src="../img/intro.png" class="img-responsive" alt="intro"/></div>--%>
-    </div>
+
+
     <center>
    <div id="RegistroUsuarios" class="form">
        <div class="container_login" style="width:75%">
@@ -37,15 +30,7 @@
                 </div>
             </div>
 
-         <div id="Div1">
-            <table>
-                <tr>
-                    <td>
-                        <input id="Actualizar" type="button" value="Editar Direccion Residencia" class="center-block btn btn_ficha " />
-                    </td>
-                </tr>
-            </table>
-        </div>
+       
 
     <%--<div id="cargarArchivos">
        <%-- <div>

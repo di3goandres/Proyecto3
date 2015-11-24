@@ -218,6 +218,8 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                             var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
                             fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
+                            fileControl._CreateFolderInFTP(CarpetaInicial+@"/ADJUNTOS", "OPERADOR_REPOSITORY_USER");
+
                             #endregion
 
 

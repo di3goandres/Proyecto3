@@ -14,7 +14,7 @@ namespace Uniandes.Controlador
         /// </summary>
         /// <param name="idCarpetaPersonal"></param>
         /// <returns></returns>
-        public List<MetadataArchivos> ObtenerArchivosPorCarpetasDeUsuario(long? idCarpetaPersonal)
+        public List<MetadataArchivos> ObtenerArchivosPorCarpetasDeUsuario(long? idCarpetaPersonal, decimal idcarpeta)
         {
 
             List<MetadataArchivos> Resultados = new List<MetadataArchivos>();
@@ -32,6 +32,7 @@ namespace Uniandes.Controlador
                         var cPersonal = (from cp in ctx.tbl_metadataArchivos
                                          where
                                           cp.idCarpetaPersonal == (decimal?)null
+                                          && cp.idCarpetaPersonal != idcarpeta
                                          select cp);
 
                         if (cPersonal.Any())
@@ -109,6 +110,35 @@ namespace Uniandes.Controlador
         }
 
 
+
+
+        /// <summary>
+        /// Metodo para registrar los metadatos de un archivo en la base de datos.
+        /// </summary>
+        /// <param name="entidadSubir"></param>
+        /// <returns></returns>
+        public List<tbl_metadataArchivos> RegistrarListaMetadataArchivo(List<tbl_metadataArchivos> entidadSubir)
+        {
+
+            try
+            {
+                using (OperadorDataContext ctx = new OperadorDataContext())
+                {
+                    
+                    ctx.tbl_metadataArchivos.InsertAllOnSubmit(entidadSubir);
+                    ctx.SubmitChanges();
+
+                    return entidadSubir;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
      
 
 
@@ -117,7 +147,7 @@ namespace Uniandes.Controlador
         /// </summary>
         /// <param name="UIDuser"></param>
         /// <returns></returns>
-        public List<MetadataArchivos> ObtenerArchivosPorUsuario(string UIDuser)
+        public List<MetadataArchivos> ObtenerArchivosPorUsuario(string UIDuser, decimal idCarpeta)
         {
 
             List<MetadataArchivos> Resultados = new List<MetadataArchivos>();
@@ -134,6 +164,8 @@ namespace Uniandes.Controlador
                     var cPersonal = (from cp in ctx.tbl_metadataArchivos
                                      where
                                       cp.userIdApplicacion == UIDuser
+                                      && cp.idCarpetaPersonal != idCarpeta
+                                      || cp.idCarpetaPersonal == (decimal?)null
                                      select cp);
 
                     if (cPersonal.Any())

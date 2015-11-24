@@ -35,13 +35,14 @@ function TraerBandejaEntrada() {
         multiselect: false,
         pager: gridBandejaEntradaPagerId,
         emptyrecords: "Sin registros",
-        rownumbers: true,
+        //rownumbers: true,
         shrinkToFit: true,
         width: '850px',
         datatype: "json",
         url: pagina + 'GetGridDataWithPagingBandejaNotificaciones',
-        rowList: [10, 20, 30],
-        viewsortcols: [true, 'horizontal', true],
+        rowNum: 15,
+        rowList: [15, 30, 45],
+        //viewsortcols: [true, 'horizontal', true],
       //  scroll: true,
         loadonce: false,
         viewrecords: true,
@@ -60,7 +61,7 @@ function TraerBandejaEntrada() {
                     editrules: { edithidden: true, required: true }
                 },
                  {
-                     name: 'De', Index: "De", sortable: false, width: 0, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
+                     name: 'De', Index: "De", sortable: false, width: 250, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
                      editrules: { edithidden: true, required: true }
                  },
                 {
@@ -80,10 +81,10 @@ function TraerBandejaEntrada() {
 
                
         ],
-        ondblClickRow: function (rowid, iRow, iCol, e) {
-            var data = $('#grdSearchResults').getRowData(rowid);
-         //   SeleccionarporServicios(rowid);
-        },
+        //ondblClickRow: function (rowid, iRow, iCol, e) {
+        //    var data = $('#grdSearchResults').getRowData(rowid);
+        // //   SeleccionarporServicios(rowid);
+        //},
         jsonReader: {
             root: "d.rows",
             page: "d.page",

@@ -51,6 +51,7 @@
     <Compile Include="Conexion.cs" />
     <Compile Include="DaoUsuario.cs" />
     <Compile Include="DepartamentosDao.cs" />
+    <Compile Include="DocumentosAdjuntosDao.cs" />
     <Compile Include="MapeadorCarpetaPersonal.cs" />
     <Compile Include="MapeadorMetadataArchivos.cs" />
     <Compile Include="MetadataArchivoDao.cs" />
@@ -66,6 +67,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="tipoDocumentalDao.cs" />
     <Compile Include="TipoidentificacionDao.cs" />
   </ItemGroup>
   <ItemGroup>

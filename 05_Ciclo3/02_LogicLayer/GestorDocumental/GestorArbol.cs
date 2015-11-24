@@ -25,10 +25,12 @@ namespace Uniandes.GestorDocumental
                 MetadataArchivoDao metaDataDao = new MetadataArchivoDao();
                 List<TreeField> retorno = new List<TreeField>();
                 List<MetadataArchivos> listaArchivos = new List<MetadataArchivos>();
-                var listaCarpetas = cDao.ObtenerTodasCarpetasPorUsuario(UID);
+
+                var idCarpeta = cDao.obtenerIdCarpeta(UID, "ADJUNTOS");
+                var listaCarpetas = cDao.ObtenerTodasCarpetasPorUsuario(UID, idCarpeta);
                 if (ObtenerArchivos)
                 {
-                    listaArchivos = metaDataDao.ObtenerArchivosPorUsuario(UID);
+                    listaArchivos = metaDataDao.ObtenerArchivosPorUsuario(UID, idCarpeta);
                 }
                 var listaAtributosFile = new Li_attr();
                 listaAtributosFile = (new Li_attr() { rel = "file" });

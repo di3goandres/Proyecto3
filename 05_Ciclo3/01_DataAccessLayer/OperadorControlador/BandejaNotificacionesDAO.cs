@@ -24,7 +24,7 @@ namespace Uniandes.Controlador
                     Total = DATOS.Count();
                     if (DATOS.Any())
                     {
-                        DATOS = DATOS.OrderByDescending(x=>x.fechaEnvio).Skip(SKIP).Take(NumeroDeregistros);
+                        DATOS = DATOS.OrderByDescending(x => x.fechaEnvio).Skip(SKIP).Take(NumeroDeregistros);
                         listaRetorno = DATOS.ToList();
                     }
                 }
@@ -33,64 +33,36 @@ namespace Uniandes.Controlador
             }
             catch (Exception ex)
             {
-                AppLog.Write(" Error obteniendo datos de planes.", AppLog.LogMessageType.Error, ex, "BansatLog");
+                AppLog.Write(" Error obteniendo datos de planes.", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                 throw;
             }
         }
 
-        public bool EnviarMensaje(TransferenciaMensajes mensaje)
+
+        /// <summary>
+        /// Metodo para enviar un mensaje interno 
+        /// </summary>
+        /// <param name="mensaje"></param>
+        /// <returns>Lista de Notificaciones que fueron enviadas</returns>
+        public List<tblBandejaNotificaciones> EnviarMensaje(List<tblBandejaNotificaciones> listaInsertMensajes)
         {
             try
             {
 
-                List<tblBandejaNotificaciones> listaInsertMensajes = new List<tblBandejaNotificaciones>();
-                var enviarA = mensaje.destinatarios;
-                string IdUsuarios = string.Empty;
-                string idOrigen = string.Empty;
-                bool adjunto = mensaje.archivo.Count() > 0 ? true : false;
-                var fechaEnvio = DateTime.Now;
-                foreach (var data in enviarA)
-                {
-
-                    IdUsuarios = new DaoUsuario().obtenerIdentficadorUnicoUsuario(data.tipoIdentificacion, data.NumeroIdentificacion);
-                    idOrigen = new DaoUsuario().obtenerIdentficadorUnicoUsuario(mensaje.Origen.tipoIdentificacion, mensaje.Origen.NumeroIdentificacion);
-                    listaInsertMensajes.Add(new tblBandejaNotificaciones()
-                    {
-                        idBandejaNotificacionPadre = null,
-                        userIdAplicacionDestino = IdUsuarios,
-                        NombreEnvia = mensaje.NombreEnvia,
-                        userIdAplicacionOrigen = idOrigen,
-                        Destinatarios = "",//mensaje.Destinatarios,
-                        fechaEnvio = fechaEnvio,
-                        Mensaje = mensaje.Mensaje,
-                        Asunto = mensaje.Asunto,
-                        Estado = 1,
-                        tamanio = "",// mensaje.tamanio
-                        Adjunto = adjunto
-                    });
-
-
-                }
+               
                 using (OperadorDataContext ctx = new OperadorDataContext())
                 {
-
-
 
                     ctx.tblBandejaNotificaciones.InsertAllOnSubmit(listaInsertMensajes);
                     ctx.SubmitChanges();
                 }
+                return listaInsertMensajes;
 
-
-
-
-
-
-
-                return true;
+               
             }
             catch (Exception ex)
             {
-                AppLog.Write(" Error obteniendo datos de planes.", AppLog.LogMessageType.Error, ex, "BansatLog");
+                AppLog.Write(" Error obteniendo datos de planes.", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                 throw;
             }
 

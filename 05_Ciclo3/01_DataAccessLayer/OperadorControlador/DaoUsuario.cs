@@ -116,11 +116,11 @@ namespace Uniandes.Controlador
         }
 
 
-        public string obtenerIdentficadorUnicoUsuario(int idTIpoIdentificacion, string NumeroIdentificacion)
+        public tbl_usuarios obtenerIdentficadorUnicoUsuario(int idTIpoIdentificacion, string NumeroIdentificacion)
         {
 
 
-            string uid = string.Empty;
+            tbl_usuarios uid = new tbl_usuarios();
             using (OperadorDataContext ctx = new OperadorDataContext())
             {
 
@@ -133,7 +133,7 @@ namespace Uniandes.Controlador
                 if (cUsuarios.Any())
                 {
 
-                    uid = cUsuarios.First().userIdApplicacion;// +"-" + cUsuarios.First().tbl_tipoId.abreviado_tipoId;
+                    uid = cUsuarios.First();// +"-" + cUsuarios.First().tbl_tipoId.abreviado_tipoId;
                 
 
 

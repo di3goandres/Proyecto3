@@ -38,7 +38,7 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
         try
         {
             AppLog.Write("Inicio consulta en el centralizador", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
-
+            var completo = PrefijoEnumTIPO_IDENTIFICACION.EnumToTIPO_IDENTIFICACIONCOMPLETO(TIPO_IDENTIFICACION);
             var Existe = serviciocentralizador.ValidarPorIdentificacionYTipo(NUMERO_IDENTIFICACION, TIPO_IDENTIFICACION, IdentificadorOperador);
 
             if (Existe.Existe)
@@ -57,7 +57,12 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
                     return new
                     {
                         OK = "OK",
-                        mensaje = "OK"
+                        mensaje = "Se ha agregado un usuario",
+                        NUMERO_IDENTIFICACION = NUMERO_IDENTIFICACION,
+                        TIPO_IDENTIFICACION = TIPO_IDENTIFICACION,
+                        COMPLETO = completo,
+                        MISMO = true
+
                     };
                 }
                 else
@@ -68,7 +73,12 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
                     return new
                     {
                         OK = "OK",
-                        mensaje = "El usuario se encuentra registrado actualmente en otro operador,"
+                        mensaje = "Se ha agregado un usuario",
+                        NUMERO_IDENTIFICACION = NUMERO_IDENTIFICACION,
+                        TIPO_IDENTIFICACION = TIPO_IDENTIFICACION,
+                        COMPLETO = completo,
+                        MISMO = false
+
                     };
                 }
 
@@ -81,7 +91,9 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
                     OK = "NO",
                     mensaje = "El usuario al que estas tratando de enviarle un mensaje, no existe en ningun operador registrado",
                     NUMERO_IDENTIFICACION = NUMERO_IDENTIFICACION,
-                    TIPO_IDENTIFICACION = TIPO_IDENTIFICACION
+                    TIPO_IDENTIFICACION = TIPO_IDENTIFICACION,
+                    COMPLETO = completo,
+
 
                 };
 
@@ -111,7 +123,7 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
     /// <returns></returns>
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public static object EnviarMensaje(string Asunto, string cuerpoMensaje, string FILENAMES)
+    public static object EnviarMensaje(List<usuariosMensajes> usuarios, string Asunto, string cuerpoMensaje, string FILENAMES)
     {
         try
         {
@@ -124,12 +136,15 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 
 
 
-            destino.Add(new ListaDestinatarios()
+            foreach (var data in usuarios)
             {
+                destino.Add(new ListaDestinatarios()
+                {
 
-                NumeroIdentificacion = numero,
-                tipoIdentificacion = idTipo
-            });
+                    NumeroIdentificacion = data.numeroIdentificacion,
+                    tipoIdentificacion = data.idTIpoIdentificacion
+                });
+            }
 
             List<Archivo> archivosEnviar = new List<Archivo>();
             List<string> archivos = FILENAMES.Split(',').Where(x => string.IsNullOrWhiteSpace(x) == false).ToList();
@@ -154,7 +169,7 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
             var usuario = (UsuarioOperador)SessionHelper.GetSessionData("USUARIO");
 
             ListaDestinatarios origien = new ListaDestinatarios();
-            origien.tipoIdentificacion =  usuario.tipoIdentificacion.Value;
+            origien.tipoIdentificacion = usuario.tipoIdentificacion.Value;
             origien.NumeroIdentificacion = usuario.numeroIdentificacion;
 
             MENSAJE.archivo = archivosEnviar;
@@ -189,14 +204,15 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
             #endregion
 
         }
-        catch (Exception ex)    {
+        catch (Exception ex)
+        {
             AppLog.Write(" Error obteniendo la informacion Inicial. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
             return new
             {
                 OK = "error",
                 mensaje = "Ha ocurrido un error inesperado por favor intentelo mas tarde."
             };
-        
+
         }
     }
 
@@ -257,6 +273,19 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 
         return retorno;
     }
+
+
+
+}
+
+[Serializable]
+public class usuariosMensajes {
+
+    public string ID { get; set; }
+    public int idTIpoIdentificacion { get; set; }
+    public string tipoIdentificacion { get; set; }
+    public string numeroIdentificacion { get; set; }
+    public bool mismo { get; set; }
 
 
 

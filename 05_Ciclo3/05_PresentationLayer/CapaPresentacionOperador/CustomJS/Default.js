@@ -76,6 +76,7 @@ function TraerBandejaEntrada() {
                 {
                     name: 'FECHA', Index: "FECHA", sortable: false, width: 250, editable: true, edittype: 'text', hidden: false, editoptions: { readonly: true }, align: 'center',
                     editrules: { edithidden: true, required: true }
+                    //sorttype:'date', formatter:'date', formatoptions: {newformat:'d-M-Y'}, datefmt: 'd-M-Y'
                 }
                 ,
                  {

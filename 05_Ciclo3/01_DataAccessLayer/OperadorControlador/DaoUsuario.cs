@@ -128,6 +128,7 @@ namespace Uniandes.Controlador
 
                 var cUsuarios = (from cp in ctx.tbl_usuarios
                                  where cp.numeroIdentificacion == NumeroIdentificacion
+                                 && cp.tipoIdentificacion == idTIpoIdentificacion
                                  select cp);
 
 

@@ -50,6 +50,21 @@ namespace Operador.Entity
                 default: return "NA";
             }
         }
+
+
+        public static string EnumToTIPO_IDENTIFICACIONCOMPLETO(int me)
+        {
+            switch (me)
+            {
+                case 1: return "Cédula de Ciudadania".ToUpper();
+                case 2: return "Cédula de Extranjeria".ToUpper();
+                case 3: return "Registro Civil".ToUpper();
+                case 4: return "Pasaporte".ToUpper();
+                case 5: return "Numero Unico de Identificación Personal".ToUpper();
+                case 6: return "Tarjeta de Identidad".ToUpper();
+                default: return "NA";
+            }
+        }
     }
 
 }

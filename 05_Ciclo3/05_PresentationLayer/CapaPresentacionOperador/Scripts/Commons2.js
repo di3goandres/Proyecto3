@@ -372,7 +372,8 @@ function evitarTexto(obj, e) {
 function formatDate(input) {
     var datePart = input.match(/\d+/g),
   year = datePart[2], // get only two digits
-  month = datePart[1], day = datePart[0];
+  month = datePart[1],
+  day = datePart[0];
 
     return month + '/' + day + '/' + year;
 }
@@ -380,7 +381,8 @@ function formatDate(input) {
 function formatoInternacional(input) {
     var datePart = input.match(/\d+/g),
   year = datePart[2], // get only two digits
-  month = datePart[1], day = datePart[0];
+  month = datePart[1],
+  day = datePart[0];
 
     return year + '-' + month + '-' + day;
 }

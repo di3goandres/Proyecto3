@@ -13,6 +13,8 @@ using Uniandes.Controlador;
 using Operador.Entity;
 using Uniandes.Utilidades;
 using Uniandes.FileControl;
+using Uniandes.GestorLogicaOperador;
+using Uniandes.GestionUsuarios;
 
 public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 {
@@ -79,14 +81,15 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 
             }
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             AppLog.Write(" Error Validando informacion  ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
 
             return new
             {
                 OK = "error",
                 mensaje = "Ha ocurrido un error inesperador por favor intentelo en un unos instantes",
-             
+
 
             };
         }
@@ -98,7 +101,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public static object CrearUsuario(string NombresI, string NombresII, string ApellidosI, string ApellidosII, int TIPO_IDENTIFICACION, string NUMERO_IDENTIFICACION,
 
-        int MunExpedicion, string fechaExpedicion, string Genero, string fechaNacimiento, int MunNacimiento, int Nacionalidad, int munResidencia, string DireccionResidencia,
+        int MunExpedicion, DateTime fechaExpedicion, string Genero, DateTime fechaNacimiento, int MunNacimiento, int Nacionalidad, int munResidencia, string DireccionResidencia,
 
         string telefono,
        string Email, string passwordQuestion, string SecurityAnswer)
@@ -123,6 +126,11 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                 AppLog.Write(" Error convirtiendo la fecha de expedicionInicial. ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
                 status = "error";
                 Retorno = "Ingrese la fecha de expedición Valida";
+                return new
+                {
+                    status = status,
+                    mensaje = Retorno
+                };
 
             }
 
@@ -137,6 +145,11 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
 
                 status = "error";
                 Retorno = "Ingrese la fecha de nacimiento Valida";
+                return new
+                {
+                    status = status,
+                    mensaje = Retorno
+                };
 
             }
 
@@ -174,7 +187,8 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
             var resultado = serviciocentralizador.ValidarPorIdentificacionYTipo(nuevoUsuario.numeroIdentificacion, nuevoUsuario.idTipoIdentificacion, IdentificadorOperador);
 
             AppLog.Write(" fin consulta si existe el usuario Resutlado:" + resultado.ToString(), AppLog.LogMessageType.Info, null, "OperadorCarpeta");
-                                             
+            var prefijo = PrefijoEnumTIPO_IDENTIFICACION.EnumToTIPO_IDENTIFICACION(TIPO_IDENTIFICACION);
+            string UserName = prefijo + NUMERO_IDENTIFICACION;
             if (!resultado.Existe && !resultado.MismoOperador)
             {
 
@@ -182,7 +196,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                 //
 
 
-                MembershipUser a = Membership.GetUser(NUMERO_IDENTIFICACION);
+                MembershipUser a = Membership.GetUser(UserName);
 
                 string porEmail = string.Empty;
                 porEmail = Membership.GetUserNameByEmail(Email);
@@ -191,7 +205,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                     #region ("Creacion")
                     MembershipCreateStatus createStatus;
                     MembershipUser newUser =
-                               Membership.CreateUser(NUMERO_IDENTIFICACION, NUMERO_IDENTIFICACION,
+                               Membership.CreateUser(prefijo + NUMERO_IDENTIFICACION, NUMERO_IDENTIFICACION,
                                                      Email, passwordQuestion,
                                                      SecurityAnswer, true,
                                                      out createStatus);
@@ -199,7 +213,7 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                     switch (createStatus)
                     {
                         case MembershipCreateStatus.Success:
-                            Roles.AddUserToRole(NUMERO_IDENTIFICACION, PERFILP);
+                            Roles.AddUserToRole(UserName, PERFILP);
 
 
                             var Usuarioregistrado = serviciocentralizador.RegistrarUsuario(nuevoUsuario, IdentificadorOperador);
@@ -207,18 +221,58 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                             var datosTIpo = new TipoidentificacionDao().obtenerTipos();
                             var tipoID = datosTIpo.Where(x => x.id_tipoId == TIPO_IDENTIFICACION).Select(x => x.abreviado_tipoId).First();
                             string CarpetaInicial = tipoID + NUMERO_IDENTIFICACION;
-                            AppLog.Write(" Inicio Creacion Usuario" , AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+                            AppLog.Write(" Inicio Creacion Usuario", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
-                            var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(newUser.ProviderUserKey.ToString(),
-                                Usuarioregistrado.UUID.ToString(),
-                                "OPERADOR_REPOSITORY_USER", CarpetaInicial, Usuarioregistrado.primerNombre + " " + Usuarioregistrado.segundoNombre,  Usuarioregistrado.primerApellido + " " + Usuarioregistrado.segundoApellido,Usuarioregistrado.idTipoIdentificacion, Usuarioregistrado.numeroIdentificacion );
-                            AppLog.Write(" Fin Creacion Usuario", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+
+                            GestorRegistro gestorRegistro = new GestorRegistro();
+
+                            GestionUsuario gestor = new GestionUsuario();
+
+
+
+                            try
+                            {
+                                var registro = gestorRegistro.RegistrarUsuario(newUser.ProviderUserKey.ToString(),
+                                 Usuarioregistrado.UUID.ToString(),
+                                 "OPERADOR_REPOSITORY_USER",
+                                 CarpetaInicial, Usuarioregistrado.primerNombre + " " + Usuarioregistrado.segundoNombre,
+                                 Usuarioregistrado.primerApellido + " " + Usuarioregistrado.segundoApellido,
+                                 Usuarioregistrado.idTipoIdentificacion, Usuarioregistrado.numeroIdentificacion);
+
+                            }
+                            catch (Exception ex)
+                            {
+                                #region se eliminan los usuarios
+                                gestor.DeleteUser(UserName);
+                                serviciocentralizador.EliminarUsuario(Usuarioregistrado.UUID, IdentificadorOperador);
+                                #endregion
+                                AppLog.Write(" Error Creacion Usuario operador", AppLog.LogMessageType.Info, ex, "OperadorCarpeta");
+                                status = "Error";
+                                Retorno = "Hubo un error desconocido, la cuenta de usuario no fue creado.";
+                                return new
+                                {
+                                    status = status,
+                                    mensaje = Retorno
+                                };
+
+                            }
+                            AppLog.Write(" Fin Creacion Usuario operador", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
+
+
+                            //var usuaripoRegistrarApp = registroAPP.RegistrarUsuario(
+                            //    newUser.ProviderUserKey.ToString(),
+                            //    Usuarioregistrado.UUID.ToString(),
+                            //    "OPERADOR_REPOSITORY_USER", 
+                            //    CarpetaInicial, Usuarioregistrado.primerNombre + " " + Usuarioregistrado.segundoNombre,
+                            //    Usuarioregistrado.primerApellido + " " + Usuarioregistrado.segundoApellido,
+                            //    Usuarioregistrado.idTipoIdentificacion, Usuarioregistrado.numeroIdentificacion );
+                            //AppLog.Write(" Fin Creacion Usuario", AppLog.LogMessageType.Info, null, "OperadorCarpeta");
 
                             #region crear carpeta en el servidor
-                            var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
+                            //var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
 
-                            fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
-                            fileControl._CreateFolderInFTP(CarpetaInicial+@"/ADJUNTOS", "OPERADOR_REPOSITORY_USER");
+                            //fileControl._CreateFolderInFTP(CarpetaInicial, "OPERADOR_REPOSITORY_USER");
+                            //fileControl._CreateFolderInFTP(CarpetaInicial+@"/ADJUNTOS", "OPERADOR_REPOSITORY_USER");
 
                             #endregion
 
@@ -295,15 +349,16 @@ public partial class Registro_RegistroUsuarios : System.Web.UI.Page
                 mensaje = Retorno
             };
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
 
-            AppLog.Write(" Error Creacion de usuario en el sistema " , AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
+            AppLog.Write(" Error Creacion de usuario en el sistema ", AppLog.LogMessageType.Error, ex, "OperadorCarpeta");
             return new
             {
                 status = "error",
                 mensaje = "Ha ocurrido un error inesperado intentelo nuevamente o mas tarde"
             };
-        
+
         }
     }
 

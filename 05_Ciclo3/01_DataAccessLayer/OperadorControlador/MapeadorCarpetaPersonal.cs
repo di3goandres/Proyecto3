@@ -21,6 +21,7 @@ namespace Uniandes.Controlador
                 idCarpetaPadre = entidad.idCarpetaPadre == null ? default(decimal) :Convert.ToDecimal( entidad.idCarpetaPadre),
                 NombreCarpeta = entidad.NombreCarpeta,
                 userIdAplicacion = entidad.userIdApplicacion,
+                esSistema = entidad.EsSistema,
             };
 
         }

@@ -53,6 +53,7 @@ function cargarDatosInicales(jsonrequest) {
 
         $("#fechaExpedicion").datepicker({
             selectOtherMonths: true, changeYear: true,
+            dateFormat: 'dd/mm/yy',
             dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             showOtherMonths: true,
@@ -61,6 +62,7 @@ function cargarDatosInicales(jsonrequest) {
         });
         $("#fechanacimiento").datepicker({
             selectOtherMonths: true, changeYear: true,
+            dateFormat: 'dd/mm/yy',
             dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             showOtherMonths: true,

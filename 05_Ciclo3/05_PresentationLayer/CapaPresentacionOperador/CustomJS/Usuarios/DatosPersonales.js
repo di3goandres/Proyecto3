@@ -28,7 +28,7 @@ $(function () {
 function abrirEditarUbicacion() {
 
     $('#editarLugarUbicacio').dialog({
-        width: 590, height: 280, modal: true, resizable: false, draggable: false, title: 'Editar Datos de Ubicación', closeOnEscape: false,
+        width: 590, height: 280, modal: true, resizable: false, draggable: false, title: 'Editar Datos de Ubicación', closeOnEscape: true,
         open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show() }
     });
 }

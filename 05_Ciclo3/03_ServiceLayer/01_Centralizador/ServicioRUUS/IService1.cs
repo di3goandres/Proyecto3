@@ -30,6 +30,9 @@ namespace ServicioRUUS
         // TODO: Add your service operations here
         [OperationContract]
         bool ActualizarDatosUsuario(Usuario entity, string IdentificadorCarpetaciudadana);
+
+        [OperationContract]
+        Boolean EliminarUsuario(String identificadoUsuario, string IdentificadorCarpetaciudadana);
     }
 
 

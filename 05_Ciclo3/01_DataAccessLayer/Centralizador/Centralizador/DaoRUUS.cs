@@ -157,6 +157,44 @@ namespace Centralizador.DAO
         }
 
 
+        /// <summary>
+        /// Metodo para registrar un usuario en el Centralizador
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public bool  EliminarUsuario(String identificadoUsuario, string IdentificadorCarpetaciudadana)
+        {
+
+            try
+            {
+                Guid ownerIdGuid = Guid.Empty;
+                ownerIdGuid = new Guid(identificadoUsuario);
+                Usuario retorno = new Usuario();
+                using (CentralizadorDataContext ctx = new CentralizadorDataContext())
+                {
+
+
+                    var entidad = (from cc in ctx.tb005_RRUS
+                                   where cc.UID == ownerIdGuid
+                                   select cc);
+
+
+                    if (entidad.Any())
+                    {
+                        ctx.tb005_RRUS.DeleteAllOnSubmit(entidad);
+                        ctx.SubmitChanges();
+                        registrarLog("COUS", IdentificadorCarpetaciudadana, "ELIMINADO DE USUARIO EN EL SISTEMA");
+                    }
+                    return true; ;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
 
         /// <summary>

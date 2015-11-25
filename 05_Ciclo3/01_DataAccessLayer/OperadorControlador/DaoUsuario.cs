@@ -37,7 +37,7 @@ namespace Uniandes.Controlador
                 cmd.Parameters.Add("@carpetaUsuarioInicial", SqlDbType.VarChar);
                 cmd.Parameters.Add("@Nombres", SqlDbType.VarChar);
                 cmd.Parameters.Add("@Apellidos", SqlDbType.VarChar);
-                cmd.Parameters.Add("@tipoIdentificacion ", SqlDbType.Int);
+                cmd.Parameters.Add("@tipoIdentificacion", SqlDbType.Int);
                 cmd.Parameters.Add("@numeroIdentificacion", SqlDbType.VarChar);
 
 
@@ -77,6 +77,7 @@ namespace Uniandes.Controlador
         }
 
 
+       
 
         public UsuarioOperador ObtnerUsuario(string UUID)
         {

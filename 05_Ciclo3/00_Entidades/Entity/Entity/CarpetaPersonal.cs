@@ -12,6 +12,7 @@ namespace Operador.Entity
         public Nullable<Decimal> idCarpetaPadre { get; set; }
         public String NombreCarpeta { get; set; }
         public String PathTotal { get; set; }
+        public Nullable<Boolean> esSistema { get; set; }
 
        public  List<CarpetaPersonal> Hijos { get; set; }
 

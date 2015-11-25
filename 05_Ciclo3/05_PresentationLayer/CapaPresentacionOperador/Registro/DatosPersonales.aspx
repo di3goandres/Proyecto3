@@ -164,7 +164,7 @@
 
             <tr>
                 <td style="width: 49%; padding: 5px">
-                    <label>Departamento Residencia</label>
+                    <label>De: </label>
                     <select id="departamentoResidenciaActuali" class="TextEntry form-control"></select>
                 </td>
 

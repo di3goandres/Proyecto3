@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td style ="width:49%;padding:5px"> 
-                <label>Fecha expedición</label>
+                <label>Fecha expedición (dd/MM/yyyy)</label>
                 <input id="fechaExpedicion" type="text"  class="TextEntry form-control" /></td>
                 <td style ="width:49%;padding:5px"> 
                 <label>Genero</label>
@@ -79,7 +79,7 @@
             </tr>
             <tr>
                <td style ="width:49%;padding:5px"> 
-                    <label>Fecha nacimiento</label>
+                    <label>Fecha nacimiento (dd/MM/yyyy)</label>
                                      <input id="fechanacimiento" type="text"   class="TextEntry form-control"/></td>
 
               <td style ="width:49%;padding:5px"> 

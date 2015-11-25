@@ -175,11 +175,12 @@ public partial class Administracion_AdministrarUsuarios : System.Web.UI.Page
 
             DaoPerfil perfilDao = new DaoPerfil();
             GestionUsuario gestor = new GestionUsuario();
-
+            Centralizador.Service1Client serviciocentralizador = new Centralizador.Service1Client();
 
             bool resultado = false;
-
+              var IdentificadorOperador = "identificadorOperador".GetFromAppCfg();
             resultado = gestor.DeleteUser(ID);
+            serviciocentralizador.EliminarUsuario(ID, IdentificadorOperador);
             GestionRoles gestRoles = new GestionRoles();
             #region ("Resultado agregar")
             if (resultado)

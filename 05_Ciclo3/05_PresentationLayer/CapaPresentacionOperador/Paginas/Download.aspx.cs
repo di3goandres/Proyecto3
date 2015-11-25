@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Uniandes.Encriptador;
-using Uniandes.GestorDocumental;
+using Uniandes.GestorLogicaOperador;
 using Uniandes.Utilidades;
 
 public partial class Paginas_Download : System.Web.UI.Page
@@ -36,6 +37,11 @@ public partial class Paginas_Download : System.Web.UI.Page
                 Response.ContentType = System.Net.Mime.MediaTypeNames.Application.Octet;
                 Response.BinaryWrite(file.file);
                 Response.End();
+            }
+            catch (ThreadAbortException ab)
+            {
+
+
             }
             catch (Exception ex)
             {

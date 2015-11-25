@@ -33,7 +33,6 @@ namespace Uniandes.Controlador
                     {
                         var entidad = MapeadorCarpetaPersonal.MapCarpetaFromBizEntity(carpeta);
                         entidad.idCarpetaPadre = entidad.idCarpetaPadre == 0 ? null : entidad.idCarpetaPadre;
-                        entidad.EsSistema = false;
                         ctx.tblCarpetaPersonal.InsertOnSubmit(entidad);
                         ctx.SubmitChanges();
 
@@ -423,8 +422,7 @@ namespace Uniandes.Controlador
 
                 var cPersonal = (from cp in ctx.tblCarpetaPersonal
                                  where cp.idCarpetaPersonal == idCarpeta
-                                       && cp.EsSistema == false
-
+                                   
                                  select cp);
 
 

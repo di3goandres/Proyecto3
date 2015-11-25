@@ -89,6 +89,106 @@
         onselectednodechanged="TreeView1_SelectedNodeChanged">
 
     </asp:TreeView>--%>
+
+
+
+        <div id="VerDetalle">
+            <br />
+       
+
+               <div class="row" width:100%">
+
+                         <div class="col-md-5 col-sm-12"> 
+                                   <label >De:</label>
+                    <span   id="EnviadoDesde" class="TextEntry form-control"/>
+                                </div>
+
+                   
+                         <div class="col-md-5 col-sm-12"> 
+                                <label>Fecha de Envio</label>
+                             <span   id="fechaEnvio" class="TextEntry form-control"/>
+                                </div>
+                        
+                          <%--  <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-feedback ">
+                                    <label for="exampleInputEmail1" class="labelhalf">Documento</label>
+                                    <div class="ui-widget arrow-caret half25">
+                                        <select class="combobox form-control">
+                                            <option value="1">C.C</option>
+                                            <option value="2">C.E.</option>
+                                            <option value="3">NIT</option>
+                                        </select>
+                                    </div>
+                                    <span class="half75">
+                                        <input pattern="^[_A-z0-9]{1,}$" type="text" class="form-control animated" id="exampleInputEmail1" placeholder="Número de identificación" required="">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        <span class="help-block with-errors"></span>
+                                    </span>
+                                </div>
+                                
+                            </div>--%>
+                   </div>
+
+              <div class="row">
+
+                     <div class="col-md-5 col-sm-12"> 
+                          <label >Para:</label>
+                    <span   id="Destinatarios" class="TextEntry form-control"/>
+                         </div>
+
+                  <div class="col-md-5 col-sm-12"> 
+                         <label>Asunto</label>
+                       <span   id="Asunto" class="TextEntry form-control"/>
+                         </div>
+
+                  </div>
+
+
+           <div class="row">
+            <div class="col-md-5 col-sm-12"> 
+                 <label>Mensaje</label>
+                   <textarea style="resize:none" class="TextEntry form-control" id="cuerpoMensaje"  cols="100"   rows="14" disabled="disabled"></textarea>
+                 
+                </div>
+
+                <div class="col-md-5 col-sm-12"> 
+                    <br />
+                     <div id="divAdjuntoss">
+                        <table id="DatosAdjuntos" style="height: 100%;">
+                        </table>
+                        <div id="DatosAdjuntosPagerL">
+                        </div>
+                    </div>
+                      <div class="row" style="padding-left:15px" > 
+                           <input style="padding-left:5px" class="btn btn_ficha pull-center" id="DescargarArchivo" value="Descargar" type="button" />
+                          </div>
+                    </div>
+                      </div>
+
+
+
+           
+
+           
+              <div class="row">
+
+                    <div class="form-group has-feedback ">
+                   <div class="modal-footer">
+                      <input id="Cerrar" type="button" value="Cerrar" class="btn btn_ficha pull-left" />
+                   <%--    <input class="btn btn_ficha pull-center" id="descargar" value="Descargar Adjuntos" type="button" />--%>
+                      <input id="Button1" type="button" value="Responder" class="btn btn_ficha pull-right" />
+
+                    </div>
+                  
+
+                       
+                  </div>
+                  </div>
+
+               
+            
+       
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="contentScripts" runat="Server">
 </asp:Content>

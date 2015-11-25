@@ -10,7 +10,7 @@ using Uniandes.Controlador;
 using Operador.Entity;
 using Uniandes.Utilidades;
 using Uniandes.FileControl;
-using Uniandes.GestorMensajeria;
+using Uniandes.GestorLogicaOperador;
 
 public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 {

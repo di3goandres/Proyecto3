@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 using Uniandes.Controlador;
 using Uniandes.Encriptador;
 using Uniandes.FileControl;
-using Uniandes.GestorDocumental;
+using Uniandes.GestorLogicaOperador;
 using Uniandes.Utilidades;
 
 public partial class Paginas_MisDocumentos_Documentos : System.Web.UI.Page

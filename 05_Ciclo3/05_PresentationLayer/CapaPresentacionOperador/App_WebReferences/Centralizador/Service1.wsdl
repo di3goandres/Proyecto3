@@ -37,6 +37,12 @@
   <wsdl:message name="IService1_ActualizarDatosUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarDatosUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_EliminarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EliminarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="RegistrarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/RegistrarUsuario" message="tns:IService1_RegistrarUsuario_InputMessage" />
@@ -57,6 +63,10 @@
     <wsdl:operation name="ActualizarDatosUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ActualizarDatosUsuario" message="tns:IService1_ActualizarDatosUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ActualizarDatosUsuarioResponse" message="tns:IService1_ActualizarDatosUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EliminarUsuario" message="tns:IService1_EliminarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EliminarUsuarioResponse" message="tns:IService1_EliminarUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -99,6 +109,15 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarDatosUsuario">
       <soap:operation soapAction="http://tempuri.org/IService1/ActualizarDatosUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarUsuario">
+      <soap:operation soapAction="http://tempuri.org/IService1/EliminarUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -100,7 +100,24 @@ namespace ServicioRUUS
             catch (Exception ex)
             {
 
-                return false;
+                throw ex;
+
+            
+
+            }
+        }
+
+
+        public Boolean EliminarUsuario(string identificadoUsuario, string IdentificadorCarpetaciudadana)
+        {
+            try
+            {
+                DaoRUUS dao = new DaoRUUS();
+                return dao.EliminarUsuario(identificadoUsuario, IdentificadorCarpetaciudadana);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
 
             }
         }

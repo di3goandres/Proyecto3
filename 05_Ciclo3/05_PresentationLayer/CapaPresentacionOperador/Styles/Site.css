@@ -1778,3 +1778,9 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
 .fijo {position:fixed;} 
 
 
+
+
+.myAltRowClass {
+    background-color: #F3E2A9;
+    background-image: none;
+}

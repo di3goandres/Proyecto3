@@ -160,7 +160,7 @@
                         </div>
                     </div>
                       <div class="row" style="padding-left:5px" > 
-                           <input style="padding-left:5px" class="btn btn_ficha pull-center" id="descargar" value="Descargar" type="button" />
+                           <input style="padding-left:5px" class="btn btn_ficha pull-center" id="DescargarArchivo" value="Descargar" type="button" />
                           </div>
                     </div>
                       </div>

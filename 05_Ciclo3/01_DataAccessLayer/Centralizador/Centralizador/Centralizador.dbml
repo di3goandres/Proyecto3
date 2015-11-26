@@ -14,7 +14,7 @@
       <Column Name="idTIpoOperacion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="idOperador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="URL" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="accion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="accion" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="body" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="ejemplo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="tb006_OPERADOR_tbl011_SoapMessage" Member="tb006_OPERADOR" ThisKey="idOperador" OtherKey="idOperador" Type="tb006_OPERADOR" IsForeignKey="true" />

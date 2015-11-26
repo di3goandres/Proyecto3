@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Operador.Entity
 {
    public class Archivo
     {
-       public string Contenido { get; set; }
-       public string NombreArchivo { get; set; }
-       public Nullable<DateTime> FechaExpedicionArchivo { get; set; }
-       public Nullable<DateTime> FechaCargueArchivo { get; set; }
-       public string ArchivoExpedidoPor { get; set; }
-       public Nullable<DateTime> FechaVigencia { get; set; }
+        [XmlElementAttribute(Order = 2)]
+        public string Contenido { get; set; }
+
+
+        [XmlElementAttribute(Order = 6)]
+        public string NombreArchivo { get; set; }
+
+        [XmlElementAttribute(Order = 4)]
+        public Nullable<DateTime> FechaExpedicionArchivo { get; set; }
+
+        [XmlElementAttribute(Order = 3)]
+        public Nullable<DateTime> FechaCargueArchivo { get; set; }
+
+
+        [XmlElementAttribute(Order = 1)]
+        public string ArchivoExpedidoPor { get; set; }
+
+
+        [XmlElementAttribute(Order = 5)]
+        public Nullable<DateTime> FechaVigencia { get; set; }
 
     }
 }

@@ -156,7 +156,37 @@ namespace Centralizador.DAO
 
         }
 
+        public tb005_RRUS ConsultaNumeroYtipoidentificacion(String identificadoUsuario, int idTipodocumento)
+        {
 
+            try
+            {
+                tb005_RRUS retorno = new tb005_RRUS();
+                using (CentralizadorDataContext ctx = new CentralizadorDataContext())
+                {
+                    var usuario = (from efp in ctx.tb005_RRUS
+                                   where efp.numeroIdentificacion == identificadoUsuario
+                                   && efp.idTipoIdentificacion == idTipodocumento
+                                   select efp);
+                    if (usuario.Any())
+                    {
+
+                        retorno = usuario.First();
+                     
+                        return retorno;
+                    }
+                   
+                    return retorno;
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         /// <summary>
         /// Metodo para registrar un usuario en el Centralizador
         /// </summary>

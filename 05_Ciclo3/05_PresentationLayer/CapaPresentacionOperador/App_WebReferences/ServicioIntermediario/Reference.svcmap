@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="44d1903d-df5c-4bbb-b1da-bd7df71b5216" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:37759/ServicioIntermediario.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioIntermediario.disco" MetadataType="Disco" ID="cfc13120-3903-4a7a-bfe9-ab1cd81a6e86" SourceId="1" SourceUrl="http://localhost:37759/ServicioIntermediario.svc?disco" />
+    <MetadataFile FileName="ServicioIntermediario.xsd" MetadataType="Schema" ID="ef1b10f6-e720-4ad0-9769-069bc058507b" SourceId="1" SourceUrl="http://localhost:37759/ServicioIntermediario.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioIntermediario1.xsd" MetadataType="Schema" ID="a4c1ea75-a5c2-4662-9ba6-b5fcabc9211e" SourceId="1" SourceUrl="http://localhost:37759/ServicioIntermediario.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioIntermediario.wsdl" MetadataType="Wsdl" ID="94aa2474-ee04-4d4d-95e1-725aeed7edad" SourceId="1" SourceUrl="http://localhost:37759/ServicioIntermediario.svc?wsdl" />
+    <MetadataFile FileName="ServicioIntermediario2.xsd" MetadataType="Schema" ID="ee3185cb-dbfd-4987-96f0-18aab356248f" SourceId="1" SourceUrl="http://localhost:37759/ServicioIntermediario.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

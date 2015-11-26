@@ -68,7 +68,6 @@ public partial class Administracion_AdministrarUsuarios : System.Web.UI.Page
         {
 
             DaoPerfil perfilDao = new DaoPerfil();
-
             GestionRoles gestRoles = new GestionRoles();
 
             //
@@ -179,8 +178,10 @@ public partial class Administracion_AdministrarUsuarios : System.Web.UI.Page
 
             bool resultado = false;
               var IdentificadorOperador = "identificadorOperador".GetFromAppCfg();
+              MembershipUser u = Membership.GetUser(ID);
+
             resultado = gestor.DeleteUser(ID);
-            serviciocentralizador.EliminarUsuario(ID, IdentificadorOperador);
+            serviciocentralizador.EliminarUsuario(u.ProviderUserKey.ToString(), IdentificadorOperador);
             GestionRoles gestRoles = new GestionRoles();
             #region ("Resultado agregar")
             if (resultado)

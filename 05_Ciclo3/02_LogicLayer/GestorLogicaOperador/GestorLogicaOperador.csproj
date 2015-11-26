@@ -55,6 +55,7 @@
     <Compile Include="GestorDescargaArchivo.cs" />
     <Compile Include="GestorDocumentosAdjuntos.cs" />
     <Compile Include="GestorMensajeria.cs" />
+    <Compile Include="GestorRecibirMensajes.cs" />
     <Compile Include="GestorRegistro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

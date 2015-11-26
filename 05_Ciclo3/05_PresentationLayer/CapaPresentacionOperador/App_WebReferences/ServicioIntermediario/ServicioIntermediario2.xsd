@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Centralizador.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Centralizador.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="TransferenciaMensajes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Asunto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreEnvia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Origen" nillable="true" type="tns:ListaDestinatarios" />
+      <xs:element minOccurs="0" name="archivos" nillable="true" type="tns:ArrayOfArchivo" />
+      <xs:element minOccurs="0" name="destinatarios" nillable="true" type="tns:ArrayOfListaDestinatarios" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransferenciaMensajes" nillable="true" type="tns:TransferenciaMensajes" />
+  <xs:complexType name="ListaDestinatarios">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NumeroIdentificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoIdentificacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListaDestinatarios" nillable="true" type="tns:ListaDestinatarios" />
+  <xs:complexType name="ArrayOfArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Archivo" nillable="true" type="tns:Archivo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArchivo" nillable="true" type="tns:ArrayOfArchivo" />
+  <xs:complexType name="Archivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArchivoExpedidoPor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contenido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaCargueArchivo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaExpedicionArchivo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaVigencia" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NombreArchivo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Archivo" nillable="true" type="tns:Archivo" />
+  <xs:complexType name="ArrayOfListaDestinatarios">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ListaDestinatarios" nillable="true" type="tns:ListaDestinatarios" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfListaDestinatarios" nillable="true" type="tns:ArrayOfListaDestinatarios" />
+</xs:schema>

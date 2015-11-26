@@ -128,23 +128,57 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
         try
         {
             #region Envio Mensajes
+
+
+           
+            ServicioIntermediario.ServicioIntermediarioClient servicioMensajeriaExterno = new ServicioIntermediario.ServicioIntermediarioClient();
+
+            ServicioIntermediario.TransferenciaMensajes MensajeOtroOperadore = new ServicioIntermediario.TransferenciaMensajes();
+
+
+
+            List<ServicioIntermediario.ListaDestinatarios> destinosExternos = new List<ServicioIntermediario.ListaDestinatarios>();
+
+            ServicioIntermediario.ListaDestinatarios OrigenExtenos = new ServicioIntermediario.ListaDestinatarios();
+
+
             TransferenciaMensajes MENSAJE = new TransferenciaMensajes();
             List<ListaDestinatarios> destino = new List<ListaDestinatarios>();
+            List<ServicioIntermediario.Archivo> archivosEnviarExterno = new List<ServicioIntermediario.Archivo>();
 
             var idTipo = (int)SessionHelper.GetSessionData("TIPO_IDENTIFICACION_ENVIO");
             var numero = (string)SessionHelper.GetSessionData("NUMERO_IDENTIFICACION_ENVIO");
 
 
-
+            #region Validacion Usuarios Externos Internos
+            /**
+             *recorremos toda lista validando los usuarios que son del sistema y los que no 
+             */
             foreach (var data in usuarios)
             {
-                destino.Add(new ListaDestinatarios()
+
+                if (data.mismo)
+                {
+                    destino.Add(new ListaDestinatarios()
+                    {
+
+                        NumeroIdentificacion = data.numeroIdentificacion,
+                        tipoIdentificacion = data.idTIpoIdentificacion
+                    });
+                }
                 {
 
-                    NumeroIdentificacion = data.numeroIdentificacion,
-                    tipoIdentificacion = data.idTIpoIdentificacion
-                });
+                    destinosExternos.Add(new ServicioIntermediario.ListaDestinatarios()
+                    {
+
+                        NumeroIdentificacion = data.numeroIdentificacion,
+                        tipoIdentificacion = data.idTIpoIdentificacion
+                    });
+
+                }
             }
+            #endregion
+
 
             List<Archivo> archivosEnviar = new List<Archivo>();
             List<string> archivos = FILENAMES.Split(',').Where(x => string.IsNullOrWhiteSpace(x) == false).ToList();
@@ -166,12 +200,56 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 
                 });
             }
+
+
+
             var usuario = (UsuarioOperador)SessionHelper.GetSessionData("USUARIO");
 
             ListaDestinatarios origien = new ListaDestinatarios();
             origien.tipoIdentificacion = usuario.tipoIdentificacion.Value;
             origien.NumeroIdentificacion = usuario.numeroIdentificacion;
 
+
+            if (destinosExternos.Count() > 0)
+            {
+
+
+                foreach (var data in archivosEnviar)
+                {
+                    archivosEnviarExterno.Add(new ServicioIntermediario.Archivo()
+                    {
+                        Contenido = data.Contenido,
+                        FechaCargueArchivo = data.FechaCargueArchivo,
+                        FechaExpedicionArchivo = data.FechaExpedicionArchivo,
+                        FechaVigencia = data.FechaVigencia,
+                        NombreArchivo = data.NombreArchivo,
+                        ArchivoExpedidoPor = "",
+
+                    });
+
+                }
+                OrigenExtenos.tipoIdentificacion = usuario.tipoIdentificacion.Value;
+                OrigenExtenos.NumeroIdentificacion = usuario.numeroIdentificacion;
+
+                MensajeOtroOperadore.archivos = archivosEnviarExterno.ToArray();
+               
+                MensajeOtroOperadore.Asunto = Asunto;
+                MensajeOtroOperadore.Mensaje = cuerpoMensaje;
+                MensajeOtroOperadore.destinatarios = destinosExternos.ToArray();
+                MensajeOtroOperadore.Origen = OrigenExtenos;
+                MensajeOtroOperadore.NombreEnvia = usuario.Nombres + " " + usuario.Apellidos;
+
+                try {
+
+                    var resultado = servicioMensajeriaExterno.RecibirMensajes(MensajeOtroOperadore);
+                }
+                catch (Exception ex) { 
+                
+                
+                
+                }
+
+            }
             MENSAJE.archivo = archivosEnviar;
             MENSAJE.Asunto = Asunto;
             MENSAJE.Mensaje = cuerpoMensaje;
@@ -183,6 +261,10 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
             GestorMensajeria gestor = new GestorMensajeria();
 
             var resultadoEnvio = gestor.EnviarMensaje(MENSAJE);
+
+
+
+
 
             if (resultadoEnvio)
             {
@@ -279,7 +361,8 @@ public partial class Paginas_EnviarMensaje : System.Web.UI.Page
 }
 
 [Serializable]
-public class usuariosMensajes {
+public class usuariosMensajes
+{
 
     public string ID { get; set; }
     public int idTIpoIdentificacion { get; set; }

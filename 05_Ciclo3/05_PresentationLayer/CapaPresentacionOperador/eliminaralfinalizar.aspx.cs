@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,7 @@ using System.Xml.Serialization;
 using Uniandes.FileControl;
 using Uniandes.Utilidades;
 
+
 public partial class eliminaralfinalizar : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -20,9 +22,30 @@ public partial class eliminaralfinalizar : System.Web.UI.Page
         var fileControl = new FileControl(Int32.Parse("MaxFileSize".GetFromAppCfg()));
        // fileControl._CreateFolderInFTP(@"CC1077845378\Diego",  "OPERADOR_REPOSITORY_USER");
 
-       
-        ISoapMessage a = new ISoapMessage();
+        string r = "<Asunto>Pruebas</Asunto><Mensaje>Pruebas</Mensaje><NombreEnvia>Centralizador</NombreEnvia><Origen><NumeroIdentificacion>1077845378</NumeroIdentificacion><tipoIdentificacion>1</tipoIdentificacion></Origen><archivos><ArchivoExpedidoPor>diego</ArchivoExpedidoPor><Contenido>asdfasfadsf</Contenido><FechaCargueArchivo>2014-10-24T00:00:00</FechaCargueArchivo><FechaExpedicionArchivo>2014-10-24T00:00:00</FechaExpedicionArchivo><FechaVigencia>2014-10-24T00:00:00</FechaVigencia><NombreArchivo>diego.png</NombreArchivo></archivos><archivos><ArchivoExpedidoPor>diego</ArchivoExpedidoPor><Contenido>asdfasfadsf</Contenido><FechaCargueArchivo>2014-10-24T00:00:00</FechaCargueArchivo><FechaExpedicionArchivo>2014-10-24T00:00:00</FechaExpedicionArchivo><FechaVigencia>2014-10-24T00:00:00</FechaVigencia><NombreArchivo>diego.png</NombreArchivo></archivos><destinatarios><NumeroIdentificacion>10777845378</NumeroIdentificacion><tipoIdentificacion>1</tipoIdentificacion></destinatarios>";
 
+         XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(r);
+
+            XmlNodeList destinos = xDoc.GetElementsByTagName("Destinatarios");
+            
+        XmlNodeList archivo = xDoc.GetElementsByTagName("archivo");
+        XmlNodeList xnList = xDoc.SelectNodes("archivo");
+
+  
+
+
+
+
+
+
+
+
+
+
+
+        ISoapMessage a = new ISoapMessage();
+        crearSOAP(new Operador.Entity.TransferenciaMensajes());
         a.Uri = "http://localhost/servicios/servicioweb/Service1.asmx";
         a.ContentXml = @"<?xml version=""1.0"" encoding=""utf-8""?>
              <soapenv:Envelope xmlns:soapenv=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns=""http://tempuri.org/"">
@@ -81,24 +104,33 @@ public partial class eliminaralfinalizar : System.Web.UI.Page
 
 
         var ALGO = CallWebService(a.ContentXml);
-       
 
+     
     }
 
 
 
-    public void crearSOAP(Centralizador.Usuario MyObject)
+    public void crearSOAP(Operador.Entity.TransferenciaMensajes MyObject)
     {
 
 
-        //XmlSerializer xsSubmit = new XmlSerializer(typeof(MyObject));
-        //var subReq = new MyObject();
-        //using (StringWriter sww = new StringWriter())
-        //using (XmlWriter writer = XmlWriter.Create(sww))
-        //{
-        //    xsSubmit.Serialize(writer, subReq);
-        //    var xml = sww.ToString(); // Your XML
-        //}
+        XmlSerializer xsSubmit = new XmlSerializer(typeof(Operador.Entity.TransferenciaMensajes));
+        var subReq = new Operador.Entity.TransferenciaMensajes();
+        var st = string.Empty;
+        using (StringWriter sww = new StringWriter())
+        using (XmlWriter writer = XmlWriter.Create(sww))
+        {
+            xsSubmit.Serialize(writer, MyObject);
+            st = sww.ToString(); // Your XML
+        }
+
+        XmlDocument xDoc = new XmlDocument();
+        xDoc.LoadXml(st);
+
+        XmlNodeList archivo = xDoc.GetElementsByTagName("TransferenciaMensajes");
+
+        var s = archivo[0].InnerXml;
+
     }
 
 
